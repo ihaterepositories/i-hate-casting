@@ -1,18 +1,12 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+using Zenject;
 
-public class BootstrapInstaller : MonoBehaviour
+namespace Core.Infrastructure
 {
-    // Start is called before the first frame update
-    void Start()
+    public class BootstrapInstaller : MonoInstaller
     {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        public override void InstallBindings()
+        {
+            
+        }
     }
 }
