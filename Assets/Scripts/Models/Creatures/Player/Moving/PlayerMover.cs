@@ -1,15 +1,17 @@
-using Player.Moving.Interfaces;
+using Core.Input.Interfaces;
+using Models.Creatures.Player.Data;
 using UnityEngine;
 using Zenject;
 
-namespace Player.Moving
+namespace Models.Creatures.Player.Moving
 {
     [RequireComponent(typeof(Rigidbody2D), typeof(BoxCollider2D))]
     public class PlayerMover : MonoBehaviour
     {
         [SerializeField] private Rigidbody2D rb;
-        [SerializeField] private float speed;
         [SerializeField] private SpriteRenderer spriteRenderer;
+        
+        private readonly float _speed = PlayerStats.Speed;
         
         private IInputHandler _inputHandler;
         private float _horizontalAxis;
@@ -36,17 +38,12 @@ namespace Player.Moving
         
         private void ChangeVelocityByInput()
         {
-            Vector2 movementDirection = 
-                Mathf.Abs(_horizontalAxis) > Mathf.Abs(_verticalAxis) ? 
-                new Vector2(_horizontalAxis, 0) : 
-                new Vector2(0, _verticalAxis);
-            
-            rb.velocity = movementDirection.normalized * speed;
+            rb.velocity = new Vector2(_horizontalAxis, _verticalAxis).normalized * _speed;
         }
-        
+
         private void FlipSpriteToMoveDirection()
         {
-            if (Mathf.Abs(_horizontalAxis) > Mathf.Abs(_verticalAxis))
+            if (_horizontalAxis != 0)
                 spriteRenderer.flipX = _horizontalAxis < 0;
         }
     }

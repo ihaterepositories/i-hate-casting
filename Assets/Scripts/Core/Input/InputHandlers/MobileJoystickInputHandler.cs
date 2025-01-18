@@ -1,7 +1,7 @@
-using Player.Moving.Interfaces;
+using Core.Input.Interfaces;
 using UnityEngine;
 
-namespace Player.Moving.InputHandlers
+namespace Core.Input.InputHandlers
 {
     public class MobileJoystickInputHandler : MonoBehaviour, IInputHandler
     {
@@ -15,6 +15,16 @@ namespace Player.Moving.InputHandlers
         public float GetVerticalAxisValue()
         {
             return mobileJoystick.Vertical;
+        }
+
+        public Vector3 GetPointerPosition()
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public bool IsShootButtonPressed()
+        {
+            throw new System.NotImplementedException();
         }
     }
 }

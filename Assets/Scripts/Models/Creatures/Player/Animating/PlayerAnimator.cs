@@ -1,8 +1,8 @@
-using Player.Moving.Interfaces;
+using Core.Input.Interfaces;
 using UnityEngine;
 using Zenject;
 
-namespace Player.Animating
+namespace Models.Creatures.Player.Animating
 {
     public class PlayerAnimator : MonoBehaviour
     {
