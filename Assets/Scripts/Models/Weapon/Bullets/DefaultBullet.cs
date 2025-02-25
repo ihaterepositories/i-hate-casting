@@ -1,4 +1,4 @@
-namespace Models.Weapons.Bullets
+namespace Models.Weapon.Bullets
 {
     public class DefaultBullet : Bullet
     {

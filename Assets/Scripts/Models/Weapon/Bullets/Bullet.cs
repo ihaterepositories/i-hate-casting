@@ -1,7 +1,6 @@
 using UnityEngine;
-using UnityEngine.Serialization;
 
-namespace Models.Weapons.Bullets
+namespace Models.Weapon.Bullets
 {
     public abstract class Bullet : MonoBehaviour
     {

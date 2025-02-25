@@ -228,7 +228,7 @@ GameObject:
   - component: {fileID: 210738659}
   - component: {fileID: 210738658}
   m_Layer: 5
-  m_Name: Canvas
+  m_Name: JoystickCanvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -310,7 +310,7 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 18495750}
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 1356687992}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -354,12 +354,45 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 228748160}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 330975462}
+  m_Father: {fileID: 253183706}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &253183705
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 253183706}
+  m_Layer: 0
+  m_Name: Environment
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &253183706
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 253183705}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 228748162}
+  - {fileID: 1398390888}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &330975461
@@ -47864,7 +47897,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1356687992}
   m_Layer: 0
-  m_Name: InputHandlers
+  m_Name: InputSystems
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -47885,6 +47918,7 @@ Transform:
   m_Children:
   - {fileID: 348449849}
   - {fileID: 508800438}
+  - {fileID: 210738661}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1398390884
@@ -47989,7 +48023,7 @@ RectTransform:
   - {fileID: 2033155195}
   - {fileID: 1901541708}
   - {fileID: 1324143437}
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 253183706}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -48040,7 +48074,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2fe13d6b73ed475bbe6ab33740e21e4f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bulletPrefab: {fileID: 4668492387784157456, guid: 6e7f3302cd2c1504a986733deef75a57, type: 3}
+  isTargetOriented: 1
+  bullet: {fileID: 4668492387784157456, guid: 6e7f3302cd2c1504a986733deef75a57, type: 3}
+  stats:
+    magazineCapacity: 5
+    reloadTime: 1
+    spread: 0.2
 --- !u!1 &1565748613
 GameObject:
   m_ObjectHideFlags: 0
@@ -48132,7 +48171,7 @@ GameObject:
   - component: {fileID: 1693683877}
   - component: {fileID: 1693683879}
   m_Layer: 0
-  m_Name: Po
+  m_Name: Player
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -48752,9 +48791,7 @@ SceneRoots:
   - {fileID: 1325211431}
   - {fileID: 519420032}
   - {fileID: 119168223}
-  - {fileID: 210738661}
-  - {fileID: 1693683874}
   - {fileID: 1356687992}
+  - {fileID: 253183706}
+  - {fileID: 1693683874}
   - {fileID: 1756638773}
-  - {fileID: 228748162}
-  - {fileID: 1398390888}
