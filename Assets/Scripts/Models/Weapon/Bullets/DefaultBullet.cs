@@ -4,7 +4,7 @@ namespace Models.Weapon.Bullets
     {
         protected override void Move()
         {
-            rb.velocity = transform.right * Speed;
+            rb.velocity = transform.right * stats.speed;
         }
     }
 }

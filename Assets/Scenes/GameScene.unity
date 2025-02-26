@@ -48074,8 +48074,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2fe13d6b73ed475bbe6ab33740e21e4f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isTargetOriented: 1
-  bullet: {fileID: 4668492387784157456, guid: 6e7f3302cd2c1504a986733deef75a57, type: 3}
+  bulletPrefab: {fileID: 4668492387784157456, guid: 6e7f3302cd2c1504a986733deef75a57, type: 3}
   stats:
     magazineCapacity: 5
     reloadTime: 1
@@ -48365,50 +48364,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   animator: {fileID: 1693683878}
---- !u!1 &1756638771
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1756638773}
-  - component: {fileID: 1756638772}
-  m_Layer: 0
-  m_Name: RoundBootstrap
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &1756638772
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1756638771}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d3fd5542219940f2a8d2c3d6de33a41e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!4 &1756638773
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1756638771}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1762677255
 GameObject:
   m_ObjectHideFlags: 0
@@ -48794,4 +48749,3 @@ SceneRoots:
   - {fileID: 1356687992}
   - {fileID: 253183706}
   - {fileID: 1693683874}
-  - {fileID: 1756638773}

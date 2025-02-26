@@ -1,19 +1,24 @@
 using System.Collections;
+using Models.Weapon.Bullets;
 using Models.Weapon.Data;
+using Pooling;
 using UnityEngine;
 
 namespace Models.Weapon.Abstraction
 {
     public abstract class Weapon : MonoBehaviour
     {
-        [SerializeField] private GameObject bullet;
+        [SerializeField] private GameObject bulletPrefab;
         [SerializeField] private WeaponStats stats;
-
+        
         private bool _isReloading;
         private int _bulletsInMagazine;
 
+        private ObjectPool<Bullet> _pool;
+
         private void Start()
         {
+            _pool = new ObjectPool<Bullet>(bulletPrefab.GetComponent<Bullet>());
             _bulletsInMagazine = stats.magazineCapacity;
         }
 
@@ -36,7 +41,15 @@ namespace Models.Weapon.Abstraction
 
         private void Fire()
         {
-            GameObject bullet = Instantiate(this.bullet, transform.position, Quaternion.Euler(0, 0, GetBulletRotationAngle()));
+            if (_pool.GetFreeObject() is Bullet bullet)
+            {
+                bullet.transform.position = transform.position;
+                bullet.transform.rotation = Quaternion.Euler(0, 0, GetBulletRotationAngle());
+            }
+            else
+            {
+                Debug.LogError($"Can`t create bullet in {gameObject.name}.");
+            }
         }
 
         private float GetBulletRotationAngle()

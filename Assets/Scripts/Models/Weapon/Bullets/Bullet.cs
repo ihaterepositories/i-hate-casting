@@ -1,35 +1,51 @@
+using System;
+using Models.Weapon.Bullets.Data;
+using Pooling.Interfaces;
 using UnityEngine;
 
 namespace Models.Weapon.Bullets
 {
-    public abstract class Bullet : MonoBehaviour
+    public abstract class Bullet : MonoBehaviour, IPoolAble
     {
         [SerializeField] protected Rigidbody2D rb;
+        [SerializeField] protected BulletStats stats;
+
+        private float _lifeTimeLeft;
         
-        private int _damage;
-        protected float Speed = 10;
-        private float _lifeTime = 3;
-        
-        public void SetStats(int damage, int speed, float lifeTime)
+        public GameObject GameObject => gameObject;
+        public event Action<IPoolAble> OnDestroyed;
+
+        private void Start()
         {
-            _damage = damage;
-            Speed = speed;
-            _lifeTime = lifeTime;
+            _lifeTimeLeft = stats.lifeTime;
         }
-        
+
         private void Update()
         {
             Move();
-            CheckLifeTime();
+            ReduceLifeTime();
+            DestroyOnLifeTimeExpire();
         }
 
         protected abstract void Move();
-        
-        private void CheckLifeTime()
+
+        private void ReduceLifeTime()
         {
-            _lifeTime -= Time.deltaTime;
-            if (_lifeTime <= 0)
-                Destroy(gameObject);
+            _lifeTimeLeft -= Time.deltaTime;
+        }
+        
+        private void DestroyOnLifeTimeExpire()
+        {
+            if (_lifeTimeLeft <= 0)
+            {
+                Reset();
+                _lifeTimeLeft = stats.lifeTime;
+            }
+        }
+        
+        public void Reset()
+        {
+            OnDestroyed?.Invoke(this);
         }
     }
 }
