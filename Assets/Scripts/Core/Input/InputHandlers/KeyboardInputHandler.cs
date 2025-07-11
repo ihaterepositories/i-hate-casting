@@ -30,7 +30,10 @@ namespace Core.Input.InputHandlers
         {
             return UnityEngine.Input.GetMouseButtonDown(0);
         }
-        
-        
+
+        public bool IsReloadButtonPressed()
+        {
+            return UnityEngine.Input.GetKeyDown(KeyCode.R);
+        }
     }
 }

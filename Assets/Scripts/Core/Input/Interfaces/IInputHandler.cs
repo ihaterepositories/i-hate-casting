@@ -8,5 +8,6 @@ namespace Core.Input.Interfaces
         public float GetVerticalAxisValue();
         public Vector3 GetPointerPosition();
         public bool IsShootButtonPressed();
+        public bool IsReloadButtonPressed();
     }
 }
