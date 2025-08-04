@@ -47996,7 +47996,7 @@ MonoBehaviour:
     spread: 0
     damage: 1
     speed: 5
-    cooldownTime: 1
+    cooldownTime: 0.1
 --- !u!1 &1507514622
 GameObject:
   m_ObjectHideFlags: 0

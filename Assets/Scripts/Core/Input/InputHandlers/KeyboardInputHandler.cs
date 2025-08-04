@@ -26,9 +26,9 @@ namespace Core.Input.InputHandlers
             return Vector3.zero;
         }
 
-        public bool IsShootButtonPressed()
+        public bool IsFireButtonPressed()
         {
-            return UnityEngine.Input.GetMouseButtonDown(0);
+            return UnityEngine.Input.GetMouseButton(0);
         }
 
         public bool IsReloadButtonPressed()

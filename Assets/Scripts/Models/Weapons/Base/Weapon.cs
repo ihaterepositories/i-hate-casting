@@ -11,6 +11,7 @@ namespace Models.Weapons.Base
         [SerializeField] protected WeaponStats stats;
         
         private ObjectPool<Bullet> _bulletsPool;
+        private float _lastFireTime;
         
         protected bool IsReloading;
         protected int BulletsInMagazine;
@@ -19,13 +20,15 @@ namespace Models.Weapons.Base
         {
             _bulletsPool = new ObjectPool<Bullet>(bulletPrefab.GetComponent<Bullet>());
             BulletsInMagazine = stats.GetMagazineCapacity();
+            _lastFireTime = Time.time - stats.GetCooldownTime(); // Allow immediate fire on start
         }
 
         private void Update()
         {
             transform.rotation = Quaternion.Euler(0, 0, GetFireDirectionAngle());
-            if (GetFirePermission() && !IsReloading && BulletsInMagazine > 0)
+            if (GetFirePermission() && !IsReloading && BulletsInMagazine > 0 && Time.time - _lastFireTime >= stats.GetCooldownTime())
             {
+                _lastFireTime = Time.time;
                 Fire();
                 BulletsInMagazine--;
             }

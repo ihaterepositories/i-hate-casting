@@ -40,7 +40,7 @@ namespace Models.Weapons.Implementations.PlayerWeaponImplementation
 
         protected override bool GetFirePermission()
         {
-            return _inputHandler.IsShootButtonPressed();
+            return _inputHandler.IsFireButtonPressed();
         }
 
         protected override bool GetReloadPermission()
