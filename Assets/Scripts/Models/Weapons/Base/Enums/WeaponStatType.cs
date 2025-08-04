@@ -1,6 +1,6 @@
-namespace Models.Weapons.Data.WeaponStatsMultipliers.Abstraction.Enums
+namespace Models.Weapons.Base.Enums
 {
-    public enum WeaponStatsType
+    public enum WeaponStatType
     {
         ReloadTime,
         Spread,

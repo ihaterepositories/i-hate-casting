@@ -1,5 +1,5 @@
 using System;
-using Models.Weapons.Data;
+using Models.Weapons.Base;
 using PoolingCore.Interfaces;
 using UnityEngine;
 

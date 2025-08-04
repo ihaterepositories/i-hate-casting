@@ -1,16 +1,13 @@
 using System;
-using Models.Weapons.Data.WeaponStatsMultipliers;
-using Models.Weapons.Data.WeaponStatsMultipliers.Abstraction;
-using Models.Weapons.Data.WeaponStatsMultipliers.Abstraction.Enums;
-using Models.Weapons.Enums;
+using Models.Weapons.Base.Enums;
 using UnityEngine;
-using Zenject;
 
-namespace Models.Weapons.Data
+namespace Models.Weapons.Base
 {
     [Serializable]
     public class WeaponStats
     {
+        [Header("Used to assign stats multiplier.")]
         public WeaponType weaponType;
 
         [Header("Short range: 2-5, Medium range: 5-8, Long range: 9+")]
@@ -33,18 +30,19 @@ namespace Models.Weapons.Data
             _statsMultiplier = weaponStatsMultiplier;
         }
 
+        // Range is constant for all weapons, so it doesn't need a multiplier.
         public float GetRange() => range;
 
         public int GetMagazineCapacity() => magazineCapacity;
         
-        public float GetReloadTime() => reloadTime * _statsMultiplier.GetMultiplier(WeaponStatsType.ReloadTime);
+        public float GetReloadTime() => reloadTime * _statsMultiplier.GetMultiplier(WeaponStatType.ReloadTime);
         
-        public float GetSpread() => spread * _statsMultiplier.GetMultiplier(WeaponStatsType.Spread);
+        public float GetSpread() => spread * _statsMultiplier.GetMultiplier(WeaponStatType.Spread);
         
-        public float GetDamage() => damage * _statsMultiplier.GetMultiplier(WeaponStatsType.Damage);
+        public float GetDamage() => damage * _statsMultiplier.GetMultiplier(WeaponStatType.Damage);
         
-        public float GetSpeed() => speed * _statsMultiplier.GetMultiplier(WeaponStatsType.Speed);
+        public float GetSpeed() => speed * _statsMultiplier.GetMultiplier(WeaponStatType.Speed);
         
-        public float GetCooldownTime() => cooldownTime * _statsMultiplier.GetMultiplier(WeaponStatsType.CooldownTime);
+        public float GetCooldownTime() => cooldownTime * _statsMultiplier.GetMultiplier(WeaponStatType.CooldownTime);
     }
 }

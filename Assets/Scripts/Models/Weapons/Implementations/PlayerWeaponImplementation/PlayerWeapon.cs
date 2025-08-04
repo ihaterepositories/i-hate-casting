@@ -1,21 +1,41 @@
 using System.Collections;
 using Core.Input.Interfaces;
-using Models.Weapons.Abstraction;
-using Models.Weapons.Data.WeaponStatsMultipliers;
-using Models.Weapons.Enums;
+using Models.Weapons.Base;
+using Models.Weapons.Base.Enums;
+using Models.Weapons.Implementations.PlayerWeaponImplementation.StatsMultipliers;
 using UnityEngine;
 using Zenject;
 
-namespace Models.Weapons
+namespace Models.Weapons.Implementations.PlayerWeaponImplementation
 {
     public class PlayerWeapon : Weapon
     {
         private IInputHandler _inputHandler;
         
         [Inject]
-        private void Construct(IInputHandler inputHandler)
+        private void Construct(
+            IInputHandler inputHandler,
+            PlayerShortRangeWeaponStatsMultiplier playerShortRangeWeaponStatsMultiplier,
+            PlayerMediumRangeWeaponStatsMultiplier playerMediumRangeWeaponStatsMultiplier, 
+            PlayerLongRangeWeaponStatsMultiplier playerLongRangeWeaponStatsMultiplier)
         {
             _inputHandler = inputHandler;
+            
+            switch (stats.weaponType)
+            {
+                case WeaponType.PlayerShortRange:
+                    stats.SetStatsMultiplier(playerShortRangeWeaponStatsMultiplier);
+                    break;
+                case WeaponType.PlayerMediumRange:
+                    stats.SetStatsMultiplier(playerMediumRangeWeaponStatsMultiplier);
+                    break;
+                case WeaponType.PlayerLongRange:
+                    stats.SetStatsMultiplier(playerLongRangeWeaponStatsMultiplier);
+                    break;
+                default:
+                    Debug.LogError($"Unknown weapon type: {stats.weaponType}");
+                    break;
+            }
         }
 
         protected override bool GetFirePermission()

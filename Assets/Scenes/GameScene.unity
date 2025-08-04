@@ -122,6 +122,38 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &77216913
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 77216914}
+  m_Layer: 0
+  m_Name: '[CreaturesStatsMultipliers]'
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &77216914
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 77216913}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.8680757, y: -0.87573034, z: 0.04565753}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 1316259581}
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &119168221
 GameObject:
   m_ObjectHideFlags: 0
@@ -47582,6 +47614,50 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1271385108}
   m_CullTransparentMesh: 1
+--- !u!1 &1316259580
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1316259581}
+  - component: {fileID: 1316259582}
+  m_Layer: 0
+  m_Name: '[PlayerStatsMultiplier]'
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1316259581
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1316259580}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 77216914}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1316259582
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1316259580}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8bf94791b5aa4f2b990e87fe4018c261, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1324143436
 GameObject:
   m_ObjectHideFlags: 0
@@ -47913,14 +47989,14 @@ MonoBehaviour:
   bulletPrefab: {fileID: 4314891101817587288, guid: 08b272b3ee9ce4a48a3f7c36335d4c56, type: 3}
   parentRigidbody: {fileID: 1693683876}
   stats:
-    weaponType: 0
-    range: 8
-    magazineCapacity: 1000
+    weaponType: 1
+    range: 6
+    magazineCapacity: 100
     reloadTime: 1
     spread: 0
-    damage: 0
-    speed: 3
-    cooldownTime: 0
+    damage: 1
+    speed: 5
+    cooldownTime: 1
 --- !u!1 &1507514622
 GameObject:
   m_ObjectHideFlags: 0
@@ -48089,6 +48165,7 @@ GameObject:
   - component: {fileID: 1693683878}
   - component: {fileID: 1693683877}
   - component: {fileID: 1693683879}
+  - component: {fileID: 1693683880}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -48248,6 +48325,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2573dc34313c4c2e8b217500a150c9be, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  player: {fileID: 1693683880}
   rb: {fileID: 1693683876}
   spriteRenderer: {fileID: 1693683873}
 --- !u!95 &1693683878
@@ -48284,6 +48362,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   animator: {fileID: 1693683878}
+--- !u!114 &1693683880
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1693683872}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 354e425673914874b22bcf404870724e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  stats:
+    health: 3
+    speed: 3
 --- !u!1 &1762677255
 GameObject:
   m_ObjectHideFlags: 0
@@ -48670,3 +48763,4 @@ SceneRoots:
   - {fileID: 1693683874}
   - {fileID: 1356687992}
   - {fileID: 1507514623}
+  - {fileID: 77216914}

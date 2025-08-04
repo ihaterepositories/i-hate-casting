@@ -1,4 +1,4 @@
-namespace Models.Weapons.Enums
+namespace Models.Weapons.Base.Enums
 {
     public enum WeaponType
     {

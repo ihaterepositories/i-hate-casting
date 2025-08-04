@@ -1,7 +1,6 @@
-using Models.Weapons.Data.WeaponStatsMultipliers.Abstraction;
-using Models.Weapons.Data.WeaponStatsMultipliers.Abstraction.Enums;
+using Models.Weapons.Base;
 
-namespace Models.Weapons.Data.WeaponStatsMultipliers
+namespace Models.Weapons.Implementations.PlayerWeaponImplementation.StatsMultipliers
 {
     public class PlayerLongRangeWeaponStatsMultiplier : WeaponStatsMultiplier
     {

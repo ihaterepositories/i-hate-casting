@@ -2,7 +2,7 @@ using Core.Input.Interfaces;
 using UnityEngine;
 using Zenject;
 
-namespace Models.Creatures.PlayerCore.Animating
+namespace Models.Creatures.Implementations.PlayerImplementation.Animators
 {
     public class PlayerAnimator : MonoBehaviour
     {

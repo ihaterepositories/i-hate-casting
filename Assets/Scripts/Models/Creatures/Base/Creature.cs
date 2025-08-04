@@ -1,7 +1,9 @@
-namespace Models.Creatures.Abstraction
+using UnityEngine;
+
+namespace Models.Creatures.Base
 {
-    public class Creature
+    public class Creature : MonoBehaviour
     {
-        
+        public CreatureStats stats;
     }
 }

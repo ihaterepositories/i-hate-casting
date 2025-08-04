@@ -1,10 +1,16 @@
-using Models.Creatures.PlayerCore.Data;
+using Models.Creatures.Base;
+using Models.Creatures.Implementations.PlayerImplementation.StatsMultipliers;
 using UnityEngine;
+using Zenject;
 
-namespace Models.Creatures.PlayerCore
+namespace Models.Creatures.Implementations.PlayerImplementation
 {
-    public class Player : MonoBehaviour
+    public class Player : Creature
     {
-        private int _health = PlayerStats.Health;
+        [Inject]
+        private void Construct(PlayerStatsMultiplier statsMultiplier)
+        {
+            stats.SetStatsMultiplier(statsMultiplier);
+        }
     }
 }

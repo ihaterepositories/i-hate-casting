@@ -1,28 +1,28 @@
-using Models.Weapons.Data.WeaponStatsMultipliers.Abstraction.Enums;
+using Models.Weapons.Base.Enums;
 using UnityEngine;
 
-namespace Models.Weapons.Data.WeaponStatsMultipliers.Abstraction
+namespace Models.Weapons.Base
 {
     public class WeaponStatsMultiplier : MonoBehaviour
     {
-        protected float ReloadTimeMultiplier = 1f;
-        protected float SpreadMultiplier = 1f;
-        protected float DamageMultiplier = 1;
-        protected float SpeedMultiplier = 1f;
-        protected float CooldownTimeMultiplier = 1f;
+        private float _reloadTimeMultiplier = 1f;
+        private float _spreadMultiplier = 1f;
+        private float _damageMultiplier = 1;
+        private float _speedMultiplier = 1f;
+        private float _cooldownTimeMultiplier = 1f;
         
         // ???
         //public float LifeTimeMultiplier = 1f;
         
-        public float GetMultiplier(WeaponStatsType type)
+        public float GetMultiplier(WeaponStatType type)
         {
             return type switch
             {
-                WeaponStatsType.ReloadTime => ReloadTimeMultiplier,
-                WeaponStatsType.Spread => SpreadMultiplier,
-                WeaponStatsType.Damage => DamageMultiplier,
-                WeaponStatsType.Speed => SpeedMultiplier,
-                WeaponStatsType.CooldownTime => CooldownTimeMultiplier,
+                WeaponStatType.ReloadTime => _reloadTimeMultiplier,
+                WeaponStatType.Spread => _spreadMultiplier,
+                WeaponStatType.Damage => _damageMultiplier,
+                WeaponStatType.Speed => _speedMultiplier,
+                WeaponStatType.CooldownTime => _cooldownTimeMultiplier,
                 _ => 1f
             };
         }
@@ -32,15 +32,15 @@ namespace Models.Weapons.Data.WeaponStatsMultipliers.Abstraction
         /// </summary>
         /// <param name="type">Type of weapon stats multiplier to modify.</param>
         /// <param name="value">Number that will be added to current multiplier's value.</param>
-        public void AddValueToMultiplier(WeaponStatsType type, float value)
+        public void AddValueToMultiplier(WeaponStatType type, float value)
         {
             switch (type)
             {
-                case WeaponStatsType.ReloadTime: ReloadTimeMultiplier += value; break;
-                case WeaponStatsType.Spread: SpreadMultiplier += value; break;
-                case WeaponStatsType.Damage: DamageMultiplier += (int)value; break;
-                case WeaponStatsType.Speed: SpeedMultiplier += value; break;
-                case WeaponStatsType.CooldownTime: CooldownTimeMultiplier += value; break;
+                case WeaponStatType.ReloadTime: _reloadTimeMultiplier += value; break;
+                case WeaponStatType.Spread: _spreadMultiplier += value; break;
+                case WeaponStatType.Damage: _damageMultiplier += (int)value; break;
+                case WeaponStatType.Speed: _speedMultiplier += value; break;
+                case WeaponStatType.CooldownTime: _cooldownTimeMultiplier += value; break;
             }
         }
     }

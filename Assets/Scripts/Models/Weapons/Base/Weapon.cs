@@ -1,14 +1,8 @@
-using Core.Input.Interfaces;
 using Models.Bullets.Abstraction;
-using Models.Weapons.Data;
-using Models.Weapons.Data.WeaponStatsMultipliers;
-using Models.Weapons.Data.WeaponStatsMultipliers.Abstraction;
-using Models.Weapons.Enums;
 using PoolingCore;
 using UnityEngine;
-using Zenject;
 
-namespace Models.Weapons.Abstraction
+namespace Models.Weapons.Base
 {
     public abstract class Weapon : MonoBehaviour
     {
@@ -20,29 +14,6 @@ namespace Models.Weapons.Abstraction
         
         protected bool IsReloading;
         protected int BulletsInMagazine;
-        
-        [Inject]
-        private void Construct(
-            PlayerShortRangeWeaponStatsMultiplier playerShortRangeWeaponStatsMultiplier,
-            PlayerMediumRangeWeaponStatsMultiplier playerMediumRangeWeaponStatsMultiplier, 
-            PlayerLongRangeWeaponStatsMultiplier playerLongRangeWeaponStatsMultiplier)
-        {
-            switch (stats.weaponType)
-            {
-                case WeaponType.PlayerShortRange:
-                    stats.SetStatsMultiplier(playerShortRangeWeaponStatsMultiplier);
-                    break;
-                case WeaponType.PlayerMediumRange:
-                    stats.SetStatsMultiplier(playerMediumRangeWeaponStatsMultiplier);
-                    break;
-                case WeaponType.PlayerLongRange:
-                    stats.SetStatsMultiplier(playerLongRangeWeaponStatsMultiplier);
-                    break;
-                default:
-                    Debug.LogError($"Unknown weapon type: {stats.weaponType}");
-                    break;
-            }
-        }
         
         private void Start()
         {
