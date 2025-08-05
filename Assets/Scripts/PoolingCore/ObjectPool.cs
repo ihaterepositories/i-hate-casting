@@ -1,6 +1,8 @@
+using System;
 using System.Collections.Generic;
 using PoolingCore.Interfaces;
 using UnityEngine;
+using Zenject;
 
 namespace PoolingCore
 {
@@ -9,13 +11,16 @@ namespace PoolingCore
         private readonly List<IPoolAble> _freeObjects;
         private readonly Transform _container;
         private readonly T _prefab;
+        private readonly DiContainer _diContainer;
 
-        public ObjectPool(T prefab)
+        public ObjectPool(T prefab, DiContainer diContainer)
         {
             _freeObjects = new List<IPoolAble>();
             _container = new GameObject().transform;
             _container.name = prefab.GameObject.name;
             _prefab = prefab;
+            
+            _diContainer = diContainer ?? throw new ArgumentNullException(nameof(diContainer));
         }
 
         public IPoolAble GetFreeObject()
@@ -29,7 +34,11 @@ namespace PoolingCore
             }
             else
             {
-                poolAble = Object.Instantiate(_prefab, _container);
+                GameObject instance = _diContainer.InstantiatePrefab(_prefab, _container);
+                poolAble = instance.GetComponent<IPoolAble>();
+
+                if (poolAble == null)
+                    throw new Exception($"Instantiated object does not implement IPoolAble: {_prefab.name}");
             }
 
             if (poolAble == null)

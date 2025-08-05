@@ -1,24 +1,31 @@
 using Models.Bullets.Abstraction;
 using PoolingCore;
 using UnityEngine;
+using Zenject;
 
 namespace Models.Weapons.Base
 {
     public abstract class Weapon : MonoBehaviour
     {
         [SerializeField] private GameObject bulletPrefab;
-        [SerializeField] private Rigidbody2D parentRigidbody;
         [SerializeField] protected WeaponStats stats;
         
         private ObjectPool<Bullet> _bulletsPool;
         private float _lastFireTime;
+        private DiContainer _diContainer;
         
         protected bool IsReloading;
         protected int BulletsInMagazine;
         
+        [Inject]
+        private void Construct(DiContainer diContainer)
+        {
+            _diContainer = diContainer;
+        }
+        
         private void Start()
         {
-            _bulletsPool = new ObjectPool<Bullet>(bulletPrefab.GetComponent<Bullet>());
+            _bulletsPool = new ObjectPool<Bullet>(bulletPrefab.GetComponent<Bullet>(), _diContainer);
             BulletsInMagazine = stats.GetMagazineCapacity();
             _lastFireTime = Time.time - stats.GetCooldownTime(); // Allow immediate fire on start
         }
