@@ -1,9 +1,10 @@
 using System.Collections.Generic;
-using ScriptableObjects;
+using Models.Items.Base.ScriptableObjects;
 using TMPro;
 using UnityEngine;
-using UnityEngine.Serialization;
 using UnityEngine.UI;
+using UserInterface.Animators;
+using UserInterface.Animators.Enums;
 using Zenject;
 
 namespace UserInterface.Functional
@@ -13,41 +14,47 @@ namespace UserInterface.Functional
         [SerializeField] private GameObject buttonPrefab;
         [SerializeField] private Transform buttonContainer;
         [SerializeField] private Transform targetParent;
-        [SerializeField] private List<Button> selectableButtons;
+        [SerializeField] private List<SelectableItemCard> cards;
         
         private DiContainer _diContainer;
+        private ScreenBorderAnimator _screenBorderAnimator;
         
         [Inject]
-        private void Construct(DiContainer container)
+        private void Construct(DiContainer container, ScreenBorderAnimator screenBorderAnimator)
         {
             _diContainer = container;
+            _screenBorderAnimator = screenBorderAnimator;
         }
 
-        public void ShowMenuToSelect(List<SelectableItemSO> items)
+        public void ShowMenuToSelect(List<SelectableItemSO> itemsData)
         {
             gameObject.SetActive(true);
+            _screenBorderAnimator.SetBorder(ScreenBorderType.ItemSelectMenuBorder);
             
-            foreach (var item in items)
+            foreach (var itemData in itemsData)
             {
-                var currentButton = selectableButtons[items.IndexOf(item)]; 
+                var currentCard = cards[itemsData.IndexOf(itemData)]; 
                 
-                currentButton.transform.Find("Icon").GetComponent<Image>().sprite = item.icon;
-                currentButton.transform.Find("Name").GetComponent<TextMeshProUGUI>().text = item.itemName;
-                currentButton.transform.Find("Description").GetComponent<TextMeshProUGUI>().text = item.description;
-
-                currentButton.onClick.AddListener(() => OnItemSelected(item.prefabToSpawn));
+                currentCard.SetData(itemData);
+                currentCard.AddOnClickAction(()=>OnItemSelected(itemData.prefabToSpawn));
             }
         }
 
         private void OnItemSelected(GameObject itemToSpawn)
+        {
+            SpawnItem(itemToSpawn);
+
+            _screenBorderAnimator.HideBorder();
+            gameObject.SetActive(false);
+        }
+
+        private void SpawnItem(GameObject itemToSpawn)
         {
             if (itemToSpawn != null)
             {
                 GameObject instance = _diContainer.InstantiatePrefab(itemToSpawn, targetParent);
                 instance.transform.localPosition = Vector3.zero;
             }
-
-            gameObject.SetActive(false);
         }
     }
 }

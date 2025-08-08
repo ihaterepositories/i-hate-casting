@@ -1,5 +1,6 @@
 using Models.Creatures.Implementations.PlayerImplementation.StatsMultipliers;
-using Models.Weapons.Implementations.PlayerWeaponImplementation.StatsMultipliers;
+using Models.Items.Weapons.Implementations.PlayerWeaponImplementation.StatsMultipliers;
+using UserInterface.Animators;
 using Zenject;
 
 namespace Core.Infrastructure
@@ -13,6 +14,8 @@ namespace Core.Infrastructure
             Container.Bind<PlayerShortRangeWeaponStatsMultiplier>().FromComponentInHierarchy().AsSingle();
             Container.Bind<PlayerMediumRangeWeaponStatsMultiplier>().FromComponentInHierarchy().AsSingle();
             Container.Bind<PlayerLongRangeWeaponStatsMultiplier>().FromComponentInHierarchy().AsSingle();
+
+            Container.Bind<ScreenBorderAnimator>().FromComponentInHierarchy().AsSingle();
         }
     }
 }

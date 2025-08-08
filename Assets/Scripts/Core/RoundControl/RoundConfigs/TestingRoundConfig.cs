@@ -1,4 +1,4 @@
-namespace Core.RoundConfigs
+namespace Core.RoundControl.RoundConfigs
 {
     public class TestingRoundConfig
     {
