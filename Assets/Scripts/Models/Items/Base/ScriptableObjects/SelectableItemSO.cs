@@ -1,17 +1,18 @@
 using Models.Items.Base.Enums;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace Models.Items.Base.ScriptableObjects
 {
     [CreateAssetMenu(fileName = "SelectableItem", menuName = "ScriptableObjects/SelectableItem")]
-    public class SelectableItemSO : ScriptableObject
+    public class SelectableItemSo : ScriptableObject
     {
-        public ItemRarity itemRarity;
-        public ItemType itemType;
-        public string itemName;
-        [TextArea]
-        public string description;
-        public Sprite icon;
-        public GameObject prefabToSpawn;
+        [FormerlySerializedAs("itemRarity")] public ItemRarity _itemRarity;
+        [FormerlySerializedAs("itemType")] public ItemType _itemType;
+        [FormerlySerializedAs("itemName")] public string _itemName;
+        [FormerlySerializedAs("description")] [TextArea]
+        public string _description;
+        [FormerlySerializedAs("icon")] public Sprite _icon;
+        [FormerlySerializedAs("prefabToSpawn")] public GameObject _prefabToSpawn;
     }
 }

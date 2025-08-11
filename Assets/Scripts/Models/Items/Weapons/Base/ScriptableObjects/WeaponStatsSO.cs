@@ -4,19 +4,20 @@ using UnityEngine;
 namespace Models.Items.Weapons.Base.ScriptableObjects
 {
     [CreateAssetMenu(fileName = "WeaponStats", menuName = "ScriptableObjects/WeaponStats")]
-    public class WeaponStatsSO : ScriptableObject
+    public class WeaponStatsSo : ScriptableObject
     {
         [Header("Used to assign stats multiplier.")]
-        public WeaponType weaponType;
+        public WeaponType WeaponType;
 
         [Header("Short range: 1-2, Medium range: 3-5, Long range: 6+")]
-        [SerializeField] private float range;
-        [SerializeField] private int magazineCapacity;
-        [SerializeField] private float reloadTime;
-        [SerializeField] private float spread;
-        [SerializeField] private float damage;
-        [SerializeField] private float speed;
-        [SerializeField] private float cooldownTime;
+        [SerializeField] private float _range;
+        [SerializeField] private int _magazineCapacity;
+        [Header("2 seconds is minimum")]
+        [SerializeField] private float _reloadTime;
+        [SerializeField] private float _spread;
+        [SerializeField] private float _damage;
+        [SerializeField] private float _speed;
+        [SerializeField] private float _cooldownTime;
 
         private WeaponStatsMultiplier _statsMultiplier;
 
@@ -31,18 +32,18 @@ namespace Models.Items.Weapons.Base.ScriptableObjects
         }
 
         // Range is constant for all weapons, so it doesn't need a multiplier.
-        public float GetRange() => range;
+        public float GetRange() => _range;
 
-        public int GetMagazineCapacity() => magazineCapacity;
+        public int GetMagazineCapacity() => _magazineCapacity;
         
-        public float GetReloadTime() => reloadTime * _statsMultiplier.GetMultiplier(WeaponStatType.ReloadTime);
+        public float GetReloadTime() => _reloadTime * _statsMultiplier.GetMultiplier(WeaponStatType.ReloadTime);
         
-        public float GetSpread() => spread * _statsMultiplier.GetMultiplier(WeaponStatType.Spread);
+        public float GetSpread() => _spread * _statsMultiplier.GetMultiplier(WeaponStatType.Spread);
         
-        public float GetDamage() => damage * _statsMultiplier.GetMultiplier(WeaponStatType.Damage);
+        public float GetDamage() => _damage * _statsMultiplier.GetMultiplier(WeaponStatType.Damage);
         
-        public float GetSpeed() => speed * _statsMultiplier.GetMultiplier(WeaponStatType.Speed);
+        public float GetSpeed() => _speed * _statsMultiplier.GetMultiplier(WeaponStatType.Speed);
         
-        public float GetCooldownTime() => cooldownTime * _statsMultiplier.GetMultiplier(WeaponStatType.CooldownTime);
+        public float GetCooldownTime() => _cooldownTime * _statsMultiplier.GetMultiplier(WeaponStatType.CooldownTime);
     }
 }

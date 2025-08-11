@@ -1,14 +1,15 @@
 using System;
 using Models.Creatures.Base.Enums;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace Models.Creatures.Base
 {
     [Serializable]
     public class CreatureStats
     {
-        [SerializeField] private float health;
-        [SerializeField] private float speed;
+        [FormerlySerializedAs("health")] [SerializeField] private float _health;
+        [FormerlySerializedAs("speed")] [SerializeField] private float _speed;
 
         private CreatureStatsMultiplier _statsMultiplier;
         
@@ -23,7 +24,7 @@ namespace Models.Creatures.Base
             _statsMultiplier = statsMultiplier;
         }
         
-        public float GetHealth() => health * _statsMultiplier.GetMultiplier(CreatureStatType.Health);
-        public float GetSpeed() => speed * _statsMultiplier.GetMultiplier(CreatureStatType.Speed);
+        public float GetHealth() => _health * _statsMultiplier.GetMultiplier(CreatureStatType.Health);
+        public float GetSpeed() => _speed * _statsMultiplier.GetMultiplier(CreatureStatType.Speed);
     }
 }

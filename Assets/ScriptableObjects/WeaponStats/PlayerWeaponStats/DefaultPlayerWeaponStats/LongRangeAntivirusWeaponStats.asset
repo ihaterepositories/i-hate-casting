@@ -12,11 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3761525d745e40b99501882d81b0786d, type: 3}
   m_Name: LongRangeAntivirusWeaponStats
   m_EditorClassIdentifier: 
-  weaponType: 2
-  range: 6
-  magazineCapacity: 15
-  reloadTime: 7
-  spread: 1
-  damage: 1.5
-  speed: 15
-  cooldownTime: 1.5
+  WeaponType: 2
+  _range: 6
+  _magazineCapacity: 10
+  _reloadTime: 7
+  _spread: 0
+  _damage: 1
+  _speed: 10
+  _cooldownTime: 1.5

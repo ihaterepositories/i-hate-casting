@@ -12,11 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3761525d745e40b99501882d81b0786d, type: 3}
   m_Name: ShortRangeAntivirusWeaponStats
   m_EditorClassIdentifier: 
-  weaponType: 0
-  range: 2
-  magazineCapacity: 20
-  reloadTime: 2
-  spread: 4
-  damage: 3
-  speed: 10
-  cooldownTime: 0.25
+  WeaponType: 0
+  _range: 2
+  _magazineCapacity: 20
+  _reloadTime: 2
+  _spread: 3
+  _damage: 3
+  _speed: 7
+  _cooldownTime: 0.25

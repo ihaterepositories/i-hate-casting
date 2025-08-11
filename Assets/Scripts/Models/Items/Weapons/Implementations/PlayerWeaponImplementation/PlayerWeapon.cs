@@ -5,6 +5,7 @@ using Models.Items.Weapons.Base.Enums;
 using Models.Items.Weapons.Implementations.PlayerWeaponImplementation.StatsMultipliers;
 using UnityEngine;
 using Zenject;
+using Random = UnityEngine.Random;
 
 namespace Models.Items.Weapons.Implementations.PlayerWeaponImplementation
 {
@@ -21,19 +22,19 @@ namespace Models.Items.Weapons.Implementations.PlayerWeaponImplementation
         {
             _inputHandler = inputHandler;
             
-            switch (weaponStats.weaponType)
+            switch (_weaponStats.WeaponType)
             {
                 case WeaponType.PlayerShortRange:
-                    weaponStats.SetStatsMultiplier(playerShortRangeWeaponStatsMultiplier);
+                    _weaponStats.SetStatsMultiplier(playerShortRangeWeaponStatsMultiplier);
                     break;
                 case WeaponType.PlayerMediumRange:
-                    weaponStats.SetStatsMultiplier(playerMediumRangeWeaponStatsMultiplier);
+                    _weaponStats.SetStatsMultiplier(playerMediumRangeWeaponStatsMultiplier);
                     break;
                 case WeaponType.PlayerLongRange:
-                    weaponStats.SetStatsMultiplier(playerLongRangeWeaponStatsMultiplier);
+                    _weaponStats.SetStatsMultiplier(playerLongRangeWeaponStatsMultiplier);
                     break;
                 default:
-                    Debug.LogError($"Unknown weapon type: {weaponStats.weaponType}");
+                    Debug.LogError($"Unknown weapon type: {_weaponStats.WeaponType}");
                     break;
             }
         }
@@ -48,21 +49,6 @@ namespace Models.Items.Weapons.Implementations.PlayerWeaponImplementation
             return _inputHandler.IsReloadButtonPressed();
         }
 
-        protected override void Reload()
-        {
-            StartCoroutine(ReloadCoroutine());
-        }
-        
-        private IEnumerator ReloadCoroutine()
-        {
-            Debug.Log("Starting reload...");
-            IsReloading = true;
-            yield return new WaitForSeconds(weaponStats.GetReloadTime());
-            BulletsInMagazine = weaponStats.GetMagazineCapacity();
-            IsReloading = false;
-            Debug.Log("Reload complete.");
-        }
-
         protected override float GetFireDirectionAngle()
         {
             Vector2 lookDirection = (_inputHandler.GetPointerPosition() - transform.position);
@@ -71,8 +57,8 @@ namespace Models.Items.Weapons.Implementations.PlayerWeaponImplementation
 
         private float GetSpread()
         {
-            return Random.Range(-weaponStats.GetSpread(),
-                weaponStats.GetSpread());
+            return Random.Range(-_weaponStats.GetSpread(),
+                _weaponStats.GetSpread());
         }
     }
 }

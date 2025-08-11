@@ -12,11 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3761525d745e40b99501882d81b0786d, type: 3}
   m_Name: MediumRangeAntivirusWeaponStats
   m_EditorClassIdentifier: 
-  weaponType: 1
-  range: 4
-  magazineCapacity: 30
-  reloadTime: 5
-  spread: 3
-  damage: 2
-  speed: 7
-  cooldownTime: 1
+  WeaponType: 1
+  _range: 4
+  _magazineCapacity: 30
+  _reloadTime: 5
+  _spread: 4
+  _damage: 2
+  _speed: 5
+  _cooldownTime: 1

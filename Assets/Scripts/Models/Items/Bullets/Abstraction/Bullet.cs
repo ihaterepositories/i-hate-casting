@@ -2,17 +2,18 @@ using System;
 using Models.Items.Weapons.Base.ScriptableObjects;
 using PoolingCore.Interfaces;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace Models.Items.Bullets.Abstraction
 {
     public abstract class Bullet : MonoBehaviour, IPoolAble
     {
-        [SerializeField] protected Rigidbody2D rb;
+        [FormerlySerializedAs("rb")] [SerializeField] protected Rigidbody2D _rb;
         
         private float LifeTime => FiredFromWeaponStatsSo.GetRange() / FiredFromWeaponStatsSo.GetSpeed();
         private float _lifeTimeLeft;
         
-        protected WeaponStatsSO FiredFromWeaponStatsSo;
+        protected WeaponStatsSo FiredFromWeaponStatsSo;
         
         public GameObject GameObject => gameObject;
         public float Damage => FiredFromWeaponStatsSo.GetDamage();
@@ -44,7 +45,7 @@ namespace Models.Items.Bullets.Abstraction
             _lifeTimeLeft = LifeTime;
         }
 
-        public void Init(WeaponStatsSO statsSo)
+        public void Init(WeaponStatsSo statsSo)
         {
             FiredFromWeaponStatsSo = statsSo;
             _lifeTimeLeft = LifeTime;

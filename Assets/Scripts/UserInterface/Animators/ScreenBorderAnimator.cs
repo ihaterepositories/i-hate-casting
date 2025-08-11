@@ -1,6 +1,7 @@
 using DG.Tweening;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Serialization;
 using UnityEngine.UI;
 using UserInterface.Animators.Enums;
 
@@ -8,31 +9,31 @@ namespace UserInterface.Animators
 {
     public class ScreenBorderAnimator : MonoBehaviour
     {
-        [SerializeField] private float appearanceDuration = 0.5f;
-        [SerializeField] private float hideDuration = 0.5f;
-        [SerializeField] private Image screenBorderObject;
-        [SerializeField] private Sprite itemSelectMenuBorder;
-        [SerializeField] private Sprite castingMenuBorder;
+        [FormerlySerializedAs("appearanceDuration")] [SerializeField] private float _appearanceDuration = 0.5f;
+        [FormerlySerializedAs("hideDuration")] [SerializeField] private float _hideDuration = 0.5f;
+        [FormerlySerializedAs("screenBorderObject")] [SerializeField] private Image _screenBorderObject;
+        [FormerlySerializedAs("itemSelectMenuBorder")] [SerializeField] private Sprite _itemSelectMenuBorder;
+        [FormerlySerializedAs("castingMenuBorder")] [SerializeField] private Sprite _castingMenuBorder;
 
         private void OnDisable()
         {
-            screenBorderObject.DOKill();
+            _screenBorderObject.DOKill();
         }
         
         public void HideBorder()
         {
-            screenBorderObject.rectTransform.DOScale(2f, hideDuration);
+            _screenBorderObject.rectTransform.DOScale(2f, _hideDuration);
         }
 
-        public void SetBorder(ScreenBorderType type)
+        public void ShowBorder(ScreenBorderType type)
         {
             switch (type)
             {
                 case ScreenBorderType.ItemSelectMenuBorder:
-                    ShowBorder(itemSelectMenuBorder);
+                    ShowBorder(_itemSelectMenuBorder);
                     break;
                 case ScreenBorderType.CastingMenuBorder:
-                    ShowBorder(castingMenuBorder);
+                    ShowBorder(_castingMenuBorder);
                     break;
                 default:
                     throw new UnexpectedEnumValueException<ScreenBorderType>(type);
@@ -41,8 +42,8 @@ namespace UserInterface.Animators
 
         private void ShowBorder(Sprite newBorder)
         {
-            screenBorderObject.sprite = newBorder;
-            screenBorderObject.rectTransform.DOScale(1f, appearanceDuration);
+            _screenBorderObject.sprite = newBorder;
+            _screenBorderObject.rectTransform.DOScale(1f, _appearanceDuration);
         }
     }
 }

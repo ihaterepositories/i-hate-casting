@@ -1,20 +1,16 @@
-using System;
-using System.Collections.Generic;
-using Models.Items.Base.ScriptableObjects;
+using Core.ItemSpawners;
 using UnityEngine;
-using UserInterface.Functional;
-using Zenject;
+using UnityEngine.Serialization;
 
 namespace Core.RoundControl
 {
     public class RoundStarter : MonoBehaviour
     {
-        [SerializeField] private SelectableItemsMenu selectableItemsMenu;
-        [SerializeField] private List<SelectableItemSO> playerWeapons;
+        [FormerlySerializedAs("defaultWeaponSpawner")] [SerializeField] private DefaultWeaponSpawner _defaultWeaponSpawner;
 
         private void Start()
         {
-            selectableItemsMenu.ShowMenuToSelect(playerWeapons);
+            _defaultWeaponSpawner.ShowSelection();
         }
     }
 }

@@ -1,5 +1,6 @@
 using Core.Input.Interfaces;
 using UnityEngine;
+using UnityEngine.Serialization;
 using Zenject;
 
 namespace Models.Creatures.Implementations.PlayerImplementation.Movers
@@ -7,11 +8,11 @@ namespace Models.Creatures.Implementations.PlayerImplementation.Movers
     [RequireComponent(typeof(Rigidbody2D), typeof(BoxCollider2D))]
     public class PlayerMover : MonoBehaviour
     {
-        [SerializeField] private Player player;
-        [SerializeField] private Rigidbody2D rb;
-        [SerializeField] private SpriteRenderer spriteRenderer;
+        [FormerlySerializedAs("player")] [SerializeField] private Player _player;
+        [FormerlySerializedAs("rb")] [SerializeField] private Rigidbody2D _rb;
+        [FormerlySerializedAs("spriteRenderer")] [SerializeField] private SpriteRenderer _spriteRenderer;
 
-        private float Speed => player.stats.GetSpeed();
+        private float Speed => _player._stats.GetSpeed();
         
         private IInputHandler _inputHandler;
         private float _horizontalAxis;
@@ -38,13 +39,13 @@ namespace Models.Creatures.Implementations.PlayerImplementation.Movers
         
         private void ChangeVelocityByInput()
         {
-            rb.velocity = new Vector2(_horizontalAxis, _verticalAxis).normalized * Speed;
+            _rb.velocity = new Vector2(_horizontalAxis, _verticalAxis).normalized * Speed;
         }
 
         private void FlipSpriteToMoveDirection()
         {
             if (_horizontalAxis != 0)
-                spriteRenderer.flipX = _horizontalAxis < 0;
+                _spriteRenderer.flipX = _horizontalAxis < 0;
         }
     }
 }
