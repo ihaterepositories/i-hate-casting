@@ -1,23 +1,23 @@
 using System;
 using System.Collections;
+using Core.RoundControl;
 using Models.Items.Bullets.Abstraction;
 using Models.Items.Weapons.Base.ScriptableObjects;
 using PoolingCore;
 using UnityEngine;
-using UnityEngine.Serialization;
 using Zenject;
 
 namespace Models.Items.Weapons.Base
 {
     public abstract class Weapon : MonoBehaviour
     {
-        [FormerlySerializedAs("bulletPrefab")] [SerializeField] private GameObject _bulletPrefab;
-        [FormerlySerializedAs("weaponStats")] public WeaponStatsSo _weaponStats;
+        [SerializeField] private GameObject _bulletPrefab;
+        [SerializeField] protected WeaponStatsSo _weaponStats;
         
         private ObjectPool<Bullet> _bulletsPool;
-        private float _lastFireTime;
         private DiContainer _diContainer;
-
+        
+        private float _lastFireTime;
         private bool _isReloading;
         private int _bulletsInMagazine;
         
@@ -43,24 +43,24 @@ namespace Models.Items.Weapons.Base
 
         private void Update()
         {
-            transform.rotation = Quaternion.Euler(0, 0, GetFireDirectionAngle());
-            if (GetFirePermission() && !_isReloading && BulletsInMagazine > 0 && Time.time - _lastFireTime >= _weaponStats.GetCooldownTime())
+            if (GameStateController.IsGamePaused()) return;
+            
+            RotateToTarget();
+            
+            if (GetFirePermission() && !_isReloading && _bulletsInMagazine > 0 && Time.time - _lastFireTime >= _weaponStats.GetCooldownTime())
             {
-                _lastFireTime = Time.time;
                 Fire();
-                _bulletsInMagazine--;
-
-                if (_bulletsInMagazine <= 0)
-                {
-                    OnReloadNeeded?.Invoke();
-                }
             }
 
-            if (GetReloadPermission() && !_isReloading)
+            if (GetReloadPermission() && !_isReloading && _bulletsInMagazine < 1)
             {
-                OnReloadStarted?.Invoke(_weaponStats.GetReloadTime());
                 Reload();
             }
+        }
+
+        private void RotateToTarget()
+        {
+            transform.rotation = Quaternion.Euler(0, 0, GetFireDirectionAngle());
         }
 
         protected abstract bool GetFirePermission();
@@ -69,9 +69,18 @@ namespace Models.Items.Weapons.Base
         {
             if (_bulletsPool.GetFreeObject() is Bullet bullet)
             {
+                _lastFireTime = Time.time;
+                
                 bullet.Init(_weaponStats);
                 bullet.transform.position = transform.position;
                 bullet.transform.rotation = Quaternion.Euler(0, 0, GetFireDirectionAngle());
+                
+                _bulletsInMagazine--;
+                
+                if (_bulletsInMagazine <= 0)
+                {
+                    OnReloadNeeded?.Invoke();
+                }
             }
             else
             {
@@ -81,6 +90,7 @@ namespace Models.Items.Weapons.Base
         
         private void Reload()
         {
+            OnReloadStarted?.Invoke(_weaponStats.GetReloadTime());
             StartCoroutine(ReloadCoroutine());
         }
 

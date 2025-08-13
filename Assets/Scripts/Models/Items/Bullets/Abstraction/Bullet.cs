@@ -10,13 +10,13 @@ namespace Models.Items.Bullets.Abstraction
     {
         [FormerlySerializedAs("rb")] [SerializeField] protected Rigidbody2D _rb;
         
-        private float LifeTime => FiredFromWeaponStatsSo.GetRange() / FiredFromWeaponStatsSo.GetSpeed();
+        private float LifeTime => _firedFromWeaponStatsSo.GetRange() / _firedFromWeaponStatsSo.GetSpeed();
         private float _lifeTimeLeft;
         
-        protected WeaponStatsSo FiredFromWeaponStatsSo;
+        protected WeaponStatsSo _firedFromWeaponStatsSo;
         
         public GameObject GameObject => gameObject;
-        public float Damage => FiredFromWeaponStatsSo.GetDamage();
+        public float Damage => _firedFromWeaponStatsSo.GetDamage();
         
         public event Action<IPoolAble> OnDestroyed;
 
@@ -47,7 +47,7 @@ namespace Models.Items.Bullets.Abstraction
 
         public void Init(WeaponStatsSo statsSo)
         {
-            FiredFromWeaponStatsSo = statsSo;
+            _firedFromWeaponStatsSo = statsSo;
             _lifeTimeLeft = LifeTime;
         }
     }

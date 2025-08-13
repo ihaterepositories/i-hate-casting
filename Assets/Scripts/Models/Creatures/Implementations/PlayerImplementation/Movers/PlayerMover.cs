@@ -1,4 +1,5 @@
 using Core.Input.Interfaces;
+using Core.RoundControl;
 using UnityEngine;
 using UnityEngine.Serialization;
 using Zenject;
@@ -12,7 +13,7 @@ namespace Models.Creatures.Implementations.PlayerImplementation.Movers
         [FormerlySerializedAs("rb")] [SerializeField] private Rigidbody2D _rb;
         [FormerlySerializedAs("spriteRenderer")] [SerializeField] private SpriteRenderer _spriteRenderer;
 
-        private float Speed => _player._stats.GetSpeed();
+        private float Speed => _player.Stats.GetSpeed();
         
         private IInputHandler _inputHandler;
         private float _horizontalAxis;
@@ -26,6 +27,8 @@ namespace Models.Creatures.Implementations.PlayerImplementation.Movers
         
         private void Update()
         {
+            if (GameStateController.IsGamePaused()) return;
+            
             SetAxisValues();
             ChangeVelocityByInput();
             FlipSpriteToMoveDirection();

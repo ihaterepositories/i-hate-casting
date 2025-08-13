@@ -1,6 +1,6 @@
 using System.Collections;
-using Core.ItemSpawners;
 using DG.Tweening;
+using Models.Items.Spawners;
 using Models.Items.Weapons.Implementations.PlayerWeaponImplementation;
 using UnityEngine;
 using UnityEngine.Serialization;
@@ -10,24 +10,25 @@ namespace UserInterface.Animators
 {
     public class ReloadCdAnimator : MonoBehaviour
     {
-        [FormerlySerializedAs("cdIcon")] [SerializeField] private Image _cdIcon;
-        [FormerlySerializedAs("defaultCdSprite")] [SerializeField] private Sprite _defaultCdSprite;
-        [FormerlySerializedAs("brokenCdSprite")] [SerializeField] private Sprite _brokenCdSprite;
+        [SerializeField] private Image _cdIcon;
+        [SerializeField] private Sprite _defaultCdSprite;
+        [SerializeField] private Sprite _brokenCdSprite;
         
-        [FormerlySerializedAs("defaultWeaponSpawner")]
+        [FormerlySerializedAs("_baseWeaponSpawner")]
+        [FormerlySerializedAs("_defaultWeaponSpawner")]
         [Header("Needed to get spawned PlayerWeapon component")]
-        [SerializeField] private DefaultWeaponSpawner _defaultWeaponSpawner;
+        [SerializeField] private MainWeaponSpawner _mainWeaponSpawner;
         
         private PlayerWeapon _playerWeapon;
 
         private void OnEnable()
         {
-            _defaultWeaponSpawner.OnSpawned += AssignPlayerWeapon;
+            _mainWeaponSpawner.OnItemSpawned += AssignPlayerWeapon;
         }
     
         private void OnDisable()
         {
-            _defaultWeaponSpawner.OnSpawned -= AssignPlayerWeapon;
+            _mainWeaponSpawner.OnItemSpawned -= AssignPlayerWeapon;
             _playerWeapon.OnReloadNeeded -= AnimateEmptyMagazine;
             _playerWeapon.OnReloadStarted -= AnimateReloading;
 

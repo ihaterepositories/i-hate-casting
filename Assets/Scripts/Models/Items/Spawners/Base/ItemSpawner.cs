@@ -2,26 +2,33 @@ using System;
 using System.Collections.Generic;
 using Models.Items.Base.ScriptableObjects;
 using UnityEngine;
-using UnityEngine.Serialization;
-using UserInterface.Functional;
+using UserInterface.Functional.InGameMenus;
 using Zenject;
 
-namespace Core.ItemSpawners.Base
+namespace Models.Items.Spawners.Base
 {
     public abstract class ItemSpawner : MonoBehaviour
     {
-        [FormerlySerializedAs("selectionMenu")] [SerializeField] private SelectionMenu _selectionMenu;
-        [FormerlySerializedAs("targetParent")] [SerializeField] private Transform _targetParent;
+        [SerializeField] private SelectionMenu _selectionMenu;
+        [SerializeField] private Transform _targetParent;
         
         private DiContainer _diContainer;
+        private GameObject _lastSpawnedItem;
         
-        public event Action<GameObject> OnSpawned;
-        public event Action<SelectableItemSo> OnSelected; 
+        public event Action<GameObject> OnItemSpawned;
+        public static event Action<SelectableItemSo> OnItemSelectedInMenu;
+        public static event Action OnLastSpawnedItemDestroyed;
         
         [Inject]
         private void Construct(DiContainer container)
         {
             _diContainer = container;
+        }
+
+        public void DestroyLastSpawnedItem()
+        {
+            Destroy(_lastSpawnedItem);
+            OnLastSpawnedItemDestroyed?.Invoke();
         }
         
         protected void ShowSelectionFor(List<SelectableItemSo> prefabs)
@@ -43,8 +50,8 @@ namespace Core.ItemSpawners.Base
 
         private void OnItemSelected(SelectableItemSo item)
         {
-            OnSelected?.Invoke(item);
-            SpawnItem(item._prefabToSpawn);
+            OnItemSelectedInMenu?.Invoke(item);
+            SpawnItem(item.PrefabToSpawn);
         }
         
         private void SpawnItem(GameObject itemToSpawn)
@@ -53,7 +60,8 @@ namespace Core.ItemSpawners.Base
             {
                 GameObject instance = _diContainer.InstantiatePrefab(itemToSpawn, _targetParent);
                 instance.transform.localPosition = Vector3.zero;
-                OnSpawned?.Invoke(instance);
+                OnItemSpawned?.Invoke(instance);
+                _lastSpawnedItem = instance;
             }
         }
     }

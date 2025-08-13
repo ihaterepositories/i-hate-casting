@@ -9,7 +9,7 @@ namespace Models.Creatures.Implementations.PlayerImplementation
         [Inject]
         private void Construct(PlayerStatsMultiplier statsMultiplier)
         {
-            _stats.SetStatsMultiplier(statsMultiplier);
+            Stats.SetStatsMultiplier(statsMultiplier);
         }
     }
 }

@@ -1,4 +1,5 @@
 using Core.Input.Interfaces;
+using Core.RoundControl;
 using UnityEngine;
 using UnityEngine.Serialization;
 using Zenject;
@@ -23,6 +24,8 @@ namespace Models.Creatures.Implementations.PlayerImplementation.Animators
         
         private void Update()
         {
+            if (GameStateController.IsGamePaused()) return;
+            
             SetAxisValues();
             AnimateRun();
         }

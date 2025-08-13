@@ -10,11 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5f462f0578ab43f3a7dd5697ba679580, type: 3}
-  m_Name: LongRangeAntivirusItemData
+  m_Name: ShortRangeAntivirusSelectableItem
   m_EditorClassIdentifier: 
-  itemRarity: 0
-  itemType: 0
-  itemName: Antivirus
-  description: Long range base weapon
-  icon: {fileID: 21300000, guid: fa86d3a1c1c703142a6384327753db18, type: 3}
-  prefabToSpawn: {fileID: 8512101732125794142, guid: cd49d619efa080d4b828a12ba7b6dada, type: 3}
+  ItemRarity: 0
+  ItemType: 0
+  ItemName: Antivirus
+  Description: Short range antivirus
+  Icon: {fileID: 21300000, guid: eb45687525aff1f48b3fd66e5850ec5f, type: 3}
+  PrefabToSpawn: {fileID: 7472332532555384362, guid: f7c07c17c103afb4ca42cbabf55ffe64, type: 3}

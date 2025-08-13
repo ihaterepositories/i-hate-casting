@@ -24,12 +24,16 @@ namespace UserInterface.Animators
         
         public void OnPointerEnter(PointerEventData eventData)
         {
-            _button.transform.DOScale(_defaultScale * 1.1f, 0.2f).SetEase(Ease.OutBack);
+            _button.transform.DOScale(_defaultScale * 1.1f, 0.2f)
+                .SetEase(Ease.OutBack)
+                .SetUpdate(true);
         }
 
         public void OnPointerExit(PointerEventData eventData)
         {
-            _button.transform.DOScale(_defaultScale, 0.2f).SetEase(Ease.OutBack);
+            _button.transform.DOScale(_defaultScale, 0.2f)
+                .SetEase(Ease.OutBack)
+                .SetUpdate(true);
         }
     }
 }

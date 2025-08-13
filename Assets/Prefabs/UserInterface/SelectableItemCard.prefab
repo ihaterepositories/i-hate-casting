@@ -65,7 +65,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: name
+  m_text: 
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 889e3b9f02c42a54f8a035aa91eeb084, type: 2}
   m_sharedMaterial: {fileID: -7636462353939680971, guid: 889e3b9f02c42a54f8a035aa91eeb084, type: 2}
@@ -199,7 +199,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: fa86d3a1c1c703142a6384327753db18, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 588f0ab6ff22043489b356463b1dfbd0, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -274,7 +274,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: name
+  m_text: 
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 889e3b9f02c42a54f8a035aa91eeb084, type: 2}
   m_sharedMaterial: {fileID: -7636462353939680971, guid: 889e3b9f02c42a54f8a035aa91eeb084, type: 2}
@@ -481,7 +481,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bc5ec32cd2a54b68b61baa60b0e2e2e7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  button: {fileID: 9019155190377523634}
+  _button: {fileID: 9019155190377523634}
 --- !u!114 &6827794691542944477
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -494,14 +494,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 03dbd66f254a4e759671764272530909, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  itemTypeText: {fileID: 5378107078242955172}
-  itemNameText: {fileID: 8749997796109553962}
-  itemDescriptionText: {fileID: 2391273942418226554}
-  itemImage: {fileID: 6010099041375616639}
-  button: {fileID: 9019155190377523634}
-  commonCardSprite: {fileID: 21300000, guid: 0eb3189781845494490f062f8e60af56, type: 3}
-  goldCardSprite: {fileID: 21300000, guid: cf3ddf297795d1a42b20c5ecd91bf6fe, type: 3}
-  incredibleCardSprite: {fileID: 21300000, guid: b8e875ea0deb6404abe76075806cf136, type: 3}
+  _itemTypeText: {fileID: 5378107078242955172}
+  _itemNameText: {fileID: 8749997796109553962}
+  _itemDescriptionText: {fileID: 2391273942418226554}
+  _itemImage: {fileID: 6010099041375616639}
+  _button: {fileID: 9019155190377523634}
+  _commonCardSprite: {fileID: 21300000, guid: 0eb3189781845494490f062f8e60af56, type: 3}
+  _goldCardSprite: {fileID: 21300000, guid: cf3ddf297795d1a42b20c5ecd91bf6fe, type: 3}
+  _incredibleCardSprite: {fileID: 21300000, guid: b8e875ea0deb6404abe76075806cf136, type: 3}
+  _noItemIcon: {fileID: 21300000, guid: 588f0ab6ff22043489b356463b1dfbd0, type: 3}
 --- !u!1 &8448125359209835234
 GameObject:
   m_ObjectHideFlags: 0
@@ -567,7 +568,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: description
+  m_text: 
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 889e3b9f02c42a54f8a035aa91eeb084, type: 2}
   m_sharedMaterial: {fileID: -7636462353939680971, guid: 889e3b9f02c42a54f8a035aa91eeb084, type: 2}

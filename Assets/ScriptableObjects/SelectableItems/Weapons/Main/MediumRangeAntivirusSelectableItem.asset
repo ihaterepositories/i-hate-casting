@@ -10,11 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5f462f0578ab43f3a7dd5697ba679580, type: 3}
-  m_Name: MediumRangeAntivirusItemData
+  m_Name: MediumRangeAntivirusSelectableItem
   m_EditorClassIdentifier: 
-  itemRarity: 0
-  itemType: 0
-  itemName: Antivirus
-  description: Medium range base weapon
-  icon: {fileID: 21300000, guid: 5590d103db605684fb9eb8a407a1e412, type: 3}
-  prefabToSpawn: {fileID: 8791601532887404593, guid: b7f9b80f0d45c62449413e717a05df93, type: 3}
+  ItemRarity: 0
+  ItemType: 0
+  ItemName: Antivirus
+  Description: Medium range antivirus
+  Icon: {fileID: 21300000, guid: 5590d103db605684fb9eb8a407a1e412, type: 3}
+  PrefabToSpawn: {fileID: 8791601532887404593, guid: b7f9b80f0d45c62449413e717a05df93, type: 3}

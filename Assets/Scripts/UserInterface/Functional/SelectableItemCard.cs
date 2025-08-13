@@ -18,13 +18,25 @@ namespace UserInterface.Functional
         [FormerlySerializedAs("commonCardSprite")] [SerializeField] private Sprite _commonCardSprite;
         [FormerlySerializedAs("goldCardSprite")] [SerializeField] private Sprite _goldCardSprite;
         [FormerlySerializedAs("incredibleCardSprite")] [SerializeField] private Sprite _incredibleCardSprite;
+        [SerializeField] private Sprite _noItemIcon;
 
+        public void ClearData()
+        {
+            _itemTypeText.text = string.Empty;
+            _itemNameText.text = string.Empty;
+            _itemDescriptionText.text = string.Empty;
+            _itemImage.sprite = null;
+            SetCardSprite(ItemRarity.Common);
+        }
+        
         public void SetData(SelectableItemSo itemData)
         {
-            _itemTypeText.text = itemData._itemType.ToString();
-            _itemNameText.text = itemData._itemName;
-            _itemDescriptionText.text = itemData._description;
-            _itemImage.sprite = itemData._icon;
+            _itemTypeText.text = itemData.ItemType.ToString();
+            _itemNameText.text = itemData.ItemName;
+            _itemDescriptionText.text = itemData.Description;
+            _itemImage.sprite = itemData.Icon;
+            
+            SetCardSprite(itemData.ItemRarity);
         }
 
         private void SetCardSprite(ItemRarity rarity)

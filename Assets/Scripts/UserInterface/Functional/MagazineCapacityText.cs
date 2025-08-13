@@ -1,8 +1,8 @@
-using Core.ItemSpawners;
 using DG.Tweening;
+using Models.Items.Spawners;
 using Models.Items.Weapons.Implementations.PlayerWeaponImplementation;
-using TMPro;
 using UnityEngine;
+using UnityEngine.Serialization;
 using UnityEngine.UI;
 
 namespace UserInterface.Functional
@@ -11,8 +11,10 @@ namespace UserInterface.Functional
     {
         [SerializeField] private Text _magazineCapacityText;
         
+        [FormerlySerializedAs("_baseWeaponSpawner")]
+        [FormerlySerializedAs("_defaultWeaponSpawner")]
         [Header("Needed to get spawned PlayerWeapon component")]
-        [SerializeField] private DefaultWeaponSpawner _defaultWeaponSpawner;
+        [SerializeField] private MainWeaponSpawner _mainWeaponSpawner;
         
         private PlayerWeapon _playerWeapon;
         private bool _isReloading;
@@ -22,12 +24,12 @@ namespace UserInterface.Functional
 
         private void OnEnable()
         {
-            _defaultWeaponSpawner.OnSpawned += SetPlayerWeapon;
+            _mainWeaponSpawner.OnItemSpawned += SetPlayerWeapon;
         }
 
         private void OnDisable()
         {
-            _defaultWeaponSpawner.OnSpawned -= SetPlayerWeapon;
+            _mainWeaponSpawner.OnItemSpawned -= SetPlayerWeapon;
             _playerWeapon.OnReloadNeeded -= ShowReloadHintText;
             _playerWeapon.OnReloadStarted -= ShowReloadCountdownText;
         }

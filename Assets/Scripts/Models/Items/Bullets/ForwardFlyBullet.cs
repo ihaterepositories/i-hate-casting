@@ -6,7 +6,7 @@ namespace Models.Items.Bullets
     {
         protected override void Move()
         {
-            _rb.velocity = transform.right * FiredFromWeaponStatsSo.GetSpeed();
+            _rb.velocity = transform.right * _firedFromWeaponStatsSo.GetSpeed();
         }
     }
 }

@@ -44,12 +44,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2fe13d6b73ed475bbe6ab33740e21e4f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  weaponStatsMultiplier: {fileID: 0}
-  bulletPrefab: {fileID: 4668492387784157456, guid: 6e7f3302cd2c1504a986733deef75a57, type: 3}
-  stats:
-    magazineCapacity: 5
-    reloadTime: 1
-    spread: 0.2
-    damage: 0
-    speed: 0
-    lifeTime: 0
+  _bulletPrefab: {fileID: 4314891101817587288, guid: 08b272b3ee9ce4a48a3f7c36335d4c56, type: 3}

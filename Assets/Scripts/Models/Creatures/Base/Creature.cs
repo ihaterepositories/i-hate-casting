@@ -5,6 +5,6 @@ namespace Models.Creatures.Base
 {
     public class Creature : MonoBehaviour
     {
-        [FormerlySerializedAs("stats")] public CreatureStats _stats;
+        [FormerlySerializedAs("_stats")] [FormerlySerializedAs("stats")] public CreatureStats Stats;
     }
 }

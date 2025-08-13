@@ -1,4 +1,3 @@
-using System.Collections;
 using Core.Input.Interfaces;
 using Models.Items.Weapons.Base;
 using Models.Items.Weapons.Base.Enums;
