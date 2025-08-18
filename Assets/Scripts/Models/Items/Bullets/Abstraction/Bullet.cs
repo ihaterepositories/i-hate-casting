@@ -1,6 +1,6 @@
 using System;
 using Models.Items.Weapons.Base.ScriptableObjects;
-using PoolingCore.Interfaces;
+using Pooling.Interfaces;
 using UnityEngine;
 using UnityEngine.Serialization;
 

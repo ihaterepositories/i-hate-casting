@@ -1,0 +1,43 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bbb281ee3bf0b054c82ac2347e9e782c, type: 3}
+  m_Name: CommonModifiersAsset
+  m_EditorClassIdentifier: 
+  m_GroupName: CommonModifiersAsset
+  m_Data:
+    m_SerializedData: []
+  m_GUID: 91095d67e2a4ea44d89f94a326a3f934
+  m_SerializeEntries:
+  - m_GUID: 0862b74bd53c79b45bad7ea7221ee710
+    m_Address: Assets/ScriptableObjects/SelectableItems/Modifiers/CommonModifiers/GreenUpdatePackageSelectableItem.asset
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - CommonModifier
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 3bda64761c2180846815ee55409e9e97
+    m_Address: Assets/ScriptableObjects/SelectableItems/Modifiers/CommonModifiers/BlueUpdatePackageSelectableItem.asset
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - CommonModifier
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 4671098f93ebd0e4aa20a093779b3fb7
+    m_Address: Assets/ScriptableObjects/SelectableItems/Modifiers/CommonModifiers/RedUpdatePackageSelectableItem.asset
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - CommonModifier
+    FlaggedDuringContentUpdateRestriction: 0
+  m_ReadOnly: 0
+  m_Settings: {fileID: 11400000, guid: a12368aedcc243b41a2f5b04885d4a2c, type: 2}
+  m_SchemaSet:
+    m_Schemas:
+    - {fileID: 11400000, guid: 0309691439f3ea94d8a7b0b327a8cf41, type: 2}
+    - {fileID: 11400000, guid: 446eb5f44adf4304f80b4f9f45256382, type: 2}

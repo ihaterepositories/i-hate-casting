@@ -1,3 +1,4 @@
+using Models.Items.Modifiers.Implementations.WeaponsModifierImplementation.Models;
 using Models.Items.Weapons.Base.Enums;
 using UnityEngine;
 
@@ -27,21 +28,34 @@ namespace Models.Items.Weapons.Base
             };
         }
         
-        /// <summary>
-        /// Modify one of weapon stats multipliers.
-        /// </summary>
-        /// <param name="type">Type of weapon stats multiplier to modify.</param>
-        /// <param name="value">Number that will be added to current multiplier's value.</param>
-        public void AddValueToMultiplier(WeaponStatType type, float value)
+        public void AddValueToMultipliers(ModifiableWeaponStats modifiableWeaponsModifierStats)
         {
-            switch (type)
+            if (modifiableWeaponsModifierStats == null)
             {
-                case WeaponStatType.ReloadTime: _reloadTimeMultiplier += value; break;
-                case WeaponStatType.Spread: _spreadMultiplier += value; break;
-                case WeaponStatType.Damage: _damageMultiplier += (int)value; break;
-                case WeaponStatType.Speed: _speedMultiplier += value; break;
-                case WeaponStatType.CooldownTime: _cooldownTimeMultiplier += value; break;
+                Debug.LogWarning("Weapon modifier stats is null. Cannot multiply stats.");
+                return;
             }
+            
+            _reloadTimeMultiplier += modifiableWeaponsModifierStats.ReloadTimeModifier;
+            _spreadMultiplier += modifiableWeaponsModifierStats.SpreadModifier;
+            _damageMultiplier += modifiableWeaponsModifierStats.DamageModifier;
+            _speedMultiplier += modifiableWeaponsModifierStats.SpeedModifier;
+            _cooldownTimeMultiplier += modifiableWeaponsModifierStats.CooldownTimeModifier;
+        }
+
+        public void SubtractValueFromMultipliers(ModifiableWeaponStats modifiableWeaponsModifierStats)
+        {
+            if (modifiableWeaponsModifierStats == null)
+            {
+                Debug.LogWarning("Weapon modifier stats is null. Cannot subtract stats.");
+                return;
+            }
+
+            _reloadTimeMultiplier -= modifiableWeaponsModifierStats.ReloadTimeModifier;
+            _spreadMultiplier -= modifiableWeaponsModifierStats.SpreadModifier;
+            _damageMultiplier -= modifiableWeaponsModifierStats.DamageModifier;
+            _speedMultiplier -= modifiableWeaponsModifierStats.SpeedModifier;
+            _cooldownTimeMultiplier -= modifiableWeaponsModifierStats.CooldownTimeModifier;
         }
     }
 }

@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f462f0578ab43f3a7dd5697ba679580, type: 3}
+  m_Name: RedUpdatePackageSelectableItem
+  m_EditorClassIdentifier: 
+  ItemRarity: 0
+  ItemType: 1
+  ItemName: Red update package
+  Description: Modifies short range weapon. +5% speed. -0.5% spread.
+  Icon: {fileID: 21300000, guid: 588f0ab6ff22043489b356463b1dfbd0, type: 3}
+  PrefabToSpawn: {fileID: 4885351549107315119, guid: 3418c8152f81ab34c9ac2cac611e32a1, type: 3}
