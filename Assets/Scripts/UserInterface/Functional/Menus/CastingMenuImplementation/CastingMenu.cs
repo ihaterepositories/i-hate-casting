@@ -1,15 +1,16 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Globalization;
+using Core;
 using Mechanics.Casting;
 using TMPro;
 using UnityEngine;
-using UnityEngine.Serialization;
-using UserInterfaceUtils.Animators.Enums;
-using UserInterfaceUtils.Functional.Menus.Base;
-using UserInterfaceUtils.Functional.Menus.CastingMenuImplementation.Models;
+using UserInterface.Animators.Enums;
+using UserInterface.Functional.Menus.Base;
+using UserInterface.Functional.Menus.CastingMenuImplementation.Models;
 
-namespace UserInterfaceUtils.Functional.Menus.CastingMenuImplementation
+namespace UserInterface.Functional.Menus.CastingMenuImplementation
 {
     public class CastingMenu : InGameMenu
     {
@@ -69,12 +70,19 @@ namespace UserInterfaceUtils.Functional.Menus.CastingMenuImplementation
             
             if (isSuccess)
             {
-                _onSolvedCallback?.Invoke();
+                // Callback delayed due to end the casting menu border hide animation
+                StartCoroutine(InvokeOnSolvedCallbackDelayed());
             }
             else
             {
                 Debug.Log("Casting failed. [Create a notify text for player]");
             }
+        }
+
+        private IEnumerator InvokeOnSolvedCallbackDelayed()
+        {
+            yield return new WaitForSecondsRealtime(AppConstants.ExtraScreenBorderAppearanceTime+0.1f);
+            _onSolvedCallback?.Invoke();
         }
     }
 }

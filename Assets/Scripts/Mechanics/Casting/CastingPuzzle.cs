@@ -79,11 +79,13 @@ namespace Mechanics.Casting
 
                         if (_currentAnswerCheckIndex >= _generatedChars.Count)
                         {
+                            _isRunning = false;
                             OnPuzzleResult?.Invoke(true);
                         }
                     }
                     else
                     {
+                        _isRunning = false;
                         OnPuzzleResult?.Invoke(false);
                     }
 

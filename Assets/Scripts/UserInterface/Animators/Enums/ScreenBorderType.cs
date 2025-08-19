@@ -1,4 +1,4 @@
-namespace UserInterfaceUtils.Animators.Enums
+namespace UserInterface.Animators.Enums
 {
     public enum ScreenBorderType
     {

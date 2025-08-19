@@ -1,15 +1,14 @@
+using Core;
 using DG.Tweening;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
-using UserInterfaceUtils.Animators.Enums;
+using UserInterface.Animators.Enums;
 
-namespace UserInterfaceUtils.Animators
+namespace UserInterface.Animators
 {
     public class ScreenBorderAnimator : MonoBehaviour
     {
-        [SerializeField] private float _appearanceDuration = 0.5f;
-        [SerializeField] private float _hideDuration = 0.5f;
         [SerializeField] private Image _screenBorderObject;
         [SerializeField] private Sprite _itemSelectMenuBorder;
         [SerializeField] private Sprite _castingMenuBorder;
@@ -21,7 +20,7 @@ namespace UserInterfaceUtils.Animators
         
         public void HideBorder()
         {
-            _screenBorderObject.rectTransform.DOScale(2f, _hideDuration)
+            _screenBorderObject.rectTransform.DOScale(2f, AppConstants.ExtraScreenBorderAppearanceTime)
                 .SetUpdate(true);
         }
 
@@ -45,7 +44,7 @@ namespace UserInterfaceUtils.Animators
         private void ChangeAndMoveBorderToScreen(Sprite newBorder)
         {
             _screenBorderObject.sprite = newBorder;
-            _screenBorderObject.rectTransform.DOScale(1f, _appearanceDuration)
+            _screenBorderObject.rectTransform.DOScale(1f, AppConstants.ExtraScreenBorderAppearanceTime)
                 .SetUpdate(true);
         }
     }

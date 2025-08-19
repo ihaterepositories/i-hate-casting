@@ -6,7 +6,7 @@ using UnityEngine;
 using UnityEngine.Serialization;
 using UnityEngine.UI;
 
-namespace UserInterfaceUtils.Animators
+namespace UserInterface.Animators
 {
     public class ReloadCdAnimator : MonoBehaviour
     {

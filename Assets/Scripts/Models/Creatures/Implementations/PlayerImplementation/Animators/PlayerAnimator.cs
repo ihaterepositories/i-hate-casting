@@ -24,7 +24,7 @@ namespace Models.Creatures.Implementations.PlayerImplementation.Animators
         
         private void Update()
         {
-            if (GameStateController.IsGamePaused()) return;
+            if (GameStateHolder.IsGamePaused) return;
             
             SetAxisValues();
             AnimateRun();

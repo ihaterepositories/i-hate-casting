@@ -2,7 +2,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace UserInterfaceUtils.Functional.Menus.CastingMenuImplementation.Models
+namespace UserInterface.Functional.Menus.CastingMenuImplementation.Models
 {
     public class CastingPuzzleCharView : MonoBehaviour
     {

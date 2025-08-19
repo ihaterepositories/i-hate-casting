@@ -3,11 +3,11 @@ using System.Collections.Generic;
 using Models.Items.Base.ScriptableObjects;
 using UnityEngine;
 using UnityEngine.Serialization;
-using UserInterfaceUtils.Animators.Enums;
-using UserInterfaceUtils.Functional.Menus.Base;
-using UserInterfaceUtils.Functional.Menus.Base.Models;
+using UserInterface.Animators.Enums;
+using UserInterface.Functional.Menus.Base;
+using UserInterface.Functional.Menus.Base.Models;
 
-namespace UserInterfaceUtils.Functional.Menus.SelectionMenuImplementation
+namespace UserInterface.Functional.Menus.SelectionMenuImplementation
 {
     public class SelectionMenu : InGameMenu
     {

@@ -43,7 +43,7 @@ namespace Models.Items.Weapons.Base
 
         private void Update()
         {
-            if (GameStateController.IsGamePaused()) return;
+            if (GameStateHolder.IsGamePaused) return;
             
             RotateToTarget();
             

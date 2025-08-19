@@ -1,5 +1,5 @@
 using System.Collections.Generic;
-using Core.Configs;
+using Core;
 using Models.Items.Base.Enums;
 using Models.Items.Base.ScriptableObjects;
 using Models.Items.Base.Spawners;
@@ -7,7 +7,7 @@ using UnityEngine;
 using UnityEngine.AddressableAssets;
 using UnityEngine.ResourceManagement.AsyncOperations;
 using UnityEngine.ResourceManagement.ResourceLocations;
-using UserInterfaceUtils.Functional.Menus.CastingMenuImplementation;
+using UserInterface.Functional.Menus.CastingMenuImplementation;
 using Utils;
 using Random = UnityEngine.Random;
 

@@ -6,7 +6,7 @@ using UnityEngine;
 using UnityEngine.Serialization;
 using UnityEngine.UI;
 
-namespace UserInterfaceUtils.Functional.Menus.Base.Models
+namespace UserInterface.Functional.Menus.Base.Models
 {
     public class SelectableItemCard : MonoBehaviour
     {

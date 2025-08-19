@@ -1,19 +1,21 @@
 using Core.GameControl;
 using Core.GameControl.Enums;
 using UnityEngine;
-using UserInterfaceUtils.Animators;
-using UserInterfaceUtils.Animators.Enums;
+using UserInterface.Animators;
+using UserInterface.Animators.Enums;
 using Zenject;
 
-namespace UserInterfaceUtils.Functional.Menus.Base
+namespace UserInterface.Functional.Menus.Base
 {
     // Helper class for in-game menus
     public class InGameMenu : MonoBehaviour
     {
+        [SerializeField] private GamePauser _gamePauser;
+        
         private ScreenBorderAnimator _screenBorderAnimator;
         private bool _isNeedToHideBorder;
         
-        protected bool IsMenuCanBeOpened => GameStateController.IsPlayerInSomeMenu() == false;
+        protected bool IsMenuCanBeOpened => GameStateHolder.IsPlayerInSomeMenu() == false;
         
         [Inject]
         private void Construct(ScreenBorderAnimator screenBorderAnimator)
@@ -27,8 +29,8 @@ namespace UserInterfaceUtils.Functional.Menus.Base
             
             SetActiveChildes(this.gameObject, true);
             
-            GameStateController.UpdateScreenState(ScreenState.InSomeMenu);
-            GameStateController.PauseGame();
+            GameStateHolder.UpdateScreenState(ScreenState.InSomeMenu);
+            _gamePauser.PauseGame();
 
             if (borderType != ScreenBorderType.None)
             {
@@ -45,10 +47,10 @@ namespace UserInterfaceUtils.Functional.Menus.Base
         {
             SetActiveChildes(this.gameObject, false);
             
-            GameStateController.UpdateScreenState(ScreenState.InGame);
+            GameStateHolder.UpdateScreenState(ScreenState.InGame);
             
             if (resumeGame)
-                GameStateController.UnpauseGame();
+                _gamePauser.UnpauseGame();
             
             if (_isNeedToHideBorder)
                 _screenBorderAnimator.HideBorder();

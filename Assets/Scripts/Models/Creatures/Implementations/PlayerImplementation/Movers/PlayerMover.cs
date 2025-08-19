@@ -27,7 +27,7 @@ namespace Models.Creatures.Implementations.PlayerImplementation.Movers
         
         private void Update()
         {
-            if (GameStateController.IsGamePaused()) return;
+            if (GameStateHolder.IsGamePaused) return;
             
             SetAxisValues();
             ChangeVelocityByInput();

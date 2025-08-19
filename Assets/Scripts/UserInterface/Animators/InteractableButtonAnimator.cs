@@ -4,7 +4,7 @@ using UnityEngine.EventSystems;
 using UnityEngine.Serialization;
 using UnityEngine.UI;
 
-namespace UserInterfaceUtils.Animators
+namespace UserInterface.Animators
 {
     public class InteractableButtonAnimator : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     {
