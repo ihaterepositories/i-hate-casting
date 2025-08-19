@@ -1,8 +1,8 @@
 using System;
 using System.Collections.Generic;
-using Mechanics.MenuBased.Selection;
 using Models.Items.Base.ScriptableObjects;
 using UnityEngine;
+using UserInterfaceUtils.Functional.Menus.SelectionMenuImplementation;
 using Zenject;
 
 namespace Models.Items.Base.Spawners
@@ -45,7 +45,7 @@ namespace Models.Items.Base.Spawners
                 return;
             }
 
-            _selectionMenu.ShowMenuToSelect(items, SpawnItem);
+            _selectionMenu.OpenMenuToSelect(items, SpawnItem);
         }
 
         private void SpawnItem(SelectableItemSo selectableItemSo)

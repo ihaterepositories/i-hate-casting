@@ -889,7 +889,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 3963606388529558922, guid: 14c7456eb76e17349b7647ee0d8ff30a, type: 3}
       propertyPath: m_Name
-      value: CastingKey (5)
+      value: CastingPuzzleCharView (5)
       objectReference: {fileID: 0}
     - target: {fileID: 5202880763462612851, guid: 14c7456eb76e17349b7647ee0d8ff30a, type: 3}
       propertyPath: m_Pivot.x
@@ -48038,7 +48038,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 3963606388529558922, guid: 14c7456eb76e17349b7647ee0d8ff30a, type: 3}
       propertyPath: m_Name
-      value: CastingKey (4)
+      value: CastingPuzzleCharView (4)
       objectReference: {fileID: 0}
     - target: {fileID: 5202880763462612851, guid: 14c7456eb76e17349b7647ee0d8ff30a, type: 3}
       propertyPath: m_Pivot.x
@@ -48794,7 +48794,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 3963606388529558922, guid: 14c7456eb76e17349b7647ee0d8ff30a, type: 3}
       propertyPath: m_Name
-      value: CastingKey (3)
+      value: CastingPuzzleCharView (3)
       objectReference: {fileID: 0}
     - target: {fileID: 5202880763462612851, guid: 14c7456eb76e17349b7647ee0d8ff30a, type: 3}
       propertyPath: m_Pivot.x
@@ -49204,7 +49204,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 3963606388529558922, guid: 14c7456eb76e17349b7647ee0d8ff30a, type: 3}
       propertyPath: m_Name
-      value: CastingKey (6)
+      value: CastingPuzzleCharView (6)
       objectReference: {fileID: 0}
     - target: {fileID: 5202880763462612851, guid: 14c7456eb76e17349b7647ee0d8ff30a, type: 3}
       propertyPath: m_Pivot.x
@@ -49589,7 +49589,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 3963606388529558922, guid: 14c7456eb76e17349b7647ee0d8ff30a, type: 3}
       propertyPath: m_Name
-      value: CastingKey (2)
+      value: CastingPuzzleCharView (2)
       objectReference: {fileID: 0}
     - target: {fileID: 5202880763462612851, guid: 14c7456eb76e17349b7647ee0d8ff30a, type: 3}
       propertyPath: m_Pivot.x
@@ -49702,7 +49702,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 3963606388529558922, guid: 14c7456eb76e17349b7647ee0d8ff30a, type: 3}
       propertyPath: m_Name
-      value: CastingKey (7)
+      value: CastingPuzzleCharView (7)
       objectReference: {fileID: 0}
     - target: {fileID: 5202880763462612851, guid: 14c7456eb76e17349b7647ee0d8ff30a, type: 3}
       propertyPath: m_Pivot.x
@@ -50789,6 +50789,52 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1352686642
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1352686643}
+  - component: {fileID: 1352686644}
+  m_Layer: 0
+  m_Name: '[CastingPuzzle]'
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1352686643
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1352686642}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1991829578}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1352686644
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1352686642}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 48ba5087a1f042109f0ce229db33937d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _castingTime: 20
+  _puzzleCharsCount: 8
 --- !u!1 &1356687991
 GameObject:
   m_ObjectHideFlags: 0
@@ -50951,7 +50997,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 3963606388529558922, guid: 14c7456eb76e17349b7647ee0d8ff30a, type: 3}
       propertyPath: m_Name
-      value: CastingKey (1)
+      value: CastingPuzzleCharView (1)
       objectReference: {fileID: 0}
     - target: {fileID: 5202880763462612851, guid: 14c7456eb76e17349b7647ee0d8ff30a, type: 3}
       propertyPath: m_Pivot.x
@@ -51904,7 +51950,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1874556586}
   m_Layer: 5
-  m_Name: CastingKeys
+  m_Name: CastingPuzzleCharViews
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -52144,6 +52190,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1729553605}
+  - {fileID: 1352686643}
   - {fileID: 1356687992}
   - {fileID: 1507514623}
   - {fileID: 77216914}
@@ -52524,10 +52571,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 01b47b916740411e94733164c1feab36, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _castingTime: 20
+  _castingPuzzle: {fileID: 1352686644}
   _timerText: {fileID: 1095809390}
-  _hintText: {fileID: 2035205171}
-  _castingKeys:
+  _castingPuzzleCharViews:
   - {fileID: 8616460782582468151}
   - {fileID: 1495196814}
   - {fileID: 1096026741}
@@ -52544,9 +52590,37 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1874556586}
     m_Modifications:
+    - target: {fileID: 1228354772978055213, guid: 14c7456eb76e17349b7647ee0d8ff30a, type: 3}
+      propertyPath: looping
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1228354772978055213, guid: 14c7456eb76e17349b7647ee0d8ff30a, type: 3}
+      propertyPath: lengthInSec
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1228354772978055213, guid: 14c7456eb76e17349b7647ee0d8ff30a, type: 3}
+      propertyPath: simulationSpeed
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1228354772978055213, guid: 14c7456eb76e17349b7647ee0d8ff30a, type: 3}
+      propertyPath: ShapeModule.radius.value
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1228354772978055213, guid: 14c7456eb76e17349b7647ee0d8ff30a, type: 3}
+      propertyPath: InitialModule.startSize.scalar
+      value: 0.08
+      objectReference: {fileID: 0}
+    - target: {fileID: 1228354772978055213, guid: 14c7456eb76e17349b7647ee0d8ff30a, type: 3}
+      propertyPath: InitialModule.startSpeed.scalar
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 1228354772978055213, guid: 14c7456eb76e17349b7647ee0d8ff30a, type: 3}
+      propertyPath: InitialModule.startLifetime.scalar
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3963606388529558922, guid: 14c7456eb76e17349b7647ee0d8ff30a, type: 3}
       propertyPath: m_Name
-      value: CastingKey
+      value: CastingPuzzleCharView
       objectReference: {fileID: 0}
     - target: {fileID: 5202880763462612851, guid: 14c7456eb76e17349b7647ee0d8ff30a, type: 3}
       propertyPath: m_Pivot.x

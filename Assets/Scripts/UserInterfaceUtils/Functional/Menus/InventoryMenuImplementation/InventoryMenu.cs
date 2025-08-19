@@ -1,12 +1,12 @@
 using System.Collections.Generic;
-using Mechanics.MenuBased.Base;
-using Mechanics.MenuBased.Base.Models;
 using Models.Items.Base.ScriptableObjects;
 using Models.Items.Base.Spawners;
 using UnityEngine;
 using UserInterfaceUtils.Animators.Enums;
+using UserInterfaceUtils.Functional.Menus.Base;
+using UserInterfaceUtils.Functional.Menus.Base.Models;
 
-namespace Mechanics.MenuBased.Inventory
+namespace UserInterfaceUtils.Functional.Menus.InventoryMenuImplementation
 {
     public class InventoryMenu : InGameMenu
     {

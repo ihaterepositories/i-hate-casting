@@ -1,13 +1,13 @@
 using System;
 using System.Collections.Generic;
-using Mechanics.MenuBased.Base;
-using Mechanics.MenuBased.Base.Models;
 using Models.Items.Base.ScriptableObjects;
 using UnityEngine;
 using UnityEngine.Serialization;
 using UserInterfaceUtils.Animators.Enums;
+using UserInterfaceUtils.Functional.Menus.Base;
+using UserInterfaceUtils.Functional.Menus.Base.Models;
 
-namespace Mechanics.MenuBased.Selection
+namespace UserInterfaceUtils.Functional.Menus.SelectionMenuImplementation
 {
     public class SelectionMenu : InGameMenu
     {
@@ -15,7 +15,7 @@ namespace Mechanics.MenuBased.Selection
         [FormerlySerializedAs("buttonContainer")] [SerializeField] private Transform _buttonContainer;
         [FormerlySerializedAs("cards")] [SerializeField] private List<SelectableItemCard> _cards;
 
-        public void ShowMenuToSelect(List<SelectableItemSo> itemsData, Action<SelectableItemSo> onSelectedCallback = null)
+        public void OpenMenuToSelect(List<SelectableItemSo> itemsData, Action<SelectableItemSo> onSelectedCallback = null)
         {
             if (itemsData == null || itemsData.Count == 0 || itemsData.Count > _cards.Count)
             {

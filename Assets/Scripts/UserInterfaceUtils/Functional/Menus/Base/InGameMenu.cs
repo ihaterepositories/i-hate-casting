@@ -5,7 +5,7 @@ using UserInterfaceUtils.Animators;
 using UserInterfaceUtils.Animators.Enums;
 using Zenject;
 
-namespace Mechanics.MenuBased.Base
+namespace UserInterfaceUtils.Functional.Menus.Base
 {
     // Helper class for in-game menus
     public class InGameMenu : MonoBehaviour

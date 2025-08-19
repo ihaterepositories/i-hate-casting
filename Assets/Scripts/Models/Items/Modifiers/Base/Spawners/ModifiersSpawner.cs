@@ -1,7 +1,5 @@
-using System.Collections;
 using System.Collections.Generic;
 using Core.Configs;
-using Mechanics.MenuBased.Casting;
 using Models.Items.Base.Enums;
 using Models.Items.Base.ScriptableObjects;
 using Models.Items.Base.Spawners;
@@ -9,7 +7,7 @@ using UnityEngine;
 using UnityEngine.AddressableAssets;
 using UnityEngine.ResourceManagement.AsyncOperations;
 using UnityEngine.ResourceManagement.ResourceLocations;
-using UnityEngine.Serialization;
+using UserInterfaceUtils.Functional.Menus.CastingMenuImplementation;
 using Utils;
 using Random = UnityEngine.Random;
 
@@ -23,12 +21,12 @@ namespace Models.Items.Modifiers.Base.Spawners
         [SerializeField] private string _incredibleModifiersAddressablesLabel;
         
         private List<SelectableItemSo> _modifiers = new();
-        private int _countToLoad = AppConfig.MaxItemsToSelectPerOneSelectionEvent;
+        private readonly int _countToLoad = AppConstants.MaxItemsToSelectPerOneSelectionEvent;
 
         private void Update()
         {
             if (Input.GetKeyDown(KeyCode.Alpha1))
-                _castingMenu.CreateCastingPuzzleThen(LoadModifiers);
+                _castingMenu.OpenCastingPuzzleThen(LoadModifiers);
         }
         
         private void LoadModifiers()
