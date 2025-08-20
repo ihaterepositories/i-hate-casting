@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 65905230d0d6413ab09c0c2a545e2277, type: 3}
+  m_Name: SelectableItemCardSprites
+  m_EditorClassIdentifier: 
+  CommonCardSprite: {fileID: 21300000, guid: 0eb3189781845494490f062f8e60af56, type: 3}
+  CommonCardBackSprite: {fileID: 21300000, guid: 69ef3354072ae1443962fc46baed4bc1, type: 3}
+  GoldCardSprite: {fileID: 21300000, guid: cf3ddf297795d1a42b20c5ecd91bf6fe, type: 3}
+  GoldCardBackSprite: {fileID: 21300000, guid: 6e7ebb65f3c51cc45b2944a8e9cedb7d, type: 3}
+  IncredibleCardSprite: {fileID: 21300000, guid: b8e875ea0deb6404abe76075806cf136, type: 3}
+  IncredibleCardBackSprite: {fileID: 21300000, guid: 741463a82c66afb40b48c5469075f3a7, type: 3}
+  NoItemIcon: {fileID: 21300000, guid: 588f0ab6ff22043489b356463b1dfbd0, type: 3}

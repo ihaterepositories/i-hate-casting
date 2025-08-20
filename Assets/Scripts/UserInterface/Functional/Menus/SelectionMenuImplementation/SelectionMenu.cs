@@ -39,6 +39,11 @@ namespace UserInterface.Functional.Menus.SelectionMenuImplementation
 
                 i++;
             }
+
+            foreach (var card in _cards)
+            {
+                card.AnimateAppearance();
+            }
         }
     }
 }

@@ -14,8 +14,6 @@ namespace Core.Infrastructure
             Container.Bind<PlayerShortRangeWeaponStatsMultiplier>().FromComponentInHierarchy().AsSingle();
             Container.Bind<PlayerMediumRangeWeaponStatsMultiplier>().FromComponentInHierarchy().AsSingle();
             Container.Bind<PlayerLongRangeWeaponStatsMultiplier>().FromComponentInHierarchy().AsSingle();
-
-            Container.Bind<ScreenBorderAnimator>().FromComponentInHierarchy().AsSingle();
         }
     }
 }

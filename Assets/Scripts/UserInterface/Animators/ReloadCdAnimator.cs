@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using DG.Tweening;
 using Models.Items.Weapons.Implementations.MainPlayerWeaponImplementation;
@@ -14,12 +15,16 @@ namespace UserInterface.Animators
         [SerializeField] private Sprite _defaultCdSprite;
         [SerializeField] private Sprite _brokenCdSprite;
         
-        [FormerlySerializedAs("_baseWeaponSpawner")]
-        [FormerlySerializedAs("_defaultWeaponSpawner")]
         [Header("Needed to get spawned PlayerWeapon component")]
         [SerializeField] private MainWeaponSpawner _mainWeaponSpawner;
         
         private PlayerWeapon _playerWeapon;
+        private Vector3 _defaultPosition;
+
+        private void Awake()
+        {
+            _defaultPosition = _cdIcon.rectTransform.localPosition;
+        }
 
         private void OnEnable()
         {
@@ -46,7 +51,7 @@ namespace UserInterface.Animators
         private void AnimateEmptyMagazine()
         {
             _cdIcon.sprite = _brokenCdSprite;
-            _cdIcon.rectTransform.DOLocalMove(new Vector3(-100, 400), 1f).SetEase(Ease.OutBounce);
+            _cdIcon.rectTransform.DOLocalMove(new Vector3(_defaultPosition.x, _defaultPosition.y+350f), 1f).SetEase(Ease.OutBounce);
         }
         
         private void AnimateReloading(float reloadTime)
@@ -56,18 +61,18 @@ namespace UserInterface.Animators
 
         private IEnumerator AnimateReloadingCoroutine(float reloadTime)
         {
-            _cdIcon.rectTransform.DOLocalMove(new Vector3(300, 400), 0.25f);
+            _cdIcon.rectTransform.DOLocalMove(new Vector3(_defaultPosition.x+400f, _defaultPosition.y+350f), 0.25f);
         
             yield return new WaitForSeconds(reloadTime);
             
             // To prevent the animation brake with small reload time
             _cdIcon.DOKill();
-            _cdIcon.rectTransform.localPosition = new Vector3(300, 400);
+            _cdIcon.rectTransform.localPosition = new Vector3(_defaultPosition.x+400f, _defaultPosition.y+350f);
             //
         
             _cdIcon.sprite = _defaultCdSprite;
-            _cdIcon.rectTransform.DOLocalMove(new Vector3(-100, 400), 0.5f).SetEase(Ease.OutBounce)
-                .OnComplete(() => _cdIcon.rectTransform.DOLocalMove(new Vector3(-100, 0), 0.25f));
+            _cdIcon.rectTransform.DOLocalMove(new Vector3(_defaultPosition.x, _defaultPosition.y+350f), 0.5f).SetEase(Ease.OutBounce)
+                .OnComplete(() => _cdIcon.rectTransform.DOLocalMove(_defaultPosition, 0.25f));
         }
     }
 }

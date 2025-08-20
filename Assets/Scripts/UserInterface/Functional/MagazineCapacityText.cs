@@ -1,3 +1,5 @@
+using System.Collections;
+using System.Globalization;
 using DG.Tweening;
 using Models.Items.Weapons.Implementations.MainPlayerWeaponImplementation;
 using Models.Items.Weapons.Implementations.MainPlayerWeaponImplementation.Spawners;
@@ -11,8 +13,6 @@ namespace UserInterface.Functional
     {
         [SerializeField] private Text _magazineCapacityText;
         
-        [FormerlySerializedAs("_baseWeaponSpawner")]
-        [FormerlySerializedAs("_defaultWeaponSpawner")]
         [Header("Needed to get spawned PlayerWeapon component")]
         [SerializeField] private MainWeaponSpawner _mainWeaponSpawner;
         
@@ -65,10 +65,26 @@ namespace UserInterface.Functional
 
         private void ShowReloadCountdownText(float time)
         {
-            _isReloading = false;
-            _magazineCapacityText.DOCounter((int)time, 0, time)
-                .SetEase(Ease.OutBounce)
-                .OnComplete(() => _magazineCapacityText.DOColor(_defaultTextColor, 0.5f).SetEase(Ease.OutBounce));
+            StartCoroutine(ShowReloadCountdownCoroutine(time));
+        }
+
+        private IEnumerator ShowReloadCountdownCoroutine(float time)
+        {
+            _magazineCapacityText.text = time.ToString("F1", CultureInfo.InvariantCulture) + "s";
+            
+            yield return new WaitForSeconds(0.1f);
+            time -= 0.1f;
+            
+            if (time > 0)
+            {
+                StartCoroutine(ShowReloadCountdownCoroutine(time));
+            }
+            else
+            {
+                _isReloading = false;
+                _magazineCapacityText.DOColor(_defaultTextColor, 0.5f).SetEase(Ease.OutBounce);
+                UpdateText();
+            }
         }
     }
 }

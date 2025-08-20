@@ -57,7 +57,7 @@ namespace UserInterface.Functional.Menus.InventoryMenuImplementation
 
         private void HandleLastItemDestroy()
         {
-            _itemCards[_lastFilledCardIndex].ClearData();
+            _itemCards[_lastFilledCardIndex].Refresh();
             _lastFilledCardIndex -= 1;
         }
     }

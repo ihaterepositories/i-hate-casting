@@ -48580,7 +48580,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 1650, y: -700}
+  m_AnchoredPosition: {x: 1750, y: -800}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &641306071
@@ -48617,7 +48617,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 1650, y: -700}
+  m_AnchoredPosition: {x: 1750, y: -800}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &641306074
@@ -49406,7 +49406,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 1650, y: -700}
+  m_AnchoredPosition: {x: 1750, y: -800}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &974679628
@@ -49452,7 +49452,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -100, y: 0}
+  m_AnchoredPosition: {x: -100, y: -50}
   m_SizeDelta: {x: 350, y: 350}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &975909273
@@ -49668,7 +49668,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -250, y: -150}
+  m_AnchoredPosition: {x: -225, y: -100}
   m_SizeDelta: {x: 300, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1032376566
@@ -49726,7 +49726,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: ../..
+  m_Text: 00/00
 --- !u!1 &1064259278
 GameObject:
   m_ObjectHideFlags: 0
@@ -50434,6 +50434,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _gamePauser: {fileID: 2034888005}
+  _screenBorderAnimator: {fileID: 1254632605}
   _buttonPrefab: {fileID: 6395233317889171138, guid: 41291318644c0444e81ec67ed6b2c5a4, type: 3}
   _buttonContainer: {fileID: 1184116597}
   _cards:
@@ -52888,6 +52889,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _gamePauser: {fileID: 2034888005}
+  _screenBorderAnimator: {fileID: 1254632605}
   _itemCards:
   - {fileID: 468967007}
   - {fileID: 766747947}
@@ -52946,6 +52948,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _gamePauser: {fileID: 2034888005}
+  _screenBorderAnimator: {fileID: 1254632605}
   _castingPuzzle: {fileID: 1352686644}
   _timerText: {fileID: 1095809390}
   _castingPuzzleCharViews:

@@ -11,17 +11,11 @@ namespace UserInterface.Functional.Menus.Base
     public class InGameMenu : MonoBehaviour
     {
         [SerializeField] private GamePauser _gamePauser;
+        [SerializeField] private ScreenBorderAnimator _screenBorderAnimator;
         
-        private ScreenBorderAnimator _screenBorderAnimator;
         private bool _isNeedToHideBorder;
-        
-        protected bool IsMenuCanBeOpened => GameStateHolder.IsPlayerInSomeMenu() == false;
-        
-        [Inject]
-        private void Construct(ScreenBorderAnimator screenBorderAnimator)
-        {
-            _screenBorderAnimator = screenBorderAnimator;
-        }
+
+        private bool IsMenuCanBeOpened => GameStateHolder.IsPlayerInSomeMenu() == false;
         
         protected void OpenMenu(ScreenBorderType borderType)
         {
