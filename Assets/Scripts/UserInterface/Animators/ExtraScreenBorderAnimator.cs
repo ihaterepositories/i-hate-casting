@@ -1,3 +1,4 @@
+using System;
 using Core;
 using DG.Tweening;
 using Unity.VisualScripting;
@@ -7,12 +8,19 @@ using UserInterface.Animators.Enums;
 
 namespace UserInterface.Animators
 {
-    public class ScreenBorderAnimator : MonoBehaviour
+    public class ExtraScreenBorderAnimator : MonoBehaviour
     {
         [SerializeField] private Image _screenBorderObject;
         [SerializeField] private Sprite _itemSelectMenuBorder;
         [SerializeField] private Sprite _castingMenuBorder;
         
+        private Vector3 _defaultScale;
+
+        private void Awake()
+        {
+            _defaultScale = _screenBorderObject.rectTransform.localScale;
+        }
+
         private void OnDisable()
         {
             _screenBorderObject.DOKill();
@@ -20,7 +28,7 @@ namespace UserInterface.Animators
         
         public void HideBorder()
         {
-            _screenBorderObject.rectTransform.DOScale(2f, AppConstants.ExtraScreenBorderAppearanceTime)
+            _screenBorderObject.rectTransform.DOScale(_defaultScale, AppConstants.ExtraScreenBorderAppearanceTime)
                 .SetUpdate(true);
         }
 

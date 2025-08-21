@@ -81,7 +81,7 @@ namespace UserInterface.Functional.Menus.CastingMenuImplementation
 
         private IEnumerator InvokeOnSolvedCallbackDelayed()
         {
-            yield return new WaitForSecondsRealtime(AppConstants.ExtraScreenBorderAppearanceTime+0.1f);
+            yield return new WaitForSecondsRealtime(AppConstants.ExtraScreenBorderAppearanceTime);
             _onSolvedCallback?.Invoke();
         }
     }

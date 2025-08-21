@@ -500,8 +500,9 @@ MonoBehaviour:
   _itemImage: {fileID: 6010099041375616639}
   _button: {fileID: 9019155190377523634}
   _rect: {fileID: 7361929947297208119}
-  _cardsSprites: {fileID: 11400000, guid: 28b236d95f71a674aa9b33a99ba8f4d9, type: 2}
   _interactableButtonAnimator: {fileID: 6946557070322152500}
+  _cardsSprites: {fileID: 11400000, guid: 28b236d95f71a674aa9b33a99ba8f4d9, type: 2}
+  _textsColors: {fileID: 11400000, guid: 91582d9bc8b1d004c8b50b15861140af, type: 2}
 --- !u!1 &8448125359209835234
 GameObject:
   m_ObjectHideFlags: 0

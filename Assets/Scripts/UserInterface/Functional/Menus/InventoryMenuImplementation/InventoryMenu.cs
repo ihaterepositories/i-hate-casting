@@ -13,17 +13,17 @@ namespace UserInterface.Functional.Menus.InventoryMenuImplementation
         [SerializeField] private List<SelectableItemCard> _itemCards;
         
         private bool _isOpened;
-        private int _lastFilledCardIndex = -1;
+        private List<SelectableItemSo> _activeItemsData = new();
         
         private void OnEnable()
         {
-            ItemsSpawner.OnItemSelectedInMenu += FillActiveItemCard;
+            ItemsSpawner.OnItemSelectedInMenu += AddActiveItemData;
             ItemsSpawner.OnLastSpawnedItemDestroyed += HandleLastItemDestroy;
         }
 
         private void OnDisable()
         {
-            ItemsSpawner.OnItemSelectedInMenu -= FillActiveItemCard;
+            ItemsSpawner.OnItemSelectedInMenu -= AddActiveItemData;
             ItemsSpawner.OnLastSpawnedItemDestroyed -= HandleLastItemDestroy;
         }
 
@@ -33,6 +33,16 @@ namespace UserInterface.Functional.Menus.InventoryMenuImplementation
             {
                 ToggleMenu();
             }
+        }
+        
+        private void AddActiveItemData(SelectableItemSo itemData)
+        {
+            _activeItemsData.Add(itemData);
+        }
+
+        private void HandleLastItemDestroy()
+        {
+            _activeItemsData.RemoveAt(_activeItemsData.Count - 1);
         }
         
         private void ToggleMenu()
@@ -46,19 +56,24 @@ namespace UserInterface.Functional.Menus.InventoryMenuImplementation
             {
                 OpenMenu(ScreenBorderType.ItemSelectMenuBorder);
                 _isOpened = true;
+
+                ShowActiveItems();
             }
         }
 
-        private void FillActiveItemCard(SelectableItemSo itemData)
+        private void ShowActiveItems()
         {
-            _lastFilledCardIndex += 1;
-            _itemCards[_lastFilledCardIndex].FillWith(itemData);
-        }
-
-        private void HandleLastItemDestroy()
-        {
-            _itemCards[_lastFilledCardIndex].Refresh();
-            _lastFilledCardIndex -= 1;
+            for (int i = 0; i < _activeItemsData.Count; i++)
+            {
+                if (i >= _itemCards.Count)
+                {
+                    Debug.LogWarning("Not enough item cards to display all active items.");
+                    break;
+                }
+                
+                _itemCards[i].Initialize(_activeItemsData[i]);
+                _itemCards[i].AnimateFlipUp();
+            }
         }
     }
 }

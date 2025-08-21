@@ -1,6 +1,7 @@
 using Core.GameControl;
 using Core.GameControl.Enums;
 using UnityEngine;
+using UnityEngine.Serialization;
 using UserInterface.Animators;
 using UserInterface.Animators.Enums;
 using Zenject;
@@ -11,7 +12,7 @@ namespace UserInterface.Functional.Menus.Base
     public class InGameMenu : MonoBehaviour
     {
         [SerializeField] private GamePauser _gamePauser;
-        [SerializeField] private ScreenBorderAnimator _screenBorderAnimator;
+        [FormerlySerializedAs("_screenBorderAnimator")] [SerializeField] private ExtraScreenBorderAnimator _extraScreenBorderAnimator;
         
         private bool _isNeedToHideBorder;
 
@@ -28,7 +29,7 @@ namespace UserInterface.Functional.Menus.Base
 
             if (borderType != ScreenBorderType.None)
             {
-                _screenBorderAnimator.ShowBorder(borderType);
+                _extraScreenBorderAnimator.ShowBorder(borderType);
                 _isNeedToHideBorder = true;
             }
             else
@@ -47,7 +48,7 @@ namespace UserInterface.Functional.Menus.Base
                 _gamePauser.UnpauseGame();
             
             if (_isNeedToHideBorder)
-                _screenBorderAnimator.HideBorder();
+                _extraScreenBorderAnimator.HideBorder();
         }
         
         void SetActiveChildes(GameObject parent, bool state)
