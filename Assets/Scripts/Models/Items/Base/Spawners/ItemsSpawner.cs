@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using Models.Items.Base.ScriptableObjects;
 using UnityEngine;
-using UserInterface.Functional.Menus.SelectionMenuImplementation;
+using UserInterface.Menus.SelectionMenuImplementation;
 using Zenject;
 
 namespace Models.Items.Base.Spawners

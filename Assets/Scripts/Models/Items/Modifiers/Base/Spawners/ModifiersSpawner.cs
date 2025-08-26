@@ -7,7 +7,7 @@ using UnityEngine;
 using UnityEngine.AddressableAssets;
 using UnityEngine.ResourceManagement.AsyncOperations;
 using UnityEngine.ResourceManagement.ResourceLocations;
-using UserInterface.Functional.Menus.CastingMenuImplementation;
+using UserInterface.Menus.CastingMenuImplementation;
 using Utils;
 using Random = UnityEngine.Random;
 

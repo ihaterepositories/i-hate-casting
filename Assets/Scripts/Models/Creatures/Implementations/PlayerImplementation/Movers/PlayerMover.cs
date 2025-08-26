@@ -31,7 +31,6 @@ namespace Models.Creatures.Implementations.PlayerImplementation.Movers
             
             SetAxisValues();
             ChangeVelocityByInput();
-            FlipSpriteToMoveDirection();
         }
         
         private void SetAxisValues()
@@ -43,12 +42,6 @@ namespace Models.Creatures.Implementations.PlayerImplementation.Movers
         private void ChangeVelocityByInput()
         {
             _rb.velocity = new Vector2(_horizontalAxis, _verticalAxis).normalized * Speed;
-        }
-
-        private void FlipSpriteToMoveDirection()
-        {
-            if (_horizontalAxis != 0)
-                _spriteRenderer.flipX = _horizontalAxis < 0;
         }
     }
 }

@@ -2,7 +2,7 @@ using System.Collections;
 using DG.Tweening;
 using TMPro;
 using UnityEngine;
-using UserInterface.Animators;
+using UserInterface.GameScreenAnimations.Fading;
 
 namespace Core.GameControl
 {

@@ -1,6 +1,5 @@
 using Models.Creatures.Implementations.PlayerImplementation.StatsMultipliers;
 using Models.Items.Weapons.Implementations.MainPlayerWeaponImplementation.StatsMultipliers;
-using UserInterface.Animators;
 using Zenject;
 
 namespace Core.Infrastructure
