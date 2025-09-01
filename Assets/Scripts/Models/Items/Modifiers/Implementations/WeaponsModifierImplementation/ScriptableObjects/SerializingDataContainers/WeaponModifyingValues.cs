@@ -1,9 +1,9 @@
 using System;
 
-namespace Models.Items.Modifiers.Implementations.WeaponsModifierImplementation.Models
+namespace Models.Items.Modifiers.Implementations.WeaponsModifierImplementation.ScriptableObjects.SerializingDataContainers
 {
     [Serializable]
-    public class ModifiableWeaponStats
+    public class WeaponModifyingValues
     {
         public float ReloadTimeModifier = 1f;
         public float SpreadModifier = 1f;

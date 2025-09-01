@@ -1,11 +1,13 @@
 using System;
 using System.Collections;
 using Core.GameControl;
-using Models.Items.Bullets.Abstraction;
-using Models.Items.Weapons.Base.ScriptableObjects;
+using Models.Items.Bullets.Base;
+using Models.Items.Weapons.Base.StatsHandling;
+using Models.Items.Weapons.Base.StatsHandling.ScriptableObjects;
 using Pooling;
 using UnityEngine;
 using Zenject;
+using Random = UnityEngine.Random;
 
 namespace Models.Items.Weapons.Base
 {
@@ -16,29 +18,39 @@ namespace Models.Items.Weapons.Base
         
         private ObjectPool<Bullet> _bulletsPool;
         private DiContainer _diContainer;
+
+        private WeaponStatsMultipliersProvider _weaponStatsMultipliersProvider;
+        protected WeaponStatsCalculator _weaponStatsCalculator;
         
         private float _lastFireTime;
         private bool _isReloading;
         private int _bulletsInMagazine;
         
-        public WeaponStatsSo WeaponStats => _weaponStats;
         public int BulletsInMagazine => _bulletsInMagazine;
+        public WeaponStatsCalculator WeaponStatsCalculator => _weaponStatsCalculator;
         
         public event Action OnReloadNeeded;
         public event Action<float> OnReloadStarted;
         public event Action OnReloaded;
         
         [Inject]
-        private void Construct(DiContainer diContainer)
+        private void Construct(DiContainer diContainer, WeaponStatsMultipliersProvider weaponStatsMultipliersProvider)
         {
             _diContainer = diContainer;
+            _weaponStatsMultipliersProvider = weaponStatsMultipliersProvider;
         }
-        
+
+        private void Awake()
+        {
+            var weaponStatsMultiplier = _weaponStatsMultipliersProvider.GetFor(_weaponStats.WeaponType);
+            _weaponStatsCalculator = new WeaponStatsCalculator(_weaponStats, weaponStatsMultiplier);
+            _bulletsPool = new ObjectPool<Bullet>(_bulletPrefab.GetComponent<Bullet>(), _diContainer);
+        }
+
         private void Start()
         {
-            _bulletsPool = new ObjectPool<Bullet>(_bulletPrefab.GetComponent<Bullet>(), _diContainer);
-            _bulletsInMagazine = _weaponStats.GetMagazineCapacity();
-            _lastFireTime = Time.time - _weaponStats.GetCooldownTime(); // Allow immediate fire on start
+            _bulletsInMagazine = _weaponStatsCalculator.GetMagazineCapacity();
+            _lastFireTime = Time.time - _weaponStatsCalculator.GetCooldownTime(); // Allow immediate fire on start
         }
 
         private void Update()
@@ -47,7 +59,7 @@ namespace Models.Items.Weapons.Base
             
             RotateToTarget();
             
-            if (GetFirePermission() && !_isReloading && _bulletsInMagazine > 0 && Time.time - _lastFireTime >= _weaponStats.GetCooldownTime())
+            if (GetFirePermission() && !_isReloading && _bulletsInMagazine > 0 && Time.time - _lastFireTime >= _weaponStatsCalculator.GetCooldownTime())
             {
                 Fire();
             }
@@ -58,6 +70,11 @@ namespace Models.Items.Weapons.Base
             }
         }
 
+        protected float CalculateSpread()
+        {
+            return Random.Range(-_weaponStatsCalculator.GetSpread(), _weaponStatsCalculator.GetSpread());
+        }
+        
         private void RotateToTarget()
         {
             transform.rotation = Quaternion.Euler(0, 0, GetFireDirectionAngle());
@@ -71,7 +88,7 @@ namespace Models.Items.Weapons.Base
             {
                 _lastFireTime = Time.time;
                 
-                bullet.Init(_weaponStats);
+                bullet.Init(_weaponStatsCalculator);
                 bullet.transform.position = transform.position;
                 bullet.transform.rotation = Quaternion.Euler(0, 0, GetFireDirectionAngle());
                 
@@ -90,15 +107,15 @@ namespace Models.Items.Weapons.Base
         
         private void Reload()
         {
-            OnReloadStarted?.Invoke(_weaponStats.GetReloadTime());
+            OnReloadStarted?.Invoke(_weaponStatsCalculator.GetReloadTime());
             StartCoroutine(ReloadCoroutine());
         }
 
         private IEnumerator ReloadCoroutine()
         {
             _isReloading = true;
-            yield return new WaitForSeconds(_weaponStats.GetReloadTime());
-            _bulletsInMagazine = _weaponStats.GetMagazineCapacity();
+            yield return new WaitForSeconds(_weaponStatsCalculator.GetReloadTime());
+            _bulletsInMagazine = _weaponStatsCalculator.GetMagazineCapacity();
             _isReloading = false;
             OnReloaded?.Invoke();
         }

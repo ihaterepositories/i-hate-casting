@@ -4,6 +4,8 @@ namespace Models.Items.Weapons.Base.Enums
     {
         PlayerShortRange,
         PlayerMediumRange,
-        PlayerLongRange
+        PlayerLongRange,
+        DefaultEnemyWeapon,
+        BossWeapon
     }
 }

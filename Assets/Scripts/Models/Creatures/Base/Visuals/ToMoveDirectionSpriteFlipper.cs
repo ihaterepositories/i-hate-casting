@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace Models.Creatures.Base.Animators
+namespace Models.Creatures.Base.Visuals
 {
     public class ToMoveDirectionSpriteFlipper : MonoBehaviour
     {

@@ -13,10 +13,10 @@ MonoBehaviour:
   m_Name: LongRangeAntivirusWeaponStats
   m_EditorClassIdentifier: 
   WeaponType: 2
-  _range: 6
-  _magazineCapacity: 10
-  _reloadTime: 7
-  _spread: 0
-  _damage: 1
-  _speed: 10
-  _cooldownTime: 1.5
+  Range: 9
+  MagazineCapacity: 15
+  ReloadTime: 8
+  Spread: 0.5
+  Damage: 3
+  Speed: 12
+  CooldownTime: 1.5

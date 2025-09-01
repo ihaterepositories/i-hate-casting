@@ -13,10 +13,10 @@ MonoBehaviour:
   m_Name: ShortRangeAntivirusWeaponStats
   m_EditorClassIdentifier: 
   WeaponType: 0
-  _range: 2
-  _magazineCapacity: 20
-  _reloadTime: 2
-  _spread: 3
-  _damage: 3
-  _speed: 7
-  _cooldownTime: 0.25
+  Range: 2
+  MagazineCapacity: 30
+  ReloadTime: 3
+  Spread: 2.5
+  Damage: 1
+  Speed: 5
+  CooldownTime: 0.5

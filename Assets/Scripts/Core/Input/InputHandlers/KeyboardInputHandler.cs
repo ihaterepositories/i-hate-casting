@@ -35,5 +35,10 @@ namespace Core.Input.InputHandlers
         {
             return UnityEngine.Input.GetKeyDown(KeyCode.R);
         }
+        
+        public bool IsBurstButtonPressed()
+        {
+            return UnityEngine.Input.GetKeyDown(KeyCode.LeftShift);
+        }
     }
 }

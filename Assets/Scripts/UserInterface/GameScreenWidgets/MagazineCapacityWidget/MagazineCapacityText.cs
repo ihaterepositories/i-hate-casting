@@ -4,6 +4,7 @@ using DG.Tweening;
 using Models.Items.Weapons.Implementations.MainPlayerWeaponImplementation;
 using Models.Items.Weapons.Implementations.MainPlayerWeaponImplementation.Spawners;
 using UnityEngine;
+using UnityEngine.Serialization;
 using UnityEngine.UI;
 
 namespace UserInterface.GameScreenWidgets.MagazineCapacityWidget
@@ -12,8 +13,9 @@ namespace UserInterface.GameScreenWidgets.MagazineCapacityWidget
     {
         [SerializeField] private Text _magazineCapacityText;
         
+        [FormerlySerializedAs("_mainWeaponSpawner")]
         [Header("Needed to get spawned PlayerWeapon component")]
-        [SerializeField] private MainWeaponSpawner _mainWeaponSpawner;
+        [SerializeField] private MainPlayerWeaponSpawner _mainPlayerWeaponSpawner;
         
         private PlayerWeapon _playerWeapon;
         private bool _isReloading;
@@ -23,12 +25,12 @@ namespace UserInterface.GameScreenWidgets.MagazineCapacityWidget
 
         private void OnEnable()
         {
-            _mainWeaponSpawner.OnItemSpawned += SetPlayerWeapon;
+            _mainPlayerWeaponSpawner.OnItemSpawned += SetPlayerPlayerWeapon;
         }
 
         private void OnDisable()
         {
-            _mainWeaponSpawner.OnItemSpawned -= SetPlayerWeapon;
+            _mainPlayerWeaponSpawner.OnItemSpawned -= SetPlayerPlayerWeapon;
             _playerWeapon.OnReloadNeeded -= ShowReloadHintText;
             _playerWeapon.OnReloadStarted -= ShowReloadCountdownText;
         }
@@ -41,7 +43,7 @@ namespace UserInterface.GameScreenWidgets.MagazineCapacityWidget
             }
         }
 
-        private void SetPlayerWeapon(GameObject weapon)
+        private void SetPlayerPlayerWeapon(GameObject weapon)
         {
             _playerWeapon = weapon.GetComponent<PlayerWeapon>();
             
@@ -52,7 +54,7 @@ namespace UserInterface.GameScreenWidgets.MagazineCapacityWidget
         private void UpdateText()
         {
             _magazineCapacityText.text = _playerWeapon.BulletsInMagazine + "/" +
-                                        _playerWeapon.WeaponStats.GetMagazineCapacity();
+                                        _playerWeapon.WeaponStatsCalculator.GetMagazineCapacity();
         }
 
         private void ShowReloadHintText()

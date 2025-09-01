@@ -12,19 +12,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 499ed1348c314d2c845c7a78c5866266, type: 3}
   m_Name: BlueUpdatePackageModifierStats
   m_EditorClassIdentifier: 
-  PlayerShortRangeModifiableWeaponStats:
+  PlayerShortRangeWeaponModifierStats:
     ReloadTimeModifier: 1
     SpreadModifier: 1
     DamageModifier: 1
     SpeedModifier: 1
     CooldownTimeModifier: 1
-  PlayerMediumRangeModifiableWeaponStats:
+  PlayerMediumRangeWeaponModifierStats:
     ReloadTimeModifier: 1
     SpreadModifier: 0.95
     DamageModifier: 1
     SpeedModifier: 1.05
     CooldownTimeModifier: 1
-  PlayerLongRangeModifiableWeaponStats:
+  PlayerLongRangeWeaponModifierStats:
     ReloadTimeModifier: 1
     SpreadModifier: 1
     DamageModifier: 1

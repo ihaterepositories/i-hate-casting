@@ -1,4 +1,4 @@
-namespace Models.Items.Weapons.Base.Enums
+namespace Models.Items.Weapons.Base.StatsHandling.Enums
 {
     public enum WeaponStatType
     {

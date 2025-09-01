@@ -1,8 +1,8 @@
 using Models.Items.Modifiers.Base;
-using Models.Items.Modifiers.Implementations.WeaponsModifierImplementation.Models;
 using Models.Items.Modifiers.Implementations.WeaponsModifierImplementation.ScriptableObjects;
-using Models.Items.Weapons.Base;
-using Models.Items.Weapons.Implementations.MainPlayerWeaponImplementation.StatsMultipliers;
+using Models.Items.Modifiers.Implementations.WeaponsModifierImplementation.ScriptableObjects.SerializingDataContainers;
+using Models.Items.Weapons.Base.Enums;
+using Models.Items.Weapons.Base.StatsHandling;
 using UnityEngine;
 using Zenject;
 
@@ -10,35 +10,40 @@ namespace Models.Items.Modifiers.Implementations.WeaponsModifierImplementation
 {
     public class WeaponsModifier : Modifier
     {
-        [SerializeField] private WeaponsModifierStatsSO _weaponsModifyingStats;
+        [SerializeField] private WeaponsModifierStatsSo _weaponsModifierStats;
 
-        private (WeaponStatsMultiplier multiplier, ModifiableWeaponStats stats)[] _weaponData;
+        private WeaponStatsMultipliersProvider _weaponsStatsMultipliersProvider;
+        private (WeaponStatsMultiplier multiplier, WeaponModifyingValues modifyingValues)[] _weaponsModifyingData;
 
         [Inject]
-        private void Construct(
-            PlayerShortRangeWeaponStatsMultiplier shortRange,
-            PlayerMediumRangeWeaponStatsMultiplier mediumRange,
-            PlayerLongRangeWeaponStatsMultiplier longRange)
+        private void Construct(WeaponStatsMultipliersProvider weaponStatsMultipliersProvider)
         {
-            _weaponData = new (WeaponStatsMultiplier, ModifiableWeaponStats)[]
+            _weaponsStatsMultipliersProvider = weaponStatsMultipliersProvider;
+        }
+
+        private void Awake()
+        {
+            _weaponsModifyingData = new[]
             {
-                (shortRange, _weaponsModifyingStats.PlayerShortRangeModifiableWeaponStats),
-                (mediumRange, _weaponsModifyingStats.PlayerMediumRangeModifiableWeaponStats),
-                (longRange, _weaponsModifyingStats.PlayerLongRangeModifiableWeaponStats)
+                (_weaponsStatsMultipliersProvider.GetFor(WeaponType.PlayerShortRange), _weaponsModifierStats.PlayerShortRangeWeaponModifyingValues),
+                (_weaponsStatsMultipliersProvider.GetFor(WeaponType.PlayerMediumRange), _weaponsModifierStats.PlayerMediumRangeWeaponModifyingValues),
+                (_weaponsStatsMultipliersProvider.GetFor(WeaponType.PlayerLongRange), _weaponsModifierStats.PlayerLongRangeWeaponModifyingValues),
+                (_weaponsStatsMultipliersProvider.GetFor(WeaponType.DefaultEnemyWeapon), _weaponsModifierStats.DefaultEnemyWeaponModifyingValues),
+                (_weaponsStatsMultipliersProvider.GetFor(WeaponType.BossWeapon), _weaponsModifierStats.BossWeaponModifyingValues)
             };
         }
 
         protected override void ActivateModifier()
         {
-            foreach (var (multiplier, stats) in _weaponData)
+            foreach (var (multiplier, stats) in _weaponsModifyingData)
             {
-                multiplier.AddValueToMultipliers(stats);
+                multiplier.AddValuesToMultipliers(stats);
             }
         }
 
         protected override void DeactivateModifier()
         {
-            foreach (var (multiplier, stats) in _weaponData)
+            foreach (var (multiplier, stats) in _weaponsModifyingData)
             {
                 multiplier.SubtractValueFromMultipliers(stats);
             }

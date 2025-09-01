@@ -6,7 +6,7 @@ using UnityEngine;
 namespace Models.Items.Weapons.Implementations.MainPlayerWeaponImplementation.Spawners
 {
     // Provides a base weapon selection for the player on the start of the game.
-    public class MainWeaponSpawner : ItemsSpawner
+    public class MainPlayerWeaponSpawner : ItemsSpawner
     {
         [SerializeField] private List<SelectableItemSo> _mainWeapon;
 
