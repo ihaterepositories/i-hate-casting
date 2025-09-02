@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using Core.GameControl;
 using Core.Input.Interfaces;
@@ -15,9 +16,9 @@ namespace Models.Creatures.Implementations.PlayerImplementation.Movers
         [SerializeField] private Rigidbody2D _rb;
         [SerializeField] private SpriteRenderer _spriteRenderer;
 
-        private CreatureStatsCalculator _playerStatsCalculator => _player.CreatureStatsCalculator;
+        private CreatureStatsCalculator _playerStatsCalculator => _player.StatsCalculator;
         
-        private float _speedIncreaseCoefficient = 1f;
+        private float _burstCoefficient = 1f;
         
         private IInputHandler _inputHandler;
         private float _horizontalAxis;
@@ -33,16 +34,22 @@ namespace Models.Creatures.Implementations.PlayerImplementation.Movers
         {
             if (GameStateHolder.IsGamePaused) return;
             
-            SetAxisValues();
-            ChangeVelocityByInput();
+            SetDirectionByInput();
             
+            // Burst activation
             if (_inputHandler.IsBurstButtonPressed())
             {
-                DoBurst();
+                IncreaseBurstCoefficientWithinBurstDuration();
             }
         }
-        
-        private void SetAxisValues()
+
+        private void FixedUpdate()
+        {
+            if (GameStateHolder.IsGamePaused) return;
+            ChangeVelocityByInput();
+        }
+
+        private void SetDirectionByInput()
         {
             _horizontalAxis = _inputHandler.GetHorizontalAxisValue();
             _verticalAxis = _inputHandler.GetVerticalAxisValue();
@@ -50,19 +57,19 @@ namespace Models.Creatures.Implementations.PlayerImplementation.Movers
         
         private void ChangeVelocityByInput()
         {
-            _rb.velocity = new Vector2(_horizontalAxis, _verticalAxis).normalized * (_playerStatsCalculator.GetSpeed() * _speedIncreaseCoefficient);
+            _rb.velocity = new Vector2(_horizontalAxis, _verticalAxis).normalized * (_playerStatsCalculator.GetSpeed() * _burstCoefficient);
         }
         
-        private void DoBurst()
+        private void IncreaseBurstCoefficientWithinBurstDuration()
         {
-            StartCoroutine(DoBurstCoroutine());
+            StartCoroutine(BurstCoefficientIncreaseWithinBurstDurationCoroutine());
         }
 
-        private IEnumerator DoBurstCoroutine()
+        private IEnumerator BurstCoefficientIncreaseWithinBurstDurationCoroutine()
         {
-            _speedIncreaseCoefficient = _playerStatsCalculator.GetWhileBurstSpeedIncreaseCoefficient();
+            _burstCoefficient = _playerStatsCalculator.GetWhileBurstSpeedIncreaseCoefficient();
             yield return new WaitForSeconds(_playerStatsCalculator.GetBurstDuration());
-            _speedIncreaseCoefficient = 1f;
+            _burstCoefficient = 1f;
         }
     }
 }

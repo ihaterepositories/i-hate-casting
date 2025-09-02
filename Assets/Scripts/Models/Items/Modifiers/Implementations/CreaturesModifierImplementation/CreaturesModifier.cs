@@ -26,7 +26,7 @@ namespace Models.Items.Modifiers.Implementations.CreaturesModifierImplementation
             _creaturesModifyingData = new[]
             {
                 (_creatureStatsMultipliersProvider.GetFor(CreatureType.Player), _creaturesModifierStats.PlayerModifyingValues),
-                (_creatureStatsMultipliersProvider.GetFor(CreatureType.DefaultEnemy), _creaturesModifierStats.DefaultEnemiesModifyingValues),
+                (_creatureStatsMultipliersProvider.GetFor(CreatureType.Enemy), _creaturesModifierStats.DefaultEnemiesModifyingValues),
                 (_creatureStatsMultipliersProvider.GetFor(CreatureType.Boss), _creaturesModifierStats.BossModifyingValues)
             };
         }

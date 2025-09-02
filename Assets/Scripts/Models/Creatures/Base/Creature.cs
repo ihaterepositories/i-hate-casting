@@ -10,9 +10,9 @@ namespace Models.Creatures.Base
         [SerializeField] protected CreatureStatsSo _creatureStatsSo;
         
         private CreatureStatsMultipliersProvider _creatureStatsMultipliersProvider;
-        private CreatureStatsCalculator _creatureStatsCalculator;
+        private CreatureStatsCalculator _statsCalculator;
         
-        public CreatureStatsCalculator CreatureStatsCalculator => _creatureStatsCalculator;
+        public CreatureStatsCalculator StatsCalculator => _statsCalculator;
 
         [Inject]
         private void Construct(CreatureStatsMultipliersProvider creatureStatsMultipliersProvider)
@@ -23,7 +23,7 @@ namespace Models.Creatures.Base
         private void Awake()
         {
             var creatureStatsMultiplier = _creatureStatsMultipliersProvider.GetFor(_creatureStatsSo.CreatureType);
-            _creatureStatsCalculator = new CreatureStatsCalculator(_creatureStatsSo, creatureStatsMultiplier);
+            _statsCalculator = new CreatureStatsCalculator(_creatureStatsSo, creatureStatsMultiplier);
         }
     }
 }

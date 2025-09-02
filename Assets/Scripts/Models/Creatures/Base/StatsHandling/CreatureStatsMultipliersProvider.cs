@@ -14,7 +14,7 @@ namespace Models.Creatures.Base.StatsHandling
             return creatureType switch
             {
                 CreatureType.Player => _playerStatsMultiplier,
-                CreatureType.DefaultEnemy => _enemiesStatsMultiplier,
+                CreatureType.Enemy => _enemiesStatsMultiplier,
                 CreatureType.Boss => _bossesStatsMultiplier,
                 _ => null
             };
