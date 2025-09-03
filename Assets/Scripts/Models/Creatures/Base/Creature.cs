@@ -1,11 +1,13 @@
+using System;
 using Models.Creatures.Base.StatsHandling;
 using Models.Creatures.Base.StatsHandling.ScriptableObjects;
+using Pooling;
 using UnityEngine;
 using Zenject;
 
 namespace Models.Creatures.Base
 {
-    public class Creature : MonoBehaviour
+    public class Creature : PoolAbleMonoBehaviour
     {
         [SerializeField] protected CreatureStatsSo _creatureStatsSo;
         

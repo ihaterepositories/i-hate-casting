@@ -1,24 +1,21 @@
 using System;
 using Models.Items.Weapons.Base.StatsHandling;
-using Pooling.Interfaces;
+using Pooling;
 using UnityEngine;
 using UnityEngine.Serialization;
 
 namespace Models.Items.Bullets.Base
 {
-    public abstract class Bullet : MonoBehaviour, IPoolAble
+    public abstract class Bullet : PoolAbleMonoBehaviour
     {
-        [FormerlySerializedAs("rb")] [SerializeField] protected Rigidbody2D _rb;
+        [SerializeField] protected Rigidbody2D _rb;
         
         private float LifeTime => _firedFromWeaponStatsCalculator.GetRange() / _firedFromWeaponStatsCalculator.GetSpeed();
         private float _lifeTimeLeft;
         
         protected WeaponStatsCalculator _firedFromWeaponStatsCalculator;
         
-        public GameObject GameObject => gameObject;
         public float Damage => _firedFromWeaponStatsCalculator.GetDamage();
-        
-        public event Action<IPoolAble> OnDestroyed;
 
         private void Update()
         {
@@ -36,13 +33,11 @@ namespace Models.Items.Bullets.Base
         
         private void DestroyOnLifeTimeExpire()
         {
-            if (_lifeTimeLeft <= 0) Reset();
-        }
-        
-        public void Reset()
-        {
-            OnDestroyed?.Invoke(this);
-            _lifeTimeLeft = LifeTime;
+            if (_lifeTimeLeft <= 0)
+            {
+                _lifeTimeLeft = LifeTime;
+                Destroy();
+            }
         }
 
         public void Init(WeaponStatsCalculator weaponStatsCalculator)

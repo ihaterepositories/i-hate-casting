@@ -6,18 +6,18 @@ using Models.Items.Weapons.Base.StatsHandling;
 using Models.Items.Weapons.Base.StatsHandling.ScriptableObjects;
 using Pooling;
 using UnityEngine;
+using UnityEngine.Serialization;
 using Zenject;
 using Random = UnityEngine.Random;
 
 namespace Models.Items.Weapons.Base
 {
+    /// <summary>
+    /// Child class must assign the specific bullets pool in the Construct (Inject) method.
+    /// </summary>
     public abstract class Weapon : MonoBehaviour
     {
-        [SerializeField] private GameObject _bulletPrefab;
         [SerializeField] protected WeaponStatsSo _weaponStats;
-        
-        private ObjectPool<Bullet> _bulletsPool;
-        private DiContainer _diContainer;
 
         private WeaponStatsMultipliersProvider _weaponStatsMultipliersProvider;
         protected WeaponStatsCalculator _weaponStatsCalculator;
@@ -34,9 +34,8 @@ namespace Models.Items.Weapons.Base
         public event Action OnReloaded;
         
         [Inject]
-        private void Construct(DiContainer diContainer, WeaponStatsMultipliersProvider weaponStatsMultipliersProvider)
+        private void Construct(WeaponStatsMultipliersProvider weaponStatsMultipliersProvider)
         {
-            _diContainer = diContainer;
             _weaponStatsMultipliersProvider = weaponStatsMultipliersProvider;
         }
 
@@ -44,7 +43,6 @@ namespace Models.Items.Weapons.Base
         {
             var weaponStatsMultiplier = _weaponStatsMultipliersProvider.GetFor(_weaponStats.WeaponType);
             _weaponStatsCalculator = new WeaponStatsCalculator(_weaponStats, weaponStatsMultiplier);
-            _bulletsPool = new ObjectPool<Bullet>(_bulletPrefab.GetComponent<Bullet>(), _diContainer);
         }
 
         private void Start()
@@ -84,26 +82,22 @@ namespace Models.Items.Weapons.Base
         
         private void Fire()
         {
-            if (_bulletsPool.GetFreeObject() is Bullet bullet)
+            var bullet = GetBulletFromPool();
+            _lastFireTime = Time.time;
+            
+            bullet.Init(_weaponStatsCalculator);
+            bullet.transform.position = transform.position;
+            bullet.transform.rotation = Quaternion.Euler(0, 0, GetFireDirectionAngle());
+            
+            _bulletsInMagazine--;
+            
+            if (_bulletsInMagazine <= 0)
             {
-                _lastFireTime = Time.time;
-                
-                bullet.Init(_weaponStatsCalculator);
-                bullet.transform.position = transform.position;
-                bullet.transform.rotation = Quaternion.Euler(0, 0, GetFireDirectionAngle());
-                
-                _bulletsInMagazine--;
-                
-                if (_bulletsInMagazine <= 0)
-                {
-                    OnReloadNeeded?.Invoke();
-                }
-            }
-            else
-            {
-                Debug.LogError($"Can`t create bullet in {gameObject.name}.");
+                OnReloadNeeded?.Invoke();
             }
         }
+        
+        protected abstract Bullet GetBulletFromPool();
         
         private void Reload()
         {

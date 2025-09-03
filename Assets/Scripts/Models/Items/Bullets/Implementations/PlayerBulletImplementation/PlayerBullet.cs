@@ -1,8 +1,8 @@
 using Models.Items.Bullets.Base;
 
-namespace Models.Items.Bullets
+namespace Models.Items.Bullets.Implementations.PlayerBulletImplementation
 {
-    public class ForwardFlyBullet : Bullet
+    public class PlayerBullet : Bullet
     {
         protected override void Move()
         {
