@@ -1,3 +1,4 @@
+using System;
 using Models.Creatures.Implementations.PlayerImplementation;
 using UnityEngine;
 using Zenject;
@@ -9,7 +10,13 @@ namespace Models.Creatures.Implementations.EnemyImplementation.Movers
         [SerializeField] private Rigidbody2D _rb;
         [SerializeField] private Enemy _enemy;
 
+        [Header("Separation from other enemies settings")] [SerializeField]
+        private float _separationRadius = 1.5f;
+
+        [SerializeField] private float _separationStrength = 2f;
+
         private Player _player;
+        private Collider2D[] _nearestFoundColliders = new Collider2D[16];
 
         [Inject]
         public void Construct(Player player)
@@ -24,12 +31,49 @@ namespace Models.Creatures.Implementations.EnemyImplementation.Movers
 
         private void ChangeVelocity()
         {
-            _rb.velocity = CalculateDirectionToPlayerVector() * _enemy.StatsCalculator.GetSpeed();
+            Vector2 moveDir = CalculateDirectionToPlayerVector();
+            Vector2 separation = CalculateSeparationVector();
+
+            Vector2 finalDir = (moveDir + separation).normalized;
+
+            Vector2 newVelocity = finalDir * _enemy.StatsCalculator.GetSpeed();
+
+            _rb.velocity = Vector2.Lerp(_rb.velocity, newVelocity, Time.fixedDeltaTime * 5f);
         }
 
         private Vector2 CalculateDirectionToPlayerVector()
         {
             return (_player.transform.position - transform.position).normalized;
+        }
+
+        private Vector2 CalculateSeparationVector()
+        {
+            int nearestCollidersCount = Physics2D.OverlapCircleNonAlloc(transform.position, _separationRadius, _nearestFoundColliders);
+            Vector2 separatedFromAllNearestEnemiesDirection = Vector2.zero;
+
+            for (int i = 0; i < nearestCollidersCount; i++)
+            {
+                var currentCollider = _nearestFoundColliders[i];
+                if (currentCollider.TryGetComponent<Enemy>(out var otherEnemy) && otherEnemy != _enemy)
+                {
+                    // Represents the movement slightly to the side from the other enemy
+                    Vector2 difference = (Vector2)(transform.position - currentCollider.transform.position);
+                    
+                    float distanceToOtherEnemy = difference.magnitude;
+
+                    if (distanceToOtherEnemy > 0)
+                    {
+                        // The closer the enemy, the higher the strength
+                        float strength = Mathf.Clamp01(1 - distanceToOtherEnemy / _separationRadius);
+                        
+                        // Takes into account the previous calculated separation directions
+                        // to create a balanced final direction
+                        separatedFromAllNearestEnemiesDirection += difference.normalized * strength;
+                    }
+                }
+            }
+
+            return separatedFromAllNearestEnemiesDirection * _separationStrength;
         }
     }
 }

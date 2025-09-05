@@ -1,4 +1,4 @@
-using Models.Items.Modifiers.Implementations.WeaponsModifierImplementation.ScriptableObjects.SerializingDataContainers;
+using Models.Items.Artefacts.Modifiers.Implementations.WeaponsModifierImplementation.ScriptableObjects.SerializingDataContainers;
 using Models.Items.Weapons.Base.StatsHandling.Enums;
 using UnityEngine;
 

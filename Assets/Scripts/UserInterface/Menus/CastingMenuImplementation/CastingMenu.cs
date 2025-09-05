@@ -42,7 +42,7 @@ namespace UserInterface.Menus.CastingMenuImplementation
             }
         }
 
-        public void OpenCastingPuzzleThen(Action onSolvedCallback)
+        public void OpenCastingPuzzleThenIfSolved(Action onSolvedCallback)
         {
             _onSolvedCallback = onSolvedCallback;
             

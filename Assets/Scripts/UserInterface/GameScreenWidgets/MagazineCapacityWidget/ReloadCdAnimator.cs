@@ -14,10 +14,6 @@ namespace UserInterface.GameScreenWidgets.MagazineCapacityWidget
         [SerializeField] private Sprite _defaultCdSprite;
         [SerializeField] private Sprite _brokenCdSprite;
         
-        [FormerlySerializedAs("_mainWeaponSpawner")]
-        [Header("Needed to get spawned PlayerWeapon component")]
-        [SerializeField] private MainPlayerWeaponSpawner _mainPlayerWeaponSpawner;
-        
         private PlayerWeapon _playerWeapon;
         private Vector3 _defaultPosition;
 
@@ -28,21 +24,21 @@ namespace UserInterface.GameScreenWidgets.MagazineCapacityWidget
 
         private void OnEnable()
         {
-            _mainPlayerWeaponSpawner.OnItemSpawned += AssignPlayerPlayerWeapon;
+            MainPlayerWeaponSpawner.OnSpawned += AssignPlayerPlayerWeapon;
         }
     
         private void OnDisable()
         {
-            _mainPlayerWeaponSpawner.OnItemSpawned -= AssignPlayerPlayerWeapon;
+            MainPlayerWeaponSpawner.OnSpawned -= AssignPlayerPlayerWeapon;
             _playerWeapon.OnReloadNeeded -= AnimateEmptyMagazine;
             _playerWeapon.OnReloadStarted -= AnimateReloading;
 
             _cdIcon.DOKill();
         }
         
-        private void AssignPlayerPlayerWeapon(GameObject weapon)
+        private void AssignPlayerPlayerWeapon(PlayerWeapon weapon)
         {
-            _playerWeapon = weapon.GetComponent<PlayerWeapon>();
+            _playerWeapon = weapon;
             
             _playerWeapon.OnReloadNeeded += AnimateEmptyMagazine;
             _playerWeapon.OnReloadStarted += AnimateReloading;

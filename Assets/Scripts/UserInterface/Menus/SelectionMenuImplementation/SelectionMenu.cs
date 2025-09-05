@@ -17,6 +17,8 @@ namespace UserInterface.Menus.SelectionMenuImplementation
         [SerializeField] private Image _cardsClickBlockerImage; 
         [FormerlySerializedAs("cards")] [SerializeField] private List<SelectableItemCard> _cards;
 
+        public static event Action<SelectableItemSo> OnItemSelected;
+        
         public void OpenMenuToSelect(List<SelectableItemSo> itemsData, Action<SelectableItemSo> onSelectedCallback = null)
         {
             if (itemsData == null || itemsData.Count == 0 || itemsData.Count > _cards.Count)
@@ -37,6 +39,7 @@ namespace UserInterface.Menus.SelectionMenuImplementation
                 currentCard.Initialize(itemData, () =>
                 {
                     onSelectedCallback?.Invoke(itemData);
+                    OnItemSelected?.Invoke(itemData);
                     CloseMenu();
                 });
 

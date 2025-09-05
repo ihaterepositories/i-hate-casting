@@ -1,8 +1,7 @@
 using Models.Creatures.Base.StatsHandling;
 using Models.Creatures.Implementations.PlayerImplementation;
-using Models.Items.Bullets.Implementations.PlayerBulletImplementation.Pools;
 using Models.Items.Weapons.Base.StatsHandling;
-using Pooling;
+using Models.Items.Weapons.Bullets.Implementations.PlayerBulletImplementation.Pools;
 using UnityEngine;
 using Zenject;
 

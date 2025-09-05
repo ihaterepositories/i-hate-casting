@@ -88,7 +88,9 @@ MonoBehaviour:
   m_LabelTable:
     m_LabelNames:
     - default
-    - CommonModifier
+    - CommonArtefact
+    - GoldArtefact
+    - IncredibleArtefact
   m_SchemaTemplates: []
   m_GroupTemplateObjects:
   - {fileID: 11400000, guid: 01824c36f480d8644aa2cfc2d9ef58ae, type: 2}

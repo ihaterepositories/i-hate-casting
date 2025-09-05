@@ -1,7 +1,7 @@
 using Core.Input.Interfaces;
-using Models.Items.Bullets.Base;
-using Models.Items.Bullets.Implementations.PlayerBulletImplementation.Pools;
 using Models.Items.Weapons.Base;
+using Models.Items.Weapons.Bullets.Base;
+using Models.Items.Weapons.Bullets.Implementations.PlayerBulletImplementation.Pools;
 using UnityEngine;
 using Zenject;
 

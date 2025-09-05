@@ -1,10 +1,9 @@
 using System;
 using System.Collections;
 using Core.GameControl;
-using Models.Items.Bullets.Base;
 using Models.Items.Weapons.Base.StatsHandling;
 using Models.Items.Weapons.Base.StatsHandling.ScriptableObjects;
-using Pooling;
+using Models.Items.Weapons.Bullets.Base;
 using UnityEngine;
 using UnityEngine.Serialization;
 using Zenject;

@@ -13,10 +13,6 @@ namespace UserInterface.GameScreenWidgets.MagazineCapacityWidget
     {
         [SerializeField] private Text _magazineCapacityText;
         
-        [FormerlySerializedAs("_mainWeaponSpawner")]
-        [Header("Needed to get spawned PlayerWeapon component")]
-        [SerializeField] private MainPlayerWeaponSpawner _mainPlayerWeaponSpawner;
-        
         private PlayerWeapon _playerWeapon;
         private bool _isReloading;
 
@@ -25,12 +21,12 @@ namespace UserInterface.GameScreenWidgets.MagazineCapacityWidget
 
         private void OnEnable()
         {
-            _mainPlayerWeaponSpawner.OnItemSpawned += SetPlayerPlayerWeapon;
+            MainPlayerWeaponSpawner.OnSpawned += RegisterPlayerWeapon;
         }
 
         private void OnDisable()
         {
-            _mainPlayerWeaponSpawner.OnItemSpawned -= SetPlayerPlayerWeapon;
+            MainPlayerWeaponSpawner.OnSpawned -= RegisterPlayerWeapon;
             _playerWeapon.OnReloadNeeded -= ShowReloadHintText;
             _playerWeapon.OnReloadStarted -= ShowReloadCountdownText;
         }
@@ -43,9 +39,9 @@ namespace UserInterface.GameScreenWidgets.MagazineCapacityWidget
             }
         }
 
-        private void SetPlayerPlayerWeapon(GameObject weapon)
+        private void RegisterPlayerWeapon(PlayerWeapon weapon)
         {
-            _playerWeapon = weapon.GetComponent<PlayerWeapon>();
+            _playerWeapon = weapon;
             
             _playerWeapon.OnReloadNeeded += ShowReloadHintText;
             _playerWeapon.OnReloadStarted += ShowReloadCountdownText;

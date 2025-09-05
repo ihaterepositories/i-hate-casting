@@ -1,13 +1,14 @@
 using System.Collections.Generic;
 using Models.Items.Base.ScriptableObjects;
-using Models.Items.Base.Spawners;
 using UnityEngine;
 using UserInterface.GameScreenAnimations.ExtraBorder.Enums;
 using UserInterface.Menus.Base;
 using UserInterface.Menus.Base.Models;
+using UserInterface.Menus.SelectionMenuImplementation;
 
 namespace UserInterface.Menus.InventoryMenuImplementation
 {
+    // TODO: Add functionality to handle situation when item removed from player
     public class InventoryMenu : InGameMenu
     {
         [SerializeField] private List<SelectableItemCard> _itemCards;
@@ -17,14 +18,12 @@ namespace UserInterface.Menus.InventoryMenuImplementation
         
         private void OnEnable()
         {
-            ItemsSpawner.OnItemSelectedInMenu += AddActiveItemData;
-            ItemsSpawner.OnLastSpawnedItemDestroyed += HandleLastItemDestroy;
+            SelectionMenu.OnItemSelected += AddActiveItemData;
         }
 
         private void OnDisable()
         {
-            ItemsSpawner.OnItemSelectedInMenu -= AddActiveItemData;
-            ItemsSpawner.OnLastSpawnedItemDestroyed -= HandleLastItemDestroy;
+            SelectionMenu.OnItemSelected -= AddActiveItemData;
         }
 
         private void Update()

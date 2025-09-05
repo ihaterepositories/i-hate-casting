@@ -18352,12 +18352,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a1275bb2f2bb495abf2c413c3af5f674, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _selectionMenu: {fileID: 1184116598}
-  _targetParent: {fileID: 1693683874}
+  _gameObjectsSpawner: {fileID: 1430130003}
   _castingMenu: {fileID: 2138356664}
-  _commonModifiersAddressablesLabel: CommonModifier
-  _goldModifiersAddressablesLabel: GoldModifier
-  _incredibleModifiersAddressablesLabel: IncredibleModifier
+  _selectionMenu: {fileID: 1184116598}
+  _commonArtefactsLabel: CommonArtefact
+  _goldArtefactsLabel: GoldArtefact
+  _incredibleArtefactsLabel: IncredibleArtefact
 --- !u!1 &595832344
 GameObject:
   m_ObjectHideFlags: 0
@@ -19218,8 +19218,58 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 92218542}
+  - {fileID: 1430130002}
+  - {fileID: 1445715755}
   m_Father: {fileID: 1991829578}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &862223001
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 862223002}
+  - component: {fileID: 862223003}
+  m_Layer: 0
+  m_Name: '[VirusesSpawner]'
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &862223002
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 862223001}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1445715755}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &862223003
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 862223001}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e3bceff4b4c34332a25deee2dcb49ea8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _enemiesPool: {fileID: 1792117669}
+  _maxEnemiesCountSpawnedByThisSpawner: 50
+  _spawnInterval: 3
+  _spawnRadius: {x: 24, y: 12}
 --- !u!1 &874389814
 GameObject:
   m_ObjectHideFlags: 0
@@ -21591,7 +21641,6 @@ MonoBehaviour:
   _cdIcon: {fileID: 975909273}
   _defaultCdSprite: {fileID: 21300000, guid: 38671747f2048a741813d518f8a96437, type: 3}
   _brokenCdSprite: {fileID: 21300000, guid: 98928ecb8aab2d6499d5dfb68368fde2, type: 3}
-  _mainPlayerWeaponSpawner: {fileID: 2019734760}
 --- !u!114 &989578120 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 6827794691542944477, guid: 41291318644c0444e81ec67ed6b2c5a4, type: 3}
@@ -21807,7 +21856,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _magazineCapacityText: {fileID: 1032376568}
-  _mainPlayerWeaponSpawner: {fileID: 2019734760}
 --- !u!114 &1032376568
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -23292,6 +23340,82 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 03dbd66f254a4e759671764272530909, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &1430130001
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1430130002}
+  - component: {fileID: 1430130003}
+  m_Layer: 0
+  m_Name: '[GameObjectsSpawner]'
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1430130002
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1430130001}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 847632571}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1430130003
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1430130001}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6b65582f574f4d169759752be8f73deb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!1 &1445715754
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1445715755}
+  m_Layer: 0
+  m_Name: '[EnemiesSpawners]'
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1445715755
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1445715754}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 862223002}
+  m_Father: {fileID: 847632571}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1490324748
 GameObject:
   m_ObjectHideFlags: 0
@@ -24500,8 +24624,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 016249f18f49474497deb2ec1bed2a5c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _gameObjectsSpawner: {fileID: 1430130003}
   _selectionMenu: {fileID: 1184116598}
-  _targetParent: {fileID: 1693683874}
   _mainWeapon:
   - {fileID: 11400000, guid: 3063c02cb5e9fe44c9d19ff1999eef69, type: 2}
   - {fileID: 11400000, guid: da1955421d18b3a4381e34b81d52e0e4, type: 2}
