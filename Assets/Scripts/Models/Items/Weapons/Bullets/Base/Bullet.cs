@@ -1,10 +1,11 @@
+using System;
 using Models.Items.Weapons.Base.StatsHandling;
 using Models.Pooling;
 using UnityEngine;
 
 namespace Models.Items.Weapons.Bullets.Base
 {
-    public abstract class Bullet : PoolAbleMonoBehaviour
+    public class Bullet : PoolAbleMonoBehaviour
     {
         [SerializeField] protected Rigidbody2D _rb;
         
@@ -13,7 +14,7 @@ namespace Models.Items.Weapons.Bullets.Base
         
         protected WeaponStatsCalculator _firedFromWeaponStatsCalculator;
         
-        public float Damage => _firedFromWeaponStatsCalculator.GetDamage();
+        public float DamageToDeal => _firedFromWeaponStatsCalculator.GetDamageToDeal();
 
         private void Update()
         {
@@ -22,7 +23,10 @@ namespace Models.Items.Weapons.Bullets.Base
             DestroyOnLifeTimeExpire();
         }
 
-        protected abstract void Move();
+        protected virtual void Move()
+        {
+            _rb.velocity = transform.right * _firedFromWeaponStatsCalculator.GetSpeed();
+        }
 
         private void ReduceLifeTime()
         {

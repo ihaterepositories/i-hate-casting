@@ -16,7 +16,7 @@ namespace Models.Creatures.Base.StatsHandling
         {
             return type switch
             {
-                CreatureStatType.Health => _healthMultiplier,
+                CreatureStatType.MaxHealth => _healthMultiplier,
                 CreatureStatType.Speed => _speedMultiplier,
                 CreatureStatType.BurstDuration => _burstDurationMultiplier,
                 CreatureStatType.WhileBurstSpeedIncreaseCoefficient => _whileBurstSpeedMultiplyingMultiplier,

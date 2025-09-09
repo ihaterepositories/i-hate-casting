@@ -14,7 +14,7 @@ namespace Models.Items.Weapons.Base.StatsHandling.ScriptableObjects
         [Header("2 seconds is minimum")]
         public float ReloadTime;
         public float Spread;
-        public float Damage;
+        public float DamageToDeal;
         public float Speed;
         public float CooldownTime;
     }

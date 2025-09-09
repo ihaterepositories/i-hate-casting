@@ -1,6 +1,8 @@
 using Models.Creatures.Base.StatsHandling;
+using Models.Creatures.Implementations.EnemyImplementation.Visuals.Pools;
 using Models.Creatures.Implementations.PlayerImplementation;
 using Models.Items.Weapons.Base.StatsHandling;
+using Models.Items.Weapons.Bullets.Implementations.EnemyBulletImplementation.Pools;
 using Models.Items.Weapons.Bullets.Implementations.PlayerBulletImplementation.Pools;
 using UnityEngine;
 using Zenject;
@@ -17,6 +19,8 @@ namespace Core.Infrastructure
             Container.Bind<WeaponStatsMultipliersProvider>().FromComponentInHierarchy().AsSingle();
 
             Container.Bind<PlayerBulletsPool>().FromComponentInHierarchy().AsSingle();
+            Container.Bind<EnemyBulletsPool>().FromComponentInHierarchy().AsSingle();
+            Container.Bind<ExplosionEffectsPool>().FromComponentInHierarchy().AsSingle();
             
             Container.Bind<Player>().FromInstance(_player).AsSingle();
         }

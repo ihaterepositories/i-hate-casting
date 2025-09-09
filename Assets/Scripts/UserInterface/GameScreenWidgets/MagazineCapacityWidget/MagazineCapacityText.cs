@@ -4,7 +4,6 @@ using DG.Tweening;
 using Models.Items.Weapons.Implementations.MainPlayerWeaponImplementation;
 using Models.Items.Weapons.Implementations.MainPlayerWeaponImplementation.Spawners;
 using UnityEngine;
-using UnityEngine.Serialization;
 using UnityEngine.UI;
 
 namespace UserInterface.GameScreenWidgets.MagazineCapacityWidget

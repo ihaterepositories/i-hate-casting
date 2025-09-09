@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.Serialization;
 using Zenject;
 
-namespace Models.Creatures.Implementations.PlayerImplementation.Animators
+namespace Models.Creatures.Implementations.PlayerImplementation.Visuals
 {
     public class PlayerAnimator : MonoBehaviour
     {

@@ -16,5 +16,15 @@ namespace Models.Pooling
         {
             OnDestroyed?.Invoke(this);
         }
+
+        
+        /// <summary>
+        /// This method is called every time when object is taken from pool.
+        /// Use it like Awake() or Start() methods.
+        /// </summary>
+        public virtual void Init()
+        {
+            
+        }
     }
 }

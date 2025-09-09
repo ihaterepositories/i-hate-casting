@@ -5,7 +5,6 @@ using Models.Items.Weapons.Base.StatsHandling;
 using Models.Items.Weapons.Base.StatsHandling.ScriptableObjects;
 using Models.Items.Weapons.Bullets.Base;
 using UnityEngine;
-using UnityEngine.Serialization;
 using Zenject;
 using Random = UnityEngine.Random;
 

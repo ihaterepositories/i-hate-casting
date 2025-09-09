@@ -2,7 +2,7 @@ namespace Models.Creatures.Base.StatsHandling.Enums
 {
     public enum CreatureStatType
     {
-        Health,
+        MaxHealth,
         Speed,
         BurstDuration,
         WhileBurstSpeedIncreaseCoefficient,

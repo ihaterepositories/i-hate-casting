@@ -9,7 +9,6 @@ using UnityEngine;
 using UnityEngine.AddressableAssets;
 using UnityEngine.ResourceManagement.AsyncOperations;
 using UnityEngine.ResourceManagement.ResourceLocations;
-using UnityEngine.Serialization;
 using UserInterface.Menus.CastingMenuImplementation;
 using UserInterface.Menus.SelectionMenuImplementation;
 using Utils;

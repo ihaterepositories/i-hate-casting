@@ -31,8 +31,8 @@ namespace Models.Items.Weapons.Base.StatsHandling
         public float GetSpread() => 
             _baseWeaponStats.Spread * _weaponStatsMultiplier.GetMultiplier(WeaponStatType.Spread);
         
-        public float GetDamage() => 
-            _baseWeaponStats.Damage * _weaponStatsMultiplier.GetMultiplier(WeaponStatType.Damage);
+        public float GetDamageToDeal() => 
+            _baseWeaponStats.DamageToDeal * _weaponStatsMultiplier.GetMultiplier(WeaponStatType.DamageToDeal);
         
         public float GetSpeed() => 
             _baseWeaponStats.Speed * _weaponStatsMultiplier.GetMultiplier(WeaponStatType.Speed);

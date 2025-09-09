@@ -4,7 +4,7 @@ namespace Models.Items.Weapons.Base.StatsHandling.Enums
     {
         ReloadTime,
         Spread,
-        Damage,
+        DamageToDeal,
         Speed,
         CooldownTime,
     }

@@ -1,5 +1,5 @@
 using System.Collections;
-using Models.Creatures.Base.Pooling;
+using Models.Creatures.Base.Pools;
 using UnityEngine;
 
 namespace Models.Creatures.Implementations.EnemyImplementation.Spawners
@@ -24,20 +24,21 @@ namespace Models.Creatures.Implementations.EnemyImplementation.Spawners
         // TODO: Implement spawn stop when game over and maybe smth else
         private IEnumerator SpawnCoroutine()
         {
-            yield return new WaitForSeconds(_spawnInterval);
-
-            if (_currentEnemiesCountSpawnedByThisSpawner <= _maxEnemiesCountSpawnedByThisSpawner)
+            while (true)
             {
+                yield return new WaitForSeconds(_spawnInterval);
+
+                if (_currentEnemiesCountSpawnedByThisSpawner >= _maxEnemiesCountSpawnedByThisSpawner) continue;
+                
                 var enemy = _enemiesPool.GetFreeObject();
-                enemy.transform.position = 
-                    new Vector2(Random.Range(-_spawnRadius.x, _spawnRadius.x), Random.Range(-_spawnRadius.y, _spawnRadius.y));
-                
+                enemy.transform.position =
+                    new Vector2(Random.Range(-_spawnRadius.x, _spawnRadius.x),
+                        Random.Range(-_spawnRadius.y, _spawnRadius.y));
+
                 enemy.OnDeath += () => _currentEnemiesCountSpawnedByThisSpawner--;
-                
+
                 _currentEnemiesCountSpawnedByThisSpawner++;
             }
-            
-            StartCoroutine(SpawnCoroutine());
         }
     }
 }

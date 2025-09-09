@@ -29,22 +29,21 @@ namespace Models.Pooling
             {
                 poolAble = _freeObjects[0] as T;
                 _freeObjects.RemoveAt(0);
+                
+                if (poolAble == null)
+                    throw new Exception($"Pooled object is null: {_prefab.name}");
+                
+                poolAble.Instance.SetActive(true);
+                poolAble.Init();
             }
             else
             {
-                GameObject instance = _diContainer.InstantiatePrefab(_prefab, _container);
-                poolAble = instance.GetComponent<PoolAbleMonoBehaviour>();
+                _diContainer.InstantiatePrefab(_prefab, _container).TryGetComponent(out poolAble);
 
                 if (poolAble == null)
-                    throw new Exception($"Instantiated object does not implement IPoolAble: {_prefab.name}");
-            }
-
-            if (poolAble == null)
-            {
-                throw new System.Exception("PoolAble object is null");
+                    throw new Exception($"Instantiated object does not implement PoolAble: {_prefab.name}");
             }
             
-            poolAble.Instance.SetActive(true);
             poolAble.OnDestroyed += ReturnToPool;
         
             return poolAble;

@@ -7,12 +7,14 @@ using Zenject;
 
 namespace Models.Creatures.Base
 {
-    public class Creature : PoolAbleMonoBehaviour
+    public abstract class Creature : PoolAbleMonoBehaviour
     {
         [SerializeField] protected CreatureStatsSo _creatureStatsSo;
         
         private CreatureStatsMultipliersProvider _creatureStatsMultipliersProvider;
         private CreatureStatsCalculator _statsCalculator;
+        
+        private float _health;
         
         public CreatureStatsCalculator StatsCalculator => _statsCalculator;
         
@@ -28,12 +30,29 @@ namespace Models.Creatures.Base
         {
             var creatureStatsMultiplier = _creatureStatsMultipliersProvider.GetFor(_creatureStatsSo.CreatureType);
             _statsCalculator = new CreatureStatsCalculator(_creatureStatsSo, creatureStatsMultiplier);
+            
+            Init();
         }
 
-        public void Kill()
+        public override void Init()
         {
+            _health = _statsCalculator.GetHealth();
+        }
+
+        public void DoDamage(float damage)
+        {
+            _health -= damage;
+            if (_health <= 0)
+                Kill();
+        }
+        
+        public virtual void Kill()
+        {
+            InstantiateDeathEffect();
             OnDeath?.Invoke();
             ReturnToPool();
         }
+
+        protected abstract void InstantiateDeathEffect();
     }
 }

@@ -18,7 +18,7 @@ namespace Models.Creatures.Base.StatsHandling
         }
         
         public float GetHealth() => 
-            _baseCreatureStats.Health * _creatureStatsMultiplier.GetMultiplier(CreatureStatType.Health);
+            _baseCreatureStats.MaxHealth * _creatureStatsMultiplier.GetMultiplier(CreatureStatType.MaxHealth);
         
         public float GetSpeed() =>
             _baseCreatureStats.Speed * _creatureStatsMultiplier.GetMultiplier(CreatureStatType.Speed);

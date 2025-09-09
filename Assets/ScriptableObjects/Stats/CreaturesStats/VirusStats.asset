@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: VirusStats
   m_EditorClassIdentifier: 
   CreatureType: 1
-  Health: 3
+  MaxHealth: 3
   Speed: 2
   BurstDuration: 0.2
   WhileBurstSpeedIncreaseCoefficient: 3

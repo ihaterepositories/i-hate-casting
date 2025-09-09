@@ -7,7 +7,7 @@ namespace Models.Creatures.Base.StatsHandling.ScriptableObjects
     public class CreatureStatsSo : ScriptableObject
     {
         public CreatureType CreatureType;
-        public float Health;
+        public float MaxHealth;
         public float Speed;
         public float BurstDuration = 0.2f;
         public float WhileBurstSpeedIncreaseCoefficient = 3f;

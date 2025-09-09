@@ -8,7 +8,7 @@ namespace Models.Items.Weapons.Base.StatsHandling
     {
         private float _reloadTimeMultiplier = 1f;
         private float _spreadMultiplier = 1f;
-        private float _damageMultiplier = 1;
+        private float _damageToDealMultiplier = 1;
         private float _speedMultiplier = 1f;
         private float _cooldownTimeMultiplier = 1f;
         
@@ -21,7 +21,7 @@ namespace Models.Items.Weapons.Base.StatsHandling
             {
                 WeaponStatType.ReloadTime => _reloadTimeMultiplier,
                 WeaponStatType.Spread => _spreadMultiplier,
-                WeaponStatType.Damage => _damageMultiplier,
+                WeaponStatType.DamageToDeal => _damageToDealMultiplier,
                 WeaponStatType.Speed => _speedMultiplier,
                 WeaponStatType.CooldownTime => _cooldownTimeMultiplier,
                 _ => 1f
@@ -38,7 +38,7 @@ namespace Models.Items.Weapons.Base.StatsHandling
             
             _reloadTimeMultiplier += modifyingValuesToModify.ReloadTimeModifier;
             _spreadMultiplier += modifyingValuesToModify.SpreadModifier;
-            _damageMultiplier += modifyingValuesToModify.DamageModifier;
+            _damageToDealMultiplier += modifyingValuesToModify.DamageToDealModifier;
             _speedMultiplier += modifyingValuesToModify.SpeedModifier;
             _cooldownTimeMultiplier += modifyingValuesToModify.CooldownTimeModifier;
         }
@@ -53,7 +53,7 @@ namespace Models.Items.Weapons.Base.StatsHandling
 
             _reloadTimeMultiplier -= modifyingValuesToModify.ReloadTimeModifier;
             _spreadMultiplier -= modifyingValuesToModify.SpreadModifier;
-            _damageMultiplier -= modifyingValuesToModify.DamageModifier;
+            _damageToDealMultiplier -= modifyingValuesToModify.DamageToDealModifier;
             _speedMultiplier -= modifyingValuesToModify.SpeedModifier;
             _cooldownTimeMultiplier -= modifyingValuesToModify.CooldownTimeModifier;
         }

@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 2725636039652148305}
   - component: {fileID: 4929568265942165925}
   - component: {fileID: 8490587614610745364}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Virus
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -188,8 +188,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _rb: {fileID: 5560108444971375601}
   _enemy: {fileID: 4929568265942165925}
-  _separationRadius: 1.5
-  _separationStrength: 2
+  _obstaclesDetectionRadius: 1.5
+  _obstaclesAvoidStrength: 2
 --- !u!114 &4929568265942165925
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -230,7 +230,7 @@ GameObject:
   - component: {fileID: 2404089022734529155}
   - component: {fileID: 3191631859600101052}
   - component: {fileID: 7245550684421471757}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: VirusReflection
   m_TagString: Untagged
   m_Icon: {fileID: 0}

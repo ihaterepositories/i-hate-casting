@@ -17,6 +17,6 @@ MonoBehaviour:
   MagazineCapacity: 30
   ReloadTime: 3
   Spread: 2.5
-  Damage: 1
+  DamageToDeal: 2
   Speed: 5
   CooldownTime: 0.5

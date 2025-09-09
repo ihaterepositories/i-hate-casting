@@ -1,4 +1,3 @@
-using System;
 using System.Collections;
 using Core.GameControl;
 using Core.Input.Interfaces;
@@ -9,7 +8,6 @@ using Zenject;
 namespace Models.Creatures.Implementations.PlayerImplementation.Movers
 {
     // TODO: Implement burst cooldown
-    [RequireComponent(typeof(Rigidbody2D), typeof(BoxCollider2D))]
     public class PlayerMover : MonoBehaviour
     {
         [SerializeField] private Player _player;
