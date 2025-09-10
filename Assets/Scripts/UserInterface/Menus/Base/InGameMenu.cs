@@ -11,7 +11,7 @@ namespace UserInterface.Menus.Base
     public class InGameMenu : MonoBehaviour
     {
         [SerializeField] private GamePauser _gamePauser;
-        [FormerlySerializedAs("_screenBorderAnimator")] [SerializeField] private ExtraScreenBorderAnimator _extraScreenBorderAnimator;
+        [FormerlySerializedAs("_extraScreenBorderAnimator")] [SerializeField] private ScreenBorderAnimator _screenBorderAnimator;
         
         private bool _isNeedToHideBorder;
 
@@ -28,7 +28,7 @@ namespace UserInterface.Menus.Base
 
             if (borderType != ScreenBorderType.None)
             {
-                _extraScreenBorderAnimator.ShowBorder(borderType);
+                _screenBorderAnimator.ShowBorder(borderType);
                 _isNeedToHideBorder = true;
             }
             else
@@ -47,7 +47,7 @@ namespace UserInterface.Menus.Base
                 _gamePauser.UnpauseGame();
             
             if (_isNeedToHideBorder)
-                _extraScreenBorderAnimator.HideBorder();
+                _screenBorderAnimator.HideBorder();
         }
         
         void SetActiveChildes(GameObject parent, bool state)

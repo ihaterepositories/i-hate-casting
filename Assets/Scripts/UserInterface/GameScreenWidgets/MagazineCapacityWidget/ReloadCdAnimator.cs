@@ -56,7 +56,7 @@ namespace UserInterface.GameScreenWidgets.MagazineCapacityWidget
 
         private IEnumerator AnimateReloadingCoroutine(float reloadTime)
         {
-            _cdIcon.rectTransform.DOLocalMove(new Vector3(_defaultPosition.x+400f, _defaultPosition.y+350f), 0.25f);
+            _cdIcon.rectTransform.DOLocalMove(new Vector3(_defaultPosition.x+500f, _defaultPosition.y+350f), 0.25f);
         
             yield return new WaitForSeconds(reloadTime);
             

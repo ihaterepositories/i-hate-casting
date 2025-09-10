@@ -7,27 +7,33 @@ using UserInterface.GameScreenAnimations.ExtraBorder.Enums;
 
 namespace UserInterface.GameScreenAnimations.ExtraBorder
 {
-    public class ExtraScreenBorderAnimator : MonoBehaviour
+    public class ScreenBorderAnimator : MonoBehaviour
     {
-        [SerializeField] private Image _screenBorderObject;
+        [SerializeField] private Image _screenBorder;
+        [SerializeField] private Image _extraScreenBorder;
         [SerializeField] private Sprite _itemSelectMenuBorder;
         [SerializeField] private Sprite _castingMenuBorder;
-        
-        private Vector3 _defaultScale;
+
+        private Vector3 _borderDefaultScale;
+        private Vector3 _extraBorderDefaultScale;
 
         private void Awake()
         {
-            _defaultScale = _screenBorderObject.rectTransform.localScale;
+            _borderDefaultScale = _screenBorder.rectTransform.localScale;
+            _extraBorderDefaultScale = _extraScreenBorder.rectTransform.localScale;
         }
 
         private void OnDisable()
         {
-            _screenBorderObject.DOKill();
+            _screenBorder.DOKill();
+            _extraScreenBorder.DOKill();
         }
         
         public void HideBorder()
         {
-            _screenBorderObject.rectTransform.DOScale(_defaultScale, AppConstants.ExtraScreenBorderAppearanceTime)
+            _screenBorder.rectTransform.DOScale(_borderDefaultScale, AppConstants.ExtraScreenBorderAppearanceTime-0.1f)
+                .SetUpdate(true);
+            _extraScreenBorder.rectTransform.DOScale(_extraBorderDefaultScale, AppConstants.ExtraScreenBorderAppearanceTime)
                 .SetUpdate(true);
         }
 
@@ -50,8 +56,12 @@ namespace UserInterface.GameScreenAnimations.ExtraBorder
 
         private void ChangeAndMoveBorderToScreen(Sprite newBorder)
         {
-            _screenBorderObject.sprite = newBorder;
-            _screenBorderObject.rectTransform.DOScale(1f, AppConstants.ExtraScreenBorderAppearanceTime)
+            _screenBorder.rectTransform.DOScale(1f, AppConstants.ExtraScreenBorderAppearanceTime-0.1f)
+                .SetUpdate(true)
+                .SetEase(Ease.OutBounce);
+            
+            _extraScreenBorder.sprite = newBorder;
+            _extraScreenBorder.rectTransform.DOScale(1f, AppConstants.ExtraScreenBorderAppearanceTime)
                 .SetUpdate(true);
         }
     }

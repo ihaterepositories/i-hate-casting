@@ -15,9 +15,6 @@ namespace UserInterface.GameScreenWidgets.MagazineCapacityWidget
         private PlayerWeapon _playerWeapon;
         private bool _isReloading;
 
-        private readonly Color _defaultTextColor = new Color32(233, 234, 234, 255);
-        private readonly Color _warningTextColor = new Color32(229, 109, 109, 255);
-
         private void OnEnable()
         {
             MainPlayerWeaponSpawner.OnSpawned += RegisterPlayerWeapon;
@@ -55,8 +52,7 @@ namespace UserInterface.GameScreenWidgets.MagazineCapacityWidget
         private void ShowReloadHintText()
         {
             _isReloading = true;
-            _magazineCapacityText.DOColor(_warningTextColor, 0.5f).SetEase(Ease.OutBounce)
-                .OnComplete(() => _magazineCapacityText.text = "press R...");
+            _magazineCapacityText.DOText("press R...", 0.5f).SetEase(Ease.OutBounce);
         }
 
         private void ShowReloadCountdownText(float time)
@@ -78,7 +74,6 @@ namespace UserInterface.GameScreenWidgets.MagazineCapacityWidget
             else
             {
                 _isReloading = false;
-                _magazineCapacityText.DOColor(_defaultTextColor, 0.5f).SetEase(Ease.OutBounce);
                 UpdateText();
             }
         }

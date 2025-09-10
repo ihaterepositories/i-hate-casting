@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using Core.GameControl;
+using Models.Items.Weapons.Base.Enums;
 using Models.Items.Weapons.Base.StatsHandling;
 using Models.Items.Weapons.Base.StatsHandling.ScriptableObjects;
 using Models.Items.Weapons.Bullets.Base;
@@ -26,6 +27,7 @@ namespace Models.Items.Weapons.Base
         
         public int BulletsInMagazine => _bulletsInMagazine;
         public WeaponStatsCalculator WeaponStatsCalculator => _weaponStatsCalculator;
+        public WeaponType WeaponType => _weaponStats.WeaponType;
         
         public event Action OnReloadNeeded;
         public event Action<float> OnReloadStarted;
