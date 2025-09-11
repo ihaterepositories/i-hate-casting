@@ -17,8 +17,10 @@ namespace Models.Creatures.Base
         private float _health;
         
         public CreatureStatsCalculator StatsCalculator => _statsCalculator;
+        public float Health => _health;
         
         public event Action OnDeath;
+        public event Action OnDamaged; 
 
         [Inject]
         private void Construct(CreatureStatsMultipliersProvider creatureStatsMultipliersProvider)
@@ -36,12 +38,13 @@ namespace Models.Creatures.Base
 
         public override void Init()
         {
-            _health = _statsCalculator.GetHealth();
+            _health = _statsCalculator.GetMaxHealth();
         }
 
         public void DoDamage(float damage)
         {
             _health -= damage;
+            OnDamaged?.Invoke();
             if (_health <= 0)
                 Kill();
         }
