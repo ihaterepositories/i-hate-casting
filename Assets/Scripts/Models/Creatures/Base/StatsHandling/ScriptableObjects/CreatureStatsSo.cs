@@ -1,5 +1,6 @@
 using Models.Creatures.Base.Enums;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace Models.Creatures.Base.StatsHandling.ScriptableObjects
 {
@@ -11,6 +12,6 @@ namespace Models.Creatures.Base.StatsHandling.ScriptableObjects
         public float Speed;
         public float BurstDuration = 0.2f;
         public float WhileBurstSpeedIncreaseCoefficient = 3f;
-        public float BurstCooldown = 5f;
+        public float BurstCooldownTime = 5f;
     }
 }

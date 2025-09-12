@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using Core.GameControl;
 using Core.Input.Interfaces;
@@ -7,7 +8,6 @@ using Zenject;
 
 namespace Models.Creatures.Implementations.PlayerImplementation.Movers
 {
-    // TODO: Implement burst cooldown
     public class PlayerMover : MonoBehaviour
     {
         [SerializeField] private Player _player;
@@ -17,10 +17,15 @@ namespace Models.Creatures.Implementations.PlayerImplementation.Movers
         private CreatureStatsCalculator _playerStatsCalculator => _player.StatsCalculator;
         
         private float _burstCoefficient = 1f;
+        private bool _isBurstCooldowning;
         
         private IInputHandler _inputHandler;
         private float _horizontalAxis;
         private float _verticalAxis;
+        
+        public float BurstCooldownTime => _playerStatsCalculator.GetBurstCooldownTime();
+        
+        public event Action OnBurstActivated; 
         
         [Inject]
         public void Construct(IInputHandler inputHandler)
@@ -35,7 +40,7 @@ namespace Models.Creatures.Implementations.PlayerImplementation.Movers
             SetDirectionByInput();
             
             // Burst activation
-            if (_inputHandler.IsBurstButtonPressed())
+            if (_inputHandler.IsBurstButtonPressed() && !_isBurstCooldowning)
             {
                 IncreaseBurstCoefficientWithinBurstDuration();
             }
@@ -60,7 +65,9 @@ namespace Models.Creatures.Implementations.PlayerImplementation.Movers
         
         private void IncreaseBurstCoefficientWithinBurstDuration()
         {
+            OnBurstActivated?.Invoke();
             StartCoroutine(BurstCoefficientIncreaseWithinBurstDurationCoroutine());
+            StartCoroutine(BurstCooldownCoroutine());
         }
 
         private IEnumerator BurstCoefficientIncreaseWithinBurstDurationCoroutine()
@@ -68,6 +75,13 @@ namespace Models.Creatures.Implementations.PlayerImplementation.Movers
             _burstCoefficient = _playerStatsCalculator.GetWhileBurstSpeedIncreaseCoefficient();
             yield return new WaitForSeconds(_playerStatsCalculator.GetBurstDuration());
             _burstCoefficient = 1f;
+        }
+
+        private IEnumerator BurstCooldownCoroutine()
+        {
+            _isBurstCooldowning = true;
+            yield return new WaitForSeconds(_playerStatsCalculator.GetBurstCooldownTime());
+            _isBurstCooldowning = false;
         }
     }
 }

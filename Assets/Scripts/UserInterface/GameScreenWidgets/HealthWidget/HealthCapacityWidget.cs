@@ -20,21 +20,20 @@ namespace UserInterface.GameScreenWidgets.HealthWidget
         private void Construct(Player player)
         {
             _player = player;
+            
+            _player.OnDamaged += UpdateHealthCapacityView;
         }
 
         private void Start()
         {
             _healthCapacityText.text = $"{_player.Health}/{_player.StatsCalculator.GetMaxHealth()}";
         }
-
-        private void OnEnable()
-        {
-            _player.OnDamaged += UpdateHealthCapacityView;
-        }
         
         private void OnDisable()
         {
             _player.OnDamaged -= UpdateHealthCapacityView;
+            
+            _healthCapacityImage.DOKill();
         }
 
         private void UpdateHealthCapacityView()

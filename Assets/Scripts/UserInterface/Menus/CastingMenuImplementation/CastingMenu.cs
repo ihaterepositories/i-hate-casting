@@ -6,7 +6,6 @@ using Core;
 using Mechanics.Casting;
 using TMPro;
 using UnityEngine;
-using UserInterface.GameScreenAnimations.ExtraBorder.Enums;
 using UserInterface.Menus.Base;
 using UserInterface.Menus.CastingMenuImplementation.Models;
 
@@ -46,7 +45,7 @@ namespace UserInterface.Menus.CastingMenuImplementation
         {
             _onSolvedCallback = onSolvedCallback;
             
-            OpenMenu(ScreenBorderType.CastingMenuBorder);
+            OpenMenu();
             _castingPuzzle.Run();
         }
 

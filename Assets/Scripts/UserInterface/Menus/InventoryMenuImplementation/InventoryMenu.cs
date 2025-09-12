@@ -1,7 +1,6 @@
 using System.Collections.Generic;
 using Models.Items.Base.ScriptableObjects;
 using UnityEngine;
-using UserInterface.GameScreenAnimations.ExtraBorder.Enums;
 using UserInterface.Menus.Base;
 using UserInterface.Menus.Base.Models;
 using UserInterface.Menus.SelectionMenuImplementation;
@@ -53,7 +52,7 @@ namespace UserInterface.Menus.InventoryMenuImplementation
             }
             else
             {
-                OpenMenu(ScreenBorderType.ItemSelectMenuBorder);
+                OpenMenu();
                 _isOpened = true;
 
                 ShowActiveItems();

@@ -47,6 +47,11 @@ namespace Models.Creatures.Implementations.EnemyImplementation.Movers
 
         private Vector2 CalculateSeparationVector()
         {
+            // Fixes the issue when enemies are stuck together near the player and can`t damage him
+            var distanceToPlayer = Vector2.Distance(transform.position, _player.transform.position);
+            if (distanceToPlayer < 1f) return Vector2.zero;
+            //
+            
             int nearestCollidersCount = Physics2D.OverlapCircleNonAlloc(transform.position, _obstaclesDetectionRadius, _nearestFoundColliders);
             Vector2 separatedFromAllNearestEnemiesDirection = Vector2.zero;
 

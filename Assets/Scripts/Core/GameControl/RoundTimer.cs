@@ -5,6 +5,7 @@ using Utils;
 
 namespace Core.GameControl
 {
+    // TODO: Separate UI and Logic
     public class RoundTimer : MonoBehaviour
     { 
         [SerializeField] private TextMeshProUGUI _timerText;
@@ -20,6 +21,7 @@ namespace Core.GameControl
         private void Awake()
         {
             _elapsedTime = _roundDurationInSeconds;
+            UpdateTimerText();
         }
 
         private void Update()

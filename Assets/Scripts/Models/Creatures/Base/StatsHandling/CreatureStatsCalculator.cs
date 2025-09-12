@@ -29,7 +29,7 @@ namespace Models.Creatures.Base.StatsHandling
         public float GetWhileBurstSpeedIncreaseCoefficient() => 
             _baseCreatureStats.WhileBurstSpeedIncreaseCoefficient * _creatureStatsMultiplier.GetMultiplier(CreatureStatType.WhileBurstSpeedIncreaseCoefficient);
         
-        public float GetBurstCooldown() =>
-            _baseCreatureStats.BurstCooldown * _creatureStatsMultiplier.GetMultiplier(CreatureStatType.BurstCooldown);
+        public float GetBurstCooldownTime() =>
+            _baseCreatureStats.BurstCooldownTime * _creatureStatsMultiplier.GetMultiplier(CreatureStatType.BurstCooldown);
     }
 }

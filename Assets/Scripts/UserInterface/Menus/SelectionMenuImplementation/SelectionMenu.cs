@@ -4,7 +4,6 @@ using Models.Items.Base.ScriptableObjects;
 using UnityEngine;
 using UnityEngine.Serialization;
 using UnityEngine.UI;
-using UserInterface.GameScreenAnimations.ExtraBorder.Enums;
 using UserInterface.Menus.Base;
 using UserInterface.Menus.Base.Models;
 
@@ -27,7 +26,7 @@ namespace UserInterface.Menus.SelectionMenuImplementation
                 return;
             }
             
-            OpenMenu(ScreenBorderType.ItemSelectMenuBorder);
+            OpenMenu();
             
             _cardsClickBlockerImage.gameObject.SetActive(true);
 
