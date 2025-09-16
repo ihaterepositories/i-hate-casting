@@ -1,5 +1,5 @@
 using Models.Creatures.Base.StatsHandling.Enums;
-using Models.Items.Artefacts.Modifiers.Implementations.CreaturesModifierImplementation.ScriptableObjects.SerializingDataContainers;
+using Models.Creatures.Items.Implementations.Artefacts.Modifiers.Implementations.CreaturesModifierImplementation.ScriptableObjects.SerializingDataContainers;
 using UnityEngine;
 
 namespace Models.Creatures.Base.StatsHandling

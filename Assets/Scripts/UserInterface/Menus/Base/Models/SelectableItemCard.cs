@@ -1,7 +1,7 @@
 using System;
 using DG.Tweening;
-using Models.Items.Base.Enums;
-using Models.Items.Base.ScriptableObjects;
+using Models.Creatures.Items.Base.Enums;
+using Models.Creatures.Items.Base.ScriptableObjects;
 using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;

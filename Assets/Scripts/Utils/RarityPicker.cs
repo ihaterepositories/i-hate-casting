@@ -1,4 +1,4 @@
-using Models.Items.Base.Enums;
+using Models.Creatures.Items.Base.Enums;
 using UnityEngine;
 
 namespace Utils

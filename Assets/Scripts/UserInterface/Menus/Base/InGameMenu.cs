@@ -1,7 +1,6 @@
 using Core.GameControl;
 using Core.GameControl.Enums;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 namespace UserInterface.Menus.Base
 {

@@ -51,11 +51,8 @@ namespace Models.Creatures.Base
         
         public virtual void Kill()
         {
-            InstantiateDeathEffect();
             OnDeath?.Invoke();
             ReturnToPool();
         }
-
-        protected abstract void InstantiateDeathEffect();
     }
 }

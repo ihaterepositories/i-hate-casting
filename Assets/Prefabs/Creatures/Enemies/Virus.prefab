@@ -16,6 +16,8 @@ GameObject:
   - component: {fileID: 2725636039652148305}
   - component: {fileID: 4929568265942165925}
   - component: {fileID: 8490587614610745364}
+  - component: {fileID: 1301280179827721578}
+  - component: {fileID: 2513525386469188981}
   m_Layer: 7
   m_Name: Virus
   m_TagString: Untagged
@@ -217,6 +219,33 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _spriteRenderer: {fileID: 5404321294413392843}
   _rb: {fileID: 5560108444971375601}
+--- !u!114 &1301280179827721578
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2865395982470458237}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a054f9a0f1fb4f1c90269883c1afd1b9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _animator: {fileID: 3665048062976249053}
+  _creature: {fileID: 4929568265942165925}
+--- !u!114 &2513525386469188981
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2865395982470458237}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ddc788ff933a4248a4473d8a5697cbe7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _creature: {fileID: 4929568265942165925}
 --- !u!1 &4724928372251742340
 GameObject:
   m_ObjectHideFlags: 0
@@ -230,6 +259,7 @@ GameObject:
   - component: {fileID: 2404089022734529155}
   - component: {fileID: 3191631859600101052}
   - component: {fileID: 7245550684421471757}
+  - component: {fileID: 7511397468469095657}
   m_Layer: 7
   m_Name: VirusReflection
   m_TagString: Untagged
@@ -351,3 +381,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6cd77f0dc7984a668f8ec1b2cf3950ad, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &7511397468469095657
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4724928372251742340}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a054f9a0f1fb4f1c90269883c1afd1b9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _animator: {fileID: 2404089022734529155}
+  _creature: {fileID: 4929568265942165925}

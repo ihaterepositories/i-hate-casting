@@ -1,7 +1,7 @@
 using System;
 using Models.Creatures.Base;
 using Models.Creatures.Implementations.EnemyImplementation;
-using Models.Items.Weapons.Bullets.Implementations.EnemyBulletImplementation;
+using Models.Creatures.Items.Implementations.Weapons.Bullets.Implementations.EnemyBulletImplementation;
 using UnityEngine;
 
 namespace Models.Creatures.Implementations.PlayerImplementation
@@ -23,11 +23,6 @@ namespace Models.Creatures.Implementations.PlayerImplementation
         {
             OnPlayerDeath?.Invoke();
             Debug.Log("Player Died");
-        }
-
-        protected override void InstantiateDeathEffect()
-        {
-            // TODO: Implement player death effect
         }
     }
 }

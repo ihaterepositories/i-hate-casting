@@ -1,4 +1,3 @@
-using System;
 using DG.Tweening;
 using Models.Creatures.Implementations.PlayerImplementation;
 using TMPro;

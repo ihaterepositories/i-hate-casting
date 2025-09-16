@@ -40,5 +40,10 @@ namespace Core.Input.InputHandlers
         {
             return UnityEngine.Input.GetKeyDown(KeyCode.LeftShift);
         }
+        
+        public bool IsInteractingButtonPressed()
+        {
+            return UnityEngine.Input.GetKeyDown(KeyCode.E);
+        }
     }
 }

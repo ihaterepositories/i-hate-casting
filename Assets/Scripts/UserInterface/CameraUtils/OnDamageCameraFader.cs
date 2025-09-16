@@ -1,4 +1,3 @@
-using System;
 using System.Collections;
 using Models.Creatures.Implementations.PlayerImplementation;
 using UnityEngine;

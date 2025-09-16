@@ -1,5 +1,5 @@
 using System.Collections.Generic;
-using Models.Items.Base.ScriptableObjects;
+using Models.Creatures.Items.Base.ScriptableObjects;
 using UnityEngine;
 using UserInterface.Menus.Base;
 using UserInterface.Menus.Base.Models;

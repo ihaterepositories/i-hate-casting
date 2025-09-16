@@ -1,20 +1,18 @@
 using System.Collections;
-using Models.Creatures.Base.Pools;
+using Models.Creatures.Base.Spawning;
+using Models.Creatures.Implementations.EnemyImplementation.Pools;
+using Models.Creatures.Implementations.PlayerImplementation;
 using UnityEngine;
+using Zenject;
 
 namespace Models.Creatures.Implementations.EnemyImplementation.Spawners
 {
-    public class EnemySpawner : MonoBehaviour
+    /// <summary>
+    /// Spawns enemies every certain time interval.
+    /// </summary>
+    public class EnemySpawner : CreaturesSpawner<Enemy>
     {
-        [Header("Pool for the specific type of enemy this spawner are going to spawn")]
-        [SerializeField] private CreaturesPool _enemiesPool;
-        
-        [Header("Settings")]
-        [SerializeField] private int _maxEnemiesCountSpawnedByThisSpawner;
         [SerializeField] private float _spawnInterval;
-        [SerializeField] private Vector2 _spawnRadius;
-
-        private int _currentEnemiesCountSpawnedByThisSpawner;
         
         private void Start()
         {
@@ -27,17 +25,7 @@ namespace Models.Creatures.Implementations.EnemyImplementation.Spawners
             while (true)
             {
                 yield return new WaitForSeconds(_spawnInterval);
-
-                if (_currentEnemiesCountSpawnedByThisSpawner >= _maxEnemiesCountSpawnedByThisSpawner) continue;
-                
-                var enemy = _enemiesPool.GetFreeObject();
-                enemy.transform.position =
-                    new Vector2(Random.Range(-_spawnRadius.x, _spawnRadius.x),
-                        Random.Range(-_spawnRadius.y, _spawnRadius.y));
-
-                enemy.OnDeath += () => _currentEnemiesCountSpawnedByThisSpawner--;
-
-                _currentEnemiesCountSpawnedByThisSpawner++;
+                Spawn();
             }
         }
     }

@@ -1,6 +1,5 @@
 using Models.Creatures.Base.Enums;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 namespace Models.Creatures.Base.StatsHandling.ScriptableObjects
 {

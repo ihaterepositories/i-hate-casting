@@ -1,7 +1,7 @@
 using System.Collections;
 using DG.Tweening;
-using Models.Items.Weapons.Implementations.MainPlayerWeaponImplementation;
-using Models.Items.Weapons.Implementations.MainPlayerWeaponImplementation.Spawners;
+using Models.Creatures.Items.Implementations.Weapons.Implementations.PlayerWeaponImplementation;
+using Models.Creatures.Items.Implementations.Weapons.Implementations.PlayerWeaponImplementation.Spawners;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -23,12 +23,12 @@ namespace UserInterface.GameScreenWidgets.MagazineCapacityWidget
 
         private void OnEnable()
         {
-            MainPlayerWeaponSpawner.OnSpawned += AssignPlayerPlayerWeapon;
+            PlayerWeaponSpawner.OnSpawned += AssignPlayerPlayerWeapon;
         }
     
         private void OnDisable()
         {
-            MainPlayerWeaponSpawner.OnSpawned -= AssignPlayerPlayerWeapon;
+            PlayerWeaponSpawner.OnSpawned -= AssignPlayerPlayerWeapon;
             _playerWeapon.OnReloadNeeded -= AnimateEmptyMagazine;
             _playerWeapon.OnReloadStarted -= AnimateReloading;
 

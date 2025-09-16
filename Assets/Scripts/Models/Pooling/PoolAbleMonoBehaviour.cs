@@ -16,7 +16,6 @@ namespace Models.Pooling
         {
             OnDestroyed?.Invoke(this);
         }
-
         
         /// <summary>
         /// This method is called every time when object is taken from pool.

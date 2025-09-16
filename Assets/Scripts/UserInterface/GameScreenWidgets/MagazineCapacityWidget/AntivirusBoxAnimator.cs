@@ -1,12 +1,10 @@
 using System;
 using DG.Tweening;
-using Models.Items.Weapons.Base.Enums;
-using Models.Items.Weapons.Implementations.MainPlayerWeaponImplementation;
-using Models.Items.Weapons.Implementations.MainPlayerWeaponImplementation.Spawners;
-using TMPro;
+using Models.Creatures.Items.Implementations.Weapons.Base.Enums;
+using Models.Creatures.Items.Implementations.Weapons.Implementations.PlayerWeaponImplementation;
+using Models.Creatures.Items.Implementations.Weapons.Implementations.PlayerWeaponImplementation.Spawners;
 using UnityEngine;
 using UnityEngine.UI;
-using Zenject;
 
 namespace UserInterface.GameScreenWidgets.MagazineCapacityWidget
 {
@@ -41,12 +39,12 @@ namespace UserInterface.GameScreenWidgets.MagazineCapacityWidget
 
         private void OnEnable()
         {
-            MainPlayerWeaponSpawner.OnSpawned += ChangeBoxView;
+            PlayerWeaponSpawner.OnSpawned += ChangeBoxView;
         }
 
         private void OnDisable()
         {
-            MainPlayerWeaponSpawner.OnSpawned -= ChangeBoxView;
+            PlayerWeaponSpawner.OnSpawned -= ChangeBoxView;
             
             _antivirusBoxImage.DOKill();
         }

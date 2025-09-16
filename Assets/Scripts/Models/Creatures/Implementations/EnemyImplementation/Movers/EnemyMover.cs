@@ -1,6 +1,5 @@
 using Models.Creatures.Implementations.PlayerImplementation;
 using UnityEngine;
-using UnityEngine.Serialization;
 using Zenject;
 
 namespace Models.Creatures.Implementations.EnemyImplementation.Movers
