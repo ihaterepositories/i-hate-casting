@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace UserInterface.Menus.Base.Models.ScriptableObjects
 {
-    [CreateAssetMenu(fileName = "SelectableItemCardTextsColors", menuName = "ScriptableObjects/SelectableItemCardTextsColors")]
+    [CreateAssetMenu(fileName = "SelectableItemCardTextsColors", menuName = "ScriptableObjects/DataContainers/SelectableItemCardTextsColors")]
     public class SelectableItemCardTextsColorsSo : ScriptableObject
     {
         public Color CommonCardTextColor;

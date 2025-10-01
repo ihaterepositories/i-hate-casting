@@ -11,5 +11,6 @@ namespace Core.Input.Interfaces
         public bool IsReloadButtonPressed();
         public bool IsBurstButtonPressed();
         public bool IsInteractingButtonPressed();
+        public string GetInteractingButtonName();
     }
 }

@@ -2,7 +2,6 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Globalization;
-using Core;
 using Mechanics.Casting;
 using TMPro;
 using UnityEngine;
@@ -46,6 +45,15 @@ namespace UserInterface.Menus.CastingMenuImplementation
             _onSolvedCallback = onSolvedCallback;
             
             OpenMenu();
+            
+            // Delay the puzzle start to avoid issues
+            // when the menu opening key is checked as a puzzle answer.
+            StartCoroutine(RunPuzzleDelayedCoroutine());
+        }
+        
+        private IEnumerator RunPuzzleDelayedCoroutine()
+        {
+            yield return new WaitForEndOfFrame();
             _castingPuzzle.Run();
         }
 
@@ -69,19 +77,12 @@ namespace UserInterface.Menus.CastingMenuImplementation
             
             if (isSuccess)
             {
-                // Callback delayed due to end the casting menu border hide animation
-                StartCoroutine(InvokeOnSolvedCallbackDelayed());
+                _onSolvedCallback?.Invoke();
             }
             else
             {
                 Debug.Log("Casting failed. [Create a notify text for player]");
             }
-        }
-
-        private IEnumerator InvokeOnSolvedCallbackDelayed()
-        {
-            yield return new WaitForSecondsRealtime(AppConstants.ExtraScreenBorderAppearanceTime);
-            _onSolvedCallback?.Invoke();
         }
     }
 }

@@ -34,7 +34,7 @@ namespace Models.Pooling
                     throw new Exception($"Pooled object is null: {_prefab.name}");
                 
                 poolAble.Instance.SetActive(true);
-                poolAble.Init();
+                poolAble.OnTakenFromPool();
             }
             else
             {

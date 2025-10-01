@@ -204,7 +204,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e40d59a80852484f83907c89f8845e73, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _creatureStatsSo: {fileID: 11400000, guid: cfb949d6e0e68494f95db66a1d881384, type: 2}
+  _creatureStats:
+    CreatureType: 1
+    MaxHealth: 3
+    Speed: 6
+    BurstDuration: 0.2
+    WhileBurstSpeedIncreaseCoefficient: 3
+    BurstCooldownTime: 5
 --- !u!114 &8490587614610745364
 MonoBehaviour:
   m_ObjectHideFlags: 0

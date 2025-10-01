@@ -1,5 +1,5 @@
+using Models.Creatures.Base.StatsHandling.DataContainers;
 using Models.Creatures.Base.StatsHandling.Enums;
-using Models.Creatures.Base.StatsHandling.ScriptableObjects;
 
 namespace Models.Creatures.Base.StatsHandling
 {
@@ -8,12 +8,12 @@ namespace Models.Creatures.Base.StatsHandling
     /// </summary>
     public class CreatureStatsCalculator
     {
-        private readonly CreatureStatsSo _baseCreatureStats;
+        private readonly CreatureStats _baseCreatureStats;
         private readonly CreatureStatsMultiplier _creatureStatsMultiplier;
 
-        public CreatureStatsCalculator(CreatureStatsSo creatureStatsSo, CreatureStatsMultiplier creatureStatsMultiplier)
+        public CreatureStatsCalculator(CreatureStats creatureStats, CreatureStatsMultiplier creatureStatsMultiplier)
         {
-            _baseCreatureStats = creatureStatsSo;
+            _baseCreatureStats = creatureStats;
             _creatureStatsMultiplier = creatureStatsMultiplier;
         }
         

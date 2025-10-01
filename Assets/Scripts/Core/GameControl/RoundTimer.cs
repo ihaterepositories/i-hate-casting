@@ -2,6 +2,7 @@ using System;
 using TMPro;
 using UnityEngine;
 using Utils;
+using Zenject;
 
 namespace Core.GameControl
 {
@@ -26,7 +27,7 @@ namespace Core.GameControl
 
         private void Update()
         {
-            if (GameStateHolder.IsGamePaused) return;
+            if (GamePauser.IsGamePaused) return;
             if (_isTimeExpired) return;
             
             _elapsedTime -= Time.deltaTime;

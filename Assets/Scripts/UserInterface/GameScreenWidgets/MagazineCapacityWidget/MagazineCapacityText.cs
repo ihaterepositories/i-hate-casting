@@ -1,8 +1,8 @@
 using System.Collections;
 using System.Globalization;
 using DG.Tweening;
-using Models.Creatures.Items.Implementations.Weapons.Implementations.PlayerWeaponImplementation;
-using Models.Creatures.Items.Implementations.Weapons.Implementations.PlayerWeaponImplementation.Spawners;
+using Models.Items.Weapons.PlayerWeaponImpl;
+using Models.Items.Weapons.PlayerWeaponImpl.Spawners;
 using UnityEngine;
 using UnityEngine.UI;
 

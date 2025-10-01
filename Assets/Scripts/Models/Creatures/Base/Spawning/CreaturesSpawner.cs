@@ -1,4 +1,4 @@
-using Models.Creatures.Implementations.PlayerImplementation;
+using Models.Creatures.PlayerImpl;
 using Models.Pooling;
 using UnityEngine;
 using Zenject;

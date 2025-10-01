@@ -1,15 +1,16 @@
 using System;
 using Models.Creatures.Base.StatsHandling;
-using Models.Creatures.Base.StatsHandling.ScriptableObjects;
+using Models.Creatures.Base.StatsHandling.DataContainers;
 using Models.Pooling;
 using UnityEngine;
+using UnityEngine.Serialization;
 using Zenject;
 
 namespace Models.Creatures.Base
 {
     public abstract class Creature : PoolAbleMonoBehaviour
     {
-        [SerializeField] protected CreatureStatsSo _creatureStatsSo;
+        [FormerlySerializedAs("_creatureStatsSo")] [SerializeField] protected CreatureStats _creatureStats;
         
         private CreatureStatsMultipliersProvider _creatureStatsMultipliersProvider;
         private CreatureStatsCalculator _statsCalculator;
@@ -30,13 +31,13 @@ namespace Models.Creatures.Base
 
         private void Awake()
         {
-            var creatureStatsMultiplier = _creatureStatsMultipliersProvider.GetFor(_creatureStatsSo.CreatureType);
-            _statsCalculator = new CreatureStatsCalculator(_creatureStatsSo, creatureStatsMultiplier);
+            var creatureStatsMultiplier = _creatureStatsMultipliersProvider.GetFor(_creatureStats.CreatureType);
+            _statsCalculator = new CreatureStatsCalculator(_creatureStats, creatureStatsMultiplier);
             
-            Init();
+            OnTakenFromPool();
         }
 
-        public override void Init()
+        public override void OnTakenFromPool()
         {
             _health = _statsCalculator.GetMaxHealth();
         }

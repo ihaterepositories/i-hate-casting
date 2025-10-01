@@ -1,5 +1,4 @@
-using System;
-using Models.Creatures.Implementations.EnemyImplementation.Visuals.Pools;
+using Models.Creatures.Base.Visuals.Pools;
 using UnityEngine;
 using Zenject;
 

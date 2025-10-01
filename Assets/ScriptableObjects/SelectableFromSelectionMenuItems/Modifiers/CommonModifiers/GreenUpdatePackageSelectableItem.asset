@@ -16,5 +16,5 @@ MonoBehaviour:
   ItemType: 1
   ItemName: Green update package
   Description: Modifies long range weapon. +5% speed. -0.5% spread.
-  Icon: {fileID: 21300000, guid: 588f0ab6ff22043489b356463b1dfbd0, type: 3}
+  Icon: {fileID: 21300000, guid: b39077e0da129c849994268107b290bc, type: 3}
   PrefabToSpawn: {fileID: 4885351549107315119, guid: 4d7f4f920e44fc74a8a2ec5a220dd9b9, type: 3}

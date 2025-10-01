@@ -1,7 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
-using Models.Creatures.Implementations.PlayerImplementation;
-using Models.InteractableObjects.Base.Pools;
+using Models.Creatures.PlayerImpl;
 using Models.Pooling;
 using UnityEngine;
 using Zenject;

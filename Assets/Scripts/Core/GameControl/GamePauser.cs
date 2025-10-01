@@ -8,16 +8,23 @@ namespace Core.GameControl
 {
     public class GamePauser : MonoBehaviour
     {
+        [Header("Dependencies")]
         [SerializeField] private ScreenFadeAnimator _screenFadeAnimator;
         [SerializeField] private TextMeshProUGUI _unpauseCountdownText;
+        
+        [Header("Settings")]
+        [Header("Unpause duration builds from 3 steps, each step duration:")]
+        [SerializeField] private float _unpauseStepDuration = 0.5f;
 
         private int _unpauseIndexer;
-        
+
+        public static bool IsGamePaused { get; private set; }
+
         public void PauseGame()
         {
             _screenFadeAnimator.FadeIn();
             Time.timeScale = 0;
-            GameStateHolder.IsGamePaused = true;
+            IsGamePaused = true;
         }
         
         public void UnpauseGame()
@@ -30,7 +37,7 @@ namespace Core.GameControl
 
         private IEnumerator UnpauseCoroutine()
         {
-            yield return new WaitForSecondsRealtime(1f);
+            yield return new WaitForSecondsRealtime(_unpauseStepDuration);
             
             if (_unpauseIndexer < 3)
             {
@@ -43,7 +50,7 @@ namespace Core.GameControl
                 _unpauseCountdownText.DOFade(0f, 0.25f).SetUpdate(true);
                 _screenFadeAnimator.FadeOut();
                 Time.timeScale = 1;
-                GameStateHolder.IsGamePaused = false;
+                IsGamePaused = false;
             }
         }
     }

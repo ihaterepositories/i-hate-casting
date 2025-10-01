@@ -1,29 +1,66 @@
 using Core.Input.Interfaces;
-using Models.Creatures.Implementations.PlayerImplementation;
+using Models.Creatures.PlayerImpl;
+using Models.InteractableObjects.Base.Visuals;
 using Models.Pooling;
 using UnityEngine;
 using Zenject;
 
 namespace Models.InteractableObjects.Base
 {
+    /// <summary>
+    /// Base class for all objects that the player can interact with by pressing a specific button.
+    /// Provides the text hint when the player is in interacting range.
+    /// Interacting range is determined by a trigger collider.
+    /// 
+    /// OnPlayerInteracting() is called once when the player presses the interaction button while in range.
+    /// </summary>
     public abstract class InteractableObject : PoolAbleMonoBehaviour
     {
         private IInputHandler _inputHandler;
+        protected OnCanInteractHintText _onCanInteractHintText;
+        
+        private bool _isPlayerInInteractionRange;
+        private bool _isInteracted;
         
         [Inject]
-        private void Construct(IInputHandler inputHandler)
+        private void Construct(IInputHandler inputHandler, OnCanInteractHintText onCanInteractHintText)
         {
             _inputHandler = inputHandler;
+            _onCanInteractHintText = onCanInteractHintText;
         }
-        
-        private void OnTriggerEnter2D(Collider2D other)
+
+        private void Update()
         {
-            if (!other.TryGetComponent<Player>(out var player)) return;
-            
-            if (_inputHandler.IsInteractingButtonPressed())
+            if (_inputHandler.IsInteractingButtonPressed() && 
+                _isPlayerInInteractionRange &&
+                !_isInteracted)
             {
+                _isInteracted = true;
                 OnPlayerInteracting();
             }
+        }
+
+        private void OnTriggerEnter2D(Collider2D other)
+        {
+            if (_isInteracted) return;
+            if (!other.TryGetComponent<Player>(out var player)) return;
+            
+            _onCanInteractHintText.ShowHint();
+            _isPlayerInInteractionRange = true;
+        }
+
+        private void OnTriggerExit2D(Collider2D other)
+        {
+            if (_isInteracted) return;
+            if (!other.TryGetComponent<Player>(out var player)) return;
+            
+            _onCanInteractHintText.HideHint();
+        }
+
+        public override void OnTakenFromPool()
+        {
+            _isInteracted = false;
+            _isPlayerInInteractionRange = false;
         }
 
         protected abstract void OnPlayerInteracting();

@@ -16,5 +16,5 @@ MonoBehaviour:
   ItemType: 1
   ItemName: Blue update package
   Description: Modifies medium range weapon. +5% speed. -0.5% spread.
-  Icon: {fileID: 21300000, guid: 588f0ab6ff22043489b356463b1dfbd0, type: 3}
+  Icon: {fileID: 21300000, guid: cb532afb7d78f8d42a245329f19d202b, type: 3}
   PrefabToSpawn: {fileID: 4885351549107315119, guid: 9e53d149199d8a94397dd23eb98bfe46, type: 3}

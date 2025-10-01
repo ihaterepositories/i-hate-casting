@@ -1,10 +1,12 @@
+using Core.GameControl;
 using Models.Creatures.Base.StatsHandling;
-using Models.Creatures.Implementations.EnemyImplementation.Visuals.Pools;
-using Models.Creatures.Implementations.PlayerImplementation;
-using Models.Creatures.Items.Implementations.Artefacts.Base.Spawners;
-using Models.Creatures.Items.Implementations.Weapons.Base.StatsHandling;
-using Models.Creatures.Items.Implementations.Weapons.Bullets.Implementations.EnemyBulletImplementation.Pools;
-using Models.Creatures.Items.Implementations.Weapons.Bullets.Implementations.PlayerBulletImplementation.Pools;
+using Models.Creatures.Base.Visuals.Pools;
+using Models.Creatures.PlayerImpl;
+using Models.InteractableObjects.Base.Visuals;
+using Models.Items.Base.Spawners;
+using Models.Items.Weapons.Base.StatsHandling;
+using Models.Items.Weapons.Bullets.EnemyBulletImpl.Pools;
+using Models.Items.Weapons.Bullets.PlayerBulletImpl.Pools;
 using UnityEngine;
 using Zenject;
 
@@ -22,10 +24,14 @@ namespace Core.Infrastructure
             Container.Bind<PlayerBulletsPool>().FromComponentInHierarchy().AsSingle();
             Container.Bind<EnemyBulletsPool>().FromComponentInHierarchy().AsSingle();
             Container.Bind<OnDeathExplosionEffectsPool>().FromComponentInHierarchy().AsSingle();
+
+            Container.Bind<GamePauser>().FromComponentInHierarchy().AsSingle();
             
             Container.Bind<Player>().FromInstance(_player).AsSingle();
 
-            Container.Bind<ArtefactsSpawner>().FromComponentInHierarchy().AsSingle();
+            Container.Bind<ItemsSpawner>().FromComponentInHierarchy().AsSingle();
+
+            Container.Bind<OnCanInteractHintText>().FromComponentInHierarchy().AsSingle();
         }
     }
 }

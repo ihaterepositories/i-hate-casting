@@ -3,7 +3,7 @@ using DG.Tweening;
 using Models.Pooling;
 using UnityEngine;
 
-namespace Models.Creatures.Implementations.EnemyImplementation.Visuals
+namespace Models.Creatures.Base.Visuals.Models
 {
     public class OnDeathExplosionEffect : PoolAbleMonoBehaviour
     {

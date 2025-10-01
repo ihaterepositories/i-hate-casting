@@ -1,15 +1,21 @@
 using Core.GameControl;
 using Core.GameControl.Enums;
 using UnityEngine;
+using Zenject;
 
 namespace UserInterface.Menus.Base
 {
     // Helper class for in-game menus
     public class InGameMenu : MonoBehaviour
     {
-        [SerializeField] private GamePauser _gamePauser;
-
-        private bool IsMenuCanBeOpened => GameStateHolder.IsPlayerInSomeMenu() == false;
+        private GamePauser _gamePauser;
+        private bool IsMenuCanBeOpened => ScreenStateHolder.IsPlayerInSomeMenu() == false;
+        
+        [Inject]
+        private void Construct(GamePauser gamePauser)
+        {
+            _gamePauser = gamePauser;
+        }
         
         protected void OpenMenu()
         {
@@ -17,7 +23,7 @@ namespace UserInterface.Menus.Base
             
             SetActiveChildes(this.gameObject, true);
             
-            GameStateHolder.UpdateScreenState(ScreenState.InSomeMenu);
+            ScreenStateHolder.UpdateScreenState(ScreenState.InSomeMenu);
             _gamePauser.PauseGame();
         }
         
@@ -25,7 +31,7 @@ namespace UserInterface.Menus.Base
         {
             SetActiveChildes(this.gameObject, false);
             
-            GameStateHolder.UpdateScreenState(ScreenState.InGame);
+            ScreenStateHolder.UpdateScreenState(ScreenState.InGame);
             
             if (resumeGame)
                 _gamePauser.UnpauseGame();

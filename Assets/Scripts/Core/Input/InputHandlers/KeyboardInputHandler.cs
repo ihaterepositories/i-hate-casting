@@ -45,5 +45,10 @@ namespace Core.Input.InputHandlers
         {
             return UnityEngine.Input.GetKeyDown(KeyCode.E);
         }
+
+        public string GetInteractingButtonName()
+        {
+            return "E";
+        }
     }
 }
