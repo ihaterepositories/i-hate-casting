@@ -1,5 +1,5 @@
-using Models.Creatures.EnemyImpl;
 using Models.Items.Weapons.Bullets.Base;
+using Models.WorldObjects.Creatures.EnemyImpl;
 using UnityEngine;
 
 namespace Models.Items.Weapons.Bullets.EnemyBulletImpl

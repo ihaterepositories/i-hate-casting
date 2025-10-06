@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
-using Models.Creatures.PlayerImpl;
 using Models.Items.Base.ScriptableObjects;
+using Models.WorldObjects.Creatures.PlayerImpl;
 using UnityEngine;
 using UserInterface.Menus.SelectionMenuImplementation;
 using Zenject;

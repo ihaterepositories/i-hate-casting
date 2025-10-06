@@ -1,7 +1,7 @@
-using Models.Creatures.Base.Enums;
-using Models.Creatures.Base.StatsHandling;
 using Models.Items.Modifiers.Base;
 using Models.Items.Modifiers.CreaturesModifierImpl.DataContainers;
+using Models.WorldObjects.Creatures.Base.Enums;
+using Models.WorldObjects.Creatures.Base.StatsHandling;
 using UnityEngine;
 using Zenject;
 

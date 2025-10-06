@@ -1,4 +1,4 @@
-using Models.Pooling;
+using Models.WorldObjects.Base.Pooling;
 
 namespace Models.Items.Weapons.Bullets.PlayerBulletImpl.Pools
 {

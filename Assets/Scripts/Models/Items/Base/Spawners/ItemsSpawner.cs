@@ -1,9 +1,9 @@
 using System;
 using System.Collections.Generic;
 using Core;
-using Models.Creatures.PlayerImpl;
 using Models.Items.Base.Enums;
 using Models.Items.Base.ScriptableObjects;
+using Models.WorldObjects.Creatures.PlayerImpl;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
 using UnityEngine.ResourceManagement.AsyncOperations;

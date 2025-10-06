@@ -1,5 +1,5 @@
 using DG.Tweening;
-using Models.Creatures.PlayerImpl;
+using Models.WorldObjects.Creatures.PlayerImpl;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;

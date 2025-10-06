@@ -1,5 +1,5 @@
 using System.Collections;
-using Models.Creatures.PlayerImpl;
+using Models.WorldObjects.Creatures.PlayerImpl;
 using UnityEngine;
 using UnityEngine.Rendering.PostProcessing;
 using Zenject;

@@ -1,5 +1,5 @@
-using Models.Creatures.PlayerImpl;
 using Models.Items.Weapons.Bullets.Base;
+using Models.WorldObjects.Creatures.PlayerImpl;
 using UnityEngine;
 
 namespace Models.Items.Weapons.Bullets.PlayerBulletImpl

@@ -207,7 +207,7 @@ MonoBehaviour:
   _creatureStats:
     CreatureType: 1
     MaxHealth: 3
-    Speed: 6
+    Speed: 3.1
     BurstDuration: 0.2
     WhileBurstSpeedIncreaseCoefficient: 3
     BurstCooldownTime: 5

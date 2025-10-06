@@ -1,12 +1,12 @@
 using Core.GameControl;
-using Models.Creatures.Base.StatsHandling;
-using Models.Creatures.Base.Visuals.Pools;
-using Models.Creatures.PlayerImpl;
-using Models.InteractableObjects.Base.Visuals;
 using Models.Items.Base.Spawners;
 using Models.Items.Weapons.Base.StatsHandling;
 using Models.Items.Weapons.Bullets.EnemyBulletImpl.Pools;
 using Models.Items.Weapons.Bullets.PlayerBulletImpl.Pools;
+using Models.WorldObjects.Creatures.Base.StatsHandling;
+using Models.WorldObjects.Creatures.Base.Visuals.Pools;
+using Models.WorldObjects.Creatures.PlayerImpl;
+using Models.WorldObjects.Interactables.Base.Visuals;
 using UnityEngine;
 using Zenject;
 

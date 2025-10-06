@@ -1,10 +1,10 @@
 using Models.Items.Weapons.Base.StatsHandling;
-using Models.Pooling;
+using Models.WorldObjects.Base.Pooling;
 using UnityEngine;
 
 namespace Models.Items.Weapons.Bullets.Base
 {
-    public class Bullet : PoolAbleMonoBehaviour
+    public class Bullet : PoolableMonoBehaviour
     {
         [SerializeField] protected Rigidbody2D _rb;
         
