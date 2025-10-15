@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Models.WorldObjects.Creatures.Base.StatsHandling
 {
-    public class CreatureStatsMultiplier : MonoBehaviour
+    public class CreatureStatsMultiplier
     {
         private float _healthMultiplier = 1f;
         private float _speedMultiplier = 1f;

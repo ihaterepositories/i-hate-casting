@@ -1,52 +1,66 @@
-using System;
 using Models.WorldObjects.Base.Pooling;
+using Models.WorldObjects.Creatures.Base.Living.Interfaces;
+using Models.WorldObjects.Creatures.Base.Moving.Enums;
+using Models.WorldObjects.Creatures.Base.Moving.Interfaces;
+using Models.WorldObjects.Creatures.Base.Moving.ObstaclesBypassing.Enums;
 using Models.WorldObjects.Creatures.Base.StatsHandling;
 using Models.WorldObjects.Creatures.Base.StatsHandling.DataContainers;
+using Models.WorldObjects.Creatures.Base.StatsHandling.Fabrics;
 using UnityEngine;
-using UnityEngine.Serialization;
-using Zenject;
 
 namespace Models.WorldObjects.Creatures.Base
 {
+    /// <summary>
+    /// Helper class that contains common logic for all creatures.
+    /// </summary>
     public abstract class Creature : PoolableMonoBehaviour
     {
-        [FormerlySerializedAs("_creatureStatsSo")] [SerializeField] protected CreatureStats _creatureStats;
+        [Header("Dependencies")]
+        [SerializeField] private Rigidbody2D _rigidbody2D;
         
-        private CreatureStatsMultipliersProvider _creatureStatsMultipliersProvider;
+        [Header("Settings")]
+        [SerializeField] private MoveType _moveType;
+        [SerializeField] private ObstaclesBypassType _obstaclesBypassType;
+        [SerializeField] private CreatureStats _creatureStats;
+        
         private CreatureStatsCalculator _statsCalculator;
+        private CreatureStatsMultiplier _creatureStatsMultiplier;
         
-        private float _health;
+        protected IMoveService _mover;
+        protected IHealthService _health;
+        
+        protected Rigidbody2D Rigidbody2D => _rigidbody2D;
+        protected ObstaclesBypassType ObstaclesBypassType => _obstaclesBypassType;
+        protected MoveType MoveType => _moveType;
         
         public CreatureStatsCalculator StatsCalculator => _statsCalculator;
-        public float Health => _health;
-        
-        public event Action OnDamaged; 
+        public IHealthService Health => _health;
 
-        [Inject]
-        private void Construct(CreatureStatsMultipliersProvider creatureStatsMultipliersProvider)
+        protected void InitializeStatsHandling(CreatureStatsMultiplierFactory creatureStatsMultiplierFactory)
         {
-            _creatureStatsMultipliersProvider = creatureStatsMultipliersProvider;
+            _creatureStatsMultiplier = creatureStatsMultiplierFactory.GetFor(_creatureStats.CreatureType);
+            _statsCalculator = new CreatureStatsCalculator(_creatureStats, _creatureStatsMultiplier);
         }
 
-        private void Awake()
+        protected void InitializeStats(IHealthService healthService)
         {
-            var creatureStatsMultiplier = _creatureStatsMultipliersProvider.GetFor(_creatureStats.CreatureType);
-            _statsCalculator = new CreatureStatsCalculator(_creatureStats, creatureStatsMultiplier);
-            
-            OnTakenFromPool();
+            _health = healthService;
+            _health.Refresh(_creatureStats.MaxHealth);
         }
 
         public override void OnTakenFromPool()
         {
-            _health = _statsCalculator.GetMaxHealth();
+            _health.Refresh(_statsCalculator.GetMaxHealth());
         }
 
-        public void DoDamage(float damage)
+        public void Damage(float value)
         {
-            _health -= damage;
-            OnDamaged?.Invoke();
-            if (_health <= 0)
-                Kill();
+            _health.ChangeBy(-value, _statsCalculator.GetMaxHealth());
+        }
+        
+        public void Heal(float value)
+        {
+            _health.ChangeBy(value, _statsCalculator.GetMaxHealth());
         }
         
         public virtual void Kill()

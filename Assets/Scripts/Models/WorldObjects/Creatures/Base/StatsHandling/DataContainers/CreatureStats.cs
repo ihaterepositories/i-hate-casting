@@ -1,5 +1,5 @@
 using System;
-using Models.WorldObjects.Creatures.Base.Enums;
+using Models.WorldObjects.Creatures.Base.StatsHandling.Enums;
 
 namespace Models.WorldObjects.Creatures.Base.StatsHandling.DataContainers
 {

@@ -51,5 +51,5 @@ MonoBehaviour:
     ReloadTime: 3
     Spread: 2
     DamageToDeal: 1
-    Speed: 4
+    Speed: 6
     CooldownTime: 1

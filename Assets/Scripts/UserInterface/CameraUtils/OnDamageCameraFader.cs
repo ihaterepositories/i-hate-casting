@@ -27,7 +27,7 @@ namespace UserInterface.CameraUtils
         {
             _player = player;
             
-            _player.OnDamaged += FadeInVignette;
+            _player.Health.OnDamaged += FadeInVignette;
         }
 
         private void Awake()
@@ -37,7 +37,7 @@ namespace UserInterface.CameraUtils
 
         private void OnDisable()
         {
-            _player.OnDamaged -= FadeInVignette;
+            _player.Health.OnDamaged -= FadeInVignette;
         }
 
         private void FadeInVignette()

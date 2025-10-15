@@ -23,13 +23,13 @@ namespace Models.WorldObjects.Creatures.Base.StatsHandling
         public float GetSpeed() =>
             _baseCreatureStats.Speed * _creatureStatsMultiplier.GetMultiplier(CreatureStatType.Speed);
         
-        public float GetBurstDuration() => 
+        public float GetMoveBoostDuration() => 
             _baseCreatureStats.BurstDuration * _creatureStatsMultiplier.GetMultiplier(CreatureStatType.BurstDuration);
         
-        public float GetWhileBurstSpeedIncreaseCoefficient() => 
+        public float GetMoveBoostCoefficient() => 
             _baseCreatureStats.WhileBurstSpeedIncreaseCoefficient * _creatureStatsMultiplier.GetMultiplier(CreatureStatType.WhileBurstSpeedIncreaseCoefficient);
         
-        public float GetBurstCooldownTime() =>
+        public float GetMoveBoostCooldownTime() =>
             _baseCreatureStats.BurstCooldownTime * _creatureStatsMultiplier.GetMultiplier(CreatureStatType.BurstCooldown);
     }
 }

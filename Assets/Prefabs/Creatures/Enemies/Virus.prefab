@@ -13,7 +13,6 @@ GameObject:
   - component: {fileID: 3665048062976249053}
   - component: {fileID: 5560108444971375601}
   - component: {fileID: 3664062558939312186}
-  - component: {fileID: 2725636039652148305}
   - component: {fileID: 4929568265942165925}
   - component: {fileID: 8490587614610745364}
   - component: {fileID: 1301280179827721578}
@@ -176,22 +175,6 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.15
---- !u!114 &2725636039652148305
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2865395982470458237}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: aac65b46c90f4e0782551071820bb47d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _rb: {fileID: 5560108444971375601}
-  _enemy: {fileID: 4929568265942165925}
-  _obstaclesDetectionRadius: 1.5
-  _obstaclesAvoidStrength: 2
 --- !u!114 &4929568265942165925
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -204,6 +187,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e40d59a80852484f83907c89f8845e73, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _rigidbody2D: {fileID: 5560108444971375601}
+  _moveType: 1
+  _obstaclesBypassType: 1
   _creatureStats:
     CreatureType: 1
     MaxHealth: 3

@@ -2,7 +2,6 @@ using System;
 using TMPro;
 using UnityEngine;
 using Utils;
-using Zenject;
 
 namespace Core.GameControl
 {
