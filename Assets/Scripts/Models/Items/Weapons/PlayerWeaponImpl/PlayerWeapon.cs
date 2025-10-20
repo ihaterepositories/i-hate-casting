@@ -1,43 +1,41 @@
+using System;
+using Core.GameControl;
 using Core.Input.Interfaces;
+using Models.Items.Bullets.Base.Providers;
 using Models.Items.Weapons.Base;
-using Models.Items.Weapons.Bullets.Base;
-using Models.Items.Weapons.Bullets.PlayerBulletImpl.Pools;
-using UnityEngine;
+using Models.Items.Weapons.Base.Aiming.Factories;
+using Models.Items.Weapons.Base.Reloading.Factories;
+using Models.Items.Weapons.Base.Shooting.Factories;
+using Models.Items.Weapons.Base.StatsHandling.Providers;
 using Zenject;
 
 namespace Models.Items.Weapons.PlayerWeaponImpl
 {
     public class PlayerWeapon : Weapon
     {
-        private IInputHandler _inputHandler;
-        private PlayerBulletsPool _bulletsPool;
-        
         [Inject]
-        private void Construct(IInputHandler inputHandler, PlayerBulletsPool bulletsPool)
+        private void Construct(
+            WeaponStatsMultipliersProvider statsMultipliersProvider,
+            BulletsProvider bulletsProvider,
+            MagazinesFactory magazinesFactory,
+            ShootersFactory shootersFactory,
+            AimersFactory aimersFactory)
         {
-            _inputHandler = inputHandler;
-            _bulletsPool = bulletsPool;
+            InitializeStatsHandling(statsMultipliersProvider);
+            InitializeServices(
+                bulletsProvider,
+                magazinesFactory,
+                shootersFactory,
+                aimersFactory);
         }
 
-        protected override bool GetFirePermission()
+        private void Update()
         {
-            return _inputHandler.IsFireButtonPressed();
-        }
-
-        protected override Bullet GetBulletFromPool()
-        {
-            return _bulletsPool.GetFreeObject();
-        }
-
-        protected override bool GetReloadPermission()
-        {
-            return _inputHandler.IsReloadButtonPressed();
-        }
-
-        protected override float GetFireDirectionAngle()
-        {
-            Vector2 lookDirection = (_inputHandler.GetPointerPosition() - transform.position);
-            return Mathf.Atan2(lookDirection.y, lookDirection.x) * Mathf.Rad2Deg + CalculateSpread();
+            if (GamePauser.IsGamePaused) return;
+            
+            Aimer.UpdateAiming();
+            Shooter.EnableShoot();
+            Magazine.EnableReload();
         }
     }
 }

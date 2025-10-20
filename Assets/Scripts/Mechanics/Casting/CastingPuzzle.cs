@@ -10,7 +10,7 @@ namespace Mechanics.Casting
         [SerializeField] private float _castingTime = 20f;
         [SerializeField] private int _puzzleCharsCount = 8;
         
-        private List<string> _generatedChars = new();
+        private readonly List<string> _generatedChars = new();
         private float _timer;
         private bool _isRunning;
         private int _currentAnswerCheckIndex = 0;

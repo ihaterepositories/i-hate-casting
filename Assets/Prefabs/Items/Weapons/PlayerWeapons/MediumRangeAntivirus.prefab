@@ -44,5 +44,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2fe13d6b73ed475bbe6ab33740e21e4f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _bulletPrefab: {fileID: 4314891101817587288, guid: 08b272b3ee9ce4a48a3f7c36335d4c56, type: 3}
-  _weaponStats: {fileID: 11400000, guid: 90ade5cb283790543afdaeae4fc072fd, type: 2}
+  _weaponType: 1
+  _bulletType: 1
+  _shootType: 0
+  _reloadType: 0
+  _aimType: 1
+  _weaponStats:
+    Range: 6
+    MagazineCapacity: 30
+    ReloadTime: 3
+    SpreadDegree: 7
+    DamageToDeal: 1
+    Speed: 8
+    CooldownTime: 1

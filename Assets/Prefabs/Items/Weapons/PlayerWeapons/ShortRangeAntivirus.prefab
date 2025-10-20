@@ -44,12 +44,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2fe13d6b73ed475bbe6ab33740e21e4f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _weaponType: 0
+  _bulletType: 1
+  _shootType: 0
+  _reloadType: 0
+  _aimType: 1
   _weaponStats:
-    WeaponType: 0
     Range: 3
-    MagazineCapacity: 30
-    ReloadTime: 3
-    Spread: 2
-    DamageToDeal: 1
+    MagazineCapacity: 15
+    ReloadTime: 6
+    SpreadDegree: 5
+    DamageToDeal: 2
     Speed: 6
-    CooldownTime: 1
+    CooldownTime: 1.5

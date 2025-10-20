@@ -8,24 +8,20 @@ namespace Models.WorldObjects.Creatures.Base.Moving
 {
     public class ByInputMover : Mover, IMoveService
     {
-        private readonly Rigidbody2D _rb;
-        private readonly CreatureStatsCalculator _statsCalculator;
         private readonly IInputHandler _inputHandler;
         
         private float _horizontalAxis;
         private float _verticalAxis;
         
-        public ByInputMover(
-            Rigidbody2D rigidbody2D, 
-            CreatureStatsCalculator statsCalculator,
-            IInputHandler inputHandler)
+        public ByInputMover (
+            CreatureStatsCalculator statsCalculator, 
+            Rigidbody2D rb,
+            IInputHandler inputHandler) : base(statsCalculator, rb)
         {
-            _rb = rigidbody2D;
-            _statsCalculator = statsCalculator;
             _inputHandler = inputHandler;
         }
         
-        public void Move()
+        public void EnableMove()
         {
             // Get input and set velocity
             SetDirectionByInput();

@@ -13,7 +13,7 @@ namespace UserInterface.Menus.InventoryMenuImplementation
         [SerializeField] private List<SelectableItemCard> _itemCards;
         
         private bool _isOpened;
-        private List<SelectableItemSo> _activeItemsData = new();
+        private readonly List<SelectableItemSo> _activeItemsData = new();
         
         private void OnEnable()
         {

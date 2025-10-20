@@ -6,6 +6,7 @@ using UnityEngine;
 
 namespace Models.WorldObjects.Creatures.Base.MoveBoosting
 {
+    // TODO: refactor timers with asycnhronous tasks
     public class ByInputMoveBooster : IMoveBoostService
     {
         private readonly Rigidbody2D _rigidbody2D;
@@ -35,7 +36,7 @@ namespace Models.WorldObjects.Creatures.Base.MoveBoosting
         public float BoostCooldownDuration => _statsCalculator.GetMoveBoostCooldownTime();
         public float BoostCooldownTimeElapsed => _statsCalculator.GetMoveBoostCooldownTime() - _boostCooldownTimer;
 
-        public void ActivateBooster()
+        public void EnableBoost()
         {
             if (_boostCoefficient <= 1f) return;
             _rigidbody2D.velocity *= _boostCoefficient;

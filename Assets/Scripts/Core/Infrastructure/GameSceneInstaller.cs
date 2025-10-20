@@ -2,16 +2,21 @@ using Core.GameControl;
 using Core.Input.InputHandlers;
 using Core.Input.Interfaces;
 using Models.Items.Base.Spawners;
-using Models.Items.Weapons.Base.StatsHandling;
-using Models.Items.Weapons.Bullets.EnemyBulletImpl.Pools;
-using Models.Items.Weapons.Bullets.PlayerBulletImpl.Pools;
+using Models.Items.Bullets.Base.Providers;
+using Models.Items.Bullets.EnemyBulletImpl.Pools;
+using Models.Items.Bullets.PlayerBulletImpl.Pools;
+using Models.Items.Weapons.Base.Aiming.Factories;
+using Models.Items.Weapons.Base.Reloading.Factories;
+using Models.Items.Weapons.Base.Shooting.Factories;
+using Models.Items.Weapons.Base.StatsHandling.Providers;
 using Models.WorldObjects.Creatures.Base.Animating.Pools;
 using Models.WorldObjects.Creatures.Base.Living;
+using Models.WorldObjects.Creatures.Base.Living.Factories;
 using Models.WorldObjects.Creatures.Base.Living.Interfaces;
-using Models.WorldObjects.Creatures.Base.MoveBoosting.Fabrics;
-using Models.WorldObjects.Creatures.Base.Moving.Fabrics;
-using Models.WorldObjects.Creatures.Base.Moving.ObstaclesBypassing.Fabrics;
-using Models.WorldObjects.Creatures.Base.StatsHandling.Fabrics;
+using Models.WorldObjects.Creatures.Base.MoveBoosting.Factories;
+using Models.WorldObjects.Creatures.Base.Moving.Factories;
+using Models.WorldObjects.Creatures.Base.ObstaclesBypassing.Factories;
+using Models.WorldObjects.Creatures.Base.StatsHandling.Providers;
 using Models.WorldObjects.Creatures.PlayerImpl;
 using Models.WorldObjects.Creatures.PlayerImpl.DataContainers;
 using Models.WorldObjects.Interactables.Base.Visuals;
@@ -27,21 +32,27 @@ namespace Core.Infrastructure
         
         public override void InstallBindings()
         {
-            Container.Bind<CreatureStatsMultiplierFactory>().AsSingle().NonLazy();
-            Container.Bind<WeaponStatsMultipliersProvider>().FromComponentInHierarchy().AsSingle();
+            Container.Bind<CreatureStatsMultipliersProvider>().AsSingle().NonLazy();
+            Container.Bind<WeaponStatsMultipliersProvider>().AsSingle().NonLazy();
 
-            Container.Bind<IInputHandler>().To<KeyboardInputHandler>().FromComponentInHierarchy().AsSingle();
-            Container.Bind<IHealthService>().To<Health>().AsTransient();
-
-            Container.Bind<PlayerPositionTracker>().FromComponentInHierarchy().AsSingle();
-            Container.Bind<ObstaclesBypassersFabric>().AsSingle().NonLazy();
-            Container.Bind<MoversFabric>().AsSingle().NonLazy();
-            Container.Bind<MoveBoostersFabric>().AsSingle().NonLazy();
+            Container.Bind<PlayerPositionTracker>().FromComponentInHierarchy().AsSingle().NonLazy();
+            Container.Bind<IInputHandler>().To<KeyboardInputHandler>().AsSingle().NonLazy();
             
-            Container.Bind<Player>().FromInstance(_player).AsSingle();
-
             Container.Bind<PlayerBulletsPool>().FromComponentInHierarchy().AsSingle();
             Container.Bind<EnemyBulletsPool>().FromComponentInHierarchy().AsSingle();
+            Container.Bind<BulletsProvider>().AsSingle().NonLazy();
+            
+            Container.Bind<MagazinesFactory>().AsSingle().NonLazy();
+            Container.Bind<ShootersFactory>().AsSingle().NonLazy();
+            Container.Bind<AimersFactory>().AsSingle().NonLazy();
+
+            Container.Bind<HealthServicesFactory>().AsSingle().NonLazy();
+            Container.Bind<ObstaclesBypassersFactory>().AsSingle().NonLazy();
+            Container.Bind<MoversFactory>().AsSingle().NonLazy();
+            Container.Bind<MoveBoostersFactory>().AsSingle().NonLazy();
+            
+            Container.Bind<Player>().FromInstance(_player).AsSingle();
+            
             Container.Bind<OnDeathExplosionEffectsPool>().FromComponentInHierarchy().AsSingle();
 
             Container.Bind<GamePauser>().FromComponentInHierarchy().AsSingle();

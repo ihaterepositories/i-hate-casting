@@ -2,6 +2,7 @@ using Models.Items.Modifiers.Base;
 using Models.Items.Modifiers.WeaponsModifierImpl.DataContainers;
 using Models.Items.Weapons.Base.Enums;
 using Models.Items.Weapons.Base.StatsHandling;
+using Models.Items.Weapons.Base.StatsHandling.Providers;
 using UnityEngine;
 using Zenject;
 

@@ -1,9 +1,7 @@
-using System;
 using DG.Tweening;
 using Models.WorldObjects.Creatures.Base.Living.Interfaces;
 using TMPro;
 using UnityEngine;
-using UnityEngine.UI;
 using UserInterface.StatusBar;
 using Zenject;
 
@@ -19,12 +17,11 @@ namespace Models.WorldObjects.Creatures.PlayerImpl.Visuals
         private void Construct(Player player)
         {
             _healthService = player.Health;
-        }
-
-        private void OnEnable()
-        {
+            
             _healthService.OnHealthChanged += UpdateBarAnimated;
             _healthService.OnHealthChanged += UpdateText;
+            
+            UpdateText(_healthService.CurrentValue, _healthService.MaxValue);
         }
         
         private void OnDisable()

@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Models.Items.Weapons.Base.StatsHandling
 {
-    public class WeaponStatsMultiplier : MonoBehaviour
+    public class WeaponStatsMultiplier
     {
         private float _reloadTimeMultiplier = 1f;
         private float _spreadMultiplier = 1f;
@@ -15,12 +15,12 @@ namespace Models.Items.Weapons.Base.StatsHandling
         // ???
         //public float LifeTimeMultiplier = 1f;
         
-        public float GetMultiplier(WeaponStatType type)
+        public float Multiply(WeaponStatType type)
         {
             return type switch
             {
                 WeaponStatType.ReloadTime => _reloadTimeMultiplier,
-                WeaponStatType.Spread => _spreadMultiplier,
+                WeaponStatType.SpreadDegree => _spreadMultiplier,
                 WeaponStatType.DamageToDeal => _damageToDealMultiplier,
                 WeaponStatType.Speed => _speedMultiplier,
                 WeaponStatType.CooldownTime => _cooldownTimeMultiplier,

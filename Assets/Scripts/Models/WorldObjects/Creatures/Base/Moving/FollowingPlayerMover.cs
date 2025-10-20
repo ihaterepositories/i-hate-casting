@@ -8,24 +8,20 @@ namespace Models.WorldObjects.Creatures.Base.Moving
 {
     public class FollowingPlayerMover : Mover, IMoveService
     {
-        private readonly Rigidbody2D _rigidbody2D;
         private readonly Transform _transform;
-        private readonly CreatureStatsCalculator _statsCalculator;
         private readonly PlayerPositionTracker _playerPositionTracker;
         
         public FollowingPlayerMover(
-            Rigidbody2D rigidbody2D,
+            CreatureStatsCalculator statsCalculator, 
+            Rigidbody2D rb, 
             Transform transform,
-            CreatureStatsCalculator statsCalculator,
-            PlayerPositionTracker playerPositionTracker)
+            PlayerPositionTracker playerPositionTracker) : base(statsCalculator, rb)
         {
-            _rigidbody2D = rigidbody2D;
             _transform = transform;
-            _statsCalculator = statsCalculator;
             _playerPositionTracker = playerPositionTracker;
         }
 
-        public void Move()
+        public void EnableMove()
         {
             Vector2 moveDirection = CalculateDirectionToPlayerVector();
             Vector2 bypassDirection = CalculateBypassDirection();
@@ -34,7 +30,7 @@ namespace Models.WorldObjects.Creatures.Base.Moving
 
             Vector2 newVelocity = finalDirection * _statsCalculator.GetSpeed();
 
-            _rigidbody2D.velocity = Vector2.Lerp(_rigidbody2D.velocity, newVelocity, Time.fixedDeltaTime * 5f);
+            _rb.velocity = Vector2.Lerp(_rb.velocity, newVelocity, Time.fixedDeltaTime * 5f);
         }
 
         private Vector2 CalculateDirectionToPlayerVector()

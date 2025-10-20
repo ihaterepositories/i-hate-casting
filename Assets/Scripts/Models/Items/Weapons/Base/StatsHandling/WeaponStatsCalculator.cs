@@ -1,5 +1,6 @@
 using Models.Items.Weapons.Base.StatsHandling.DataContainers;
 using Models.Items.Weapons.Base.StatsHandling.Enums;
+using UnityEngine;
 
 namespace Models.Items.Weapons.Base.StatsHandling
 {
@@ -26,18 +27,23 @@ namespace Models.Items.Weapons.Base.StatsHandling
             _baseWeaponStats.MagazineCapacity;
         
         public float GetReloadTime() => 
-            _baseWeaponStats.ReloadTime * _weaponStatsMultiplier.GetMultiplier(WeaponStatType.ReloadTime);
+            _baseWeaponStats.ReloadTime * _weaponStatsMultiplier.Multiply(WeaponStatType.ReloadTime);
         
-        public float GetSpread() => 
-            _baseWeaponStats.Spread * _weaponStatsMultiplier.GetMultiplier(WeaponStatType.Spread);
+        /// <summary>
+        /// Calculated spread is random between -spread and +spread from stats.
+        /// </summary>
+        /// <returns>Returns random value between -spread degree and +spread degree from weapon stats.</returns>
+        public float GetSpreadDegree() => 
+            Random.Range(-_baseWeaponStats.SpreadDegree * _weaponStatsMultiplier.Multiply(WeaponStatType.SpreadDegree), 
+                _baseWeaponStats.SpreadDegree * _weaponStatsMultiplier.Multiply(WeaponStatType.SpreadDegree));
         
         public float GetDamageToDeal() => 
-            _baseWeaponStats.DamageToDeal * _weaponStatsMultiplier.GetMultiplier(WeaponStatType.DamageToDeal);
+            _baseWeaponStats.DamageToDeal * _weaponStatsMultiplier.Multiply(WeaponStatType.DamageToDeal);
         
         public float GetSpeed() => 
-            _baseWeaponStats.Speed * _weaponStatsMultiplier.GetMultiplier(WeaponStatType.Speed);
+            _baseWeaponStats.Speed * _weaponStatsMultiplier.Multiply(WeaponStatType.Speed);
         
         public float GetCooldownTime() => 
-            _baseWeaponStats.CooldownTime * _weaponStatsMultiplier.GetMultiplier(WeaponStatType.CooldownTime);
+            _baseWeaponStats.CooldownTime * _weaponStatsMultiplier.Multiply(WeaponStatType.CooldownTime);
     }
 }

@@ -5,9 +5,10 @@ namespace Models.WorldObjects.Creatures.Base.Living.Interfaces
     public interface IHealthService
     {
         public float CurrentValue { get; }
+        public float MaxValue { get; }
         
-        public void ChangeBy(float value, float maxHealth);
-        public void Refresh(float maxHealth);
+        public void ChangeBy(float value);
+        public void Refresh();
         
         public event Action OnDamaged;
         public event Action OnHealed;

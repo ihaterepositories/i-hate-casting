@@ -1,15 +1,16 @@
 using System;
 using Core.GameControl;
-using Models.Items.Weapons.Bullets.EnemyBulletImpl;
+using Models.Items.Bullets.EnemyBulletImpl;
 using Models.WorldObjects.Creatures.Base;
+using Models.WorldObjects.Creatures.Base.Living.Factories;
 using Models.WorldObjects.Creatures.Base.Living.Interfaces;
 using Models.WorldObjects.Creatures.Base.MoveBoosting.Enums;
-using Models.WorldObjects.Creatures.Base.MoveBoosting.Fabrics;
+using Models.WorldObjects.Creatures.Base.MoveBoosting.Factories;
 using Models.WorldObjects.Creatures.Base.MoveBoosting.Interfaces;
-using Models.WorldObjects.Creatures.Base.Moving.Fabrics;
-using Models.WorldObjects.Creatures.Base.Moving.ObstaclesBypassing.Enums;
-using Models.WorldObjects.Creatures.Base.Moving.ObstaclesBypassing.Fabrics;
-using Models.WorldObjects.Creatures.Base.StatsHandling.Fabrics;
+using Models.WorldObjects.Creatures.Base.Moving.Factories;
+using Models.WorldObjects.Creatures.Base.ObstaclesBypassing.Enums;
+using Models.WorldObjects.Creatures.Base.ObstaclesBypassing.Factories;
+using Models.WorldObjects.Creatures.Base.StatsHandling.Providers;
 using Models.WorldObjects.Creatures.EnemyImpl;
 using UnityEngine;
 using Zenject;
@@ -18,62 +19,48 @@ namespace Models.WorldObjects.Creatures.PlayerImpl
 {
     public class Player : Creature
     {
-        [SerializeField] private MoveBoostType _moveBoostType;
-        [SerializeField] private bool _enableMoveBoost;
-        
-        private IMoveBoostService _moveBoostService;
-        
-        public IMoveBoostService MoveBoostService => _moveBoostService;
-        
-        public static event Action OnPlayerDeath;
-
         [Inject]
         private void Construct(
-            CreatureStatsMultiplierFactory creatureStatsMultiplierFactory,
-            IHealthService healthService,
-            ObstaclesBypassersFabric obstaclesBypassersFabric,
-            MoversFabric moversFabric,
-            MoveBoostersFabric moveBoostersFabric)
+            CreatureStatsMultipliersProvider creatureStatsMultipliersProvider,
+            HealthServicesFactory healthServicesFactory,
+            MoversFactory moversFactory,
+            ObstaclesBypassersFactory obstaclesBypassersFactory,
+            MoveBoostersFactory moveBoostersFactory)
         {
-            InitializeStatsHandling(creatureStatsMultiplierFactory);
-            InitializeStats(healthService);
-            
-            _mover = moversFabric.Create(MoveType, Rigidbody2D, transform, StatsCalculator);
-            
-            if (ObstaclesBypassType != ObstaclesBypassType.None)
-            {
-                var obstaclesBypasser = obstaclesBypassersFabric.Create(ObstaclesBypassType, transform);
-                _mover.AssignObstaclesBypasser(obstaclesBypasser);
-            }
-            
-            _moveBoostService = moveBoostersFabric.Create(_moveBoostType, Rigidbody2D, StatsCalculator);
+            InitializeServices(
+                creatureStatsMultipliersProvider,
+                healthServicesFactory,
+                moversFactory, 
+                obstaclesBypassersFactory, 
+                moveBoostersFactory);
+        }
+        
+        private void OnEnable()
+        {
+            Health.OnHealthGone += Kill;
+        }
+        
+        private void OnDisable()
+        {
+            Health.OnHealthGone -= Kill;
         }
 
         private void Update()
         {
             if (GamePauser.IsGamePaused) return;
             
-            _moveBoostService.HandleTimings();
+            if (MoveBoostType != MoveBoostType.None)
+                MoveBooster.HandleTimings();
         }
 
         private void FixedUpdate()
         {
             if (GamePauser.IsGamePaused) return;
             
-            _mover.Move();
+            Mover.EnableMove();
             
-            if (_enableMoveBoost)
-                _moveBoostService.ActivateBooster();
-        }
-
-        private void OnEnable()
-        {
-            _health.OnHealthGone += Kill;
-        }
-        
-        private void OnDisable()
-        {
-            _health.OnHealthGone -= Kill;
+            if (MoveBoostType != MoveBoostType.None)
+                MoveBooster.EnableBoost();
         }
 
         private void OnCollisionEnter2D(Collision2D other)
@@ -84,11 +71,10 @@ namespace Models.WorldObjects.Creatures.PlayerImpl
             if (other.collider.TryGetComponent<EnemyBullet>(out var enemyBullet))
                 Damage(enemyBullet.DamageToDeal);
         }
-        
-        public override void Kill()
+
+        protected override void Kill()
         {
-            OnPlayerDeath?.Invoke();
-            Debug.Log("Player Died");
+            Debug.Log("Player has died.");
         }
     }
 }

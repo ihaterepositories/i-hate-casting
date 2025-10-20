@@ -18,18 +18,18 @@ namespace Models.WorldObjects.Creatures.Base.StatsHandling
         }
         
         public float GetMaxHealth() => 
-            _baseCreatureStats.MaxHealth * _creatureStatsMultiplier.GetMultiplier(CreatureStatType.MaxHealth);
+            _baseCreatureStats.MaxHealth * _creatureStatsMultiplier.Multiply(CreatureStatType.MaxHealth);
         
         public float GetSpeed() =>
-            _baseCreatureStats.Speed * _creatureStatsMultiplier.GetMultiplier(CreatureStatType.Speed);
+            _baseCreatureStats.Speed * _creatureStatsMultiplier.Multiply(CreatureStatType.Speed);
         
         public float GetMoveBoostDuration() => 
-            _baseCreatureStats.BurstDuration * _creatureStatsMultiplier.GetMultiplier(CreatureStatType.BurstDuration);
+            _baseCreatureStats.BurstDuration * _creatureStatsMultiplier.Multiply(CreatureStatType.BurstDuration);
         
         public float GetMoveBoostCoefficient() => 
-            _baseCreatureStats.WhileBurstSpeedIncreaseCoefficient * _creatureStatsMultiplier.GetMultiplier(CreatureStatType.WhileBurstSpeedIncreaseCoefficient);
+            _baseCreatureStats.WhileBurstSpeedIncreaseCoefficient * _creatureStatsMultiplier.Multiply(CreatureStatType.WhileBurstSpeedIncreaseCoefficient);
         
         public float GetMoveBoostCooldownTime() =>
-            _baseCreatureStats.BurstCooldownTime * _creatureStatsMultiplier.GetMultiplier(CreatureStatType.BurstCooldown);
+            _baseCreatureStats.BurstCooldownTime * _creatureStatsMultiplier.Multiply(CreatureStatType.BurstCooldown);
     }
 }

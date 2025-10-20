@@ -7,9 +7,9 @@ namespace Models.WorldObjects.Base.Spawning.Utils
 {
     public class SafeSpawnProvider
     {
-        private static List<Vector2> _usedPositions = new();
-        private bool _checkUsedPositions;
-        private Player _player;
+        private static readonly List<Vector2> _usedPositions = new();
+        private readonly bool _checkUsedPositions;
+        private readonly Player _player;
 
         public SafeSpawnProvider(Player player, bool checkUsedPositions)
         {

@@ -12,7 +12,7 @@ namespace Models.WorldObjects.Creatures.Base.StatsHandling
         private float _whileBurstSpeedMultiplyingMultiplier = 1f;
         private float _burstCooldownMultiplier = 1f;
         
-        public float GetMultiplier(CreatureStatType type)
+        public float Multiply(CreatureStatType type)
         {
             return type switch
             {

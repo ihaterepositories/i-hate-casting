@@ -1,4 +1,5 @@
-using Models.WorldObjects.Creatures.Base.Moving.ObstaclesBypassing.Interfaces;
+using Models.WorldObjects.Creatures.Base.ObstaclesBypassing.Interfaces;
+using Models.WorldObjects.Creatures.Base.StatsHandling;
 using UnityEngine;
 
 namespace Models.WorldObjects.Creatures.Base.Moving.Base
@@ -6,6 +7,17 @@ namespace Models.WorldObjects.Creatures.Base.Moving.Base
     public class Mover
     {
         private IObstaclesBypassService _obstaclesBypassService;
+        
+        protected readonly CreatureStatsCalculator _statsCalculator;
+        protected readonly Rigidbody2D _rb;
+        
+        protected Mover(
+            CreatureStatsCalculator statsCalculator,
+            Rigidbody2D rb )
+        {
+            _statsCalculator = statsCalculator;
+            _rb = rb;
+        }
         
         public void AssignObstaclesBypasser(IObstaclesBypassService obstaclesBypassService)
         {

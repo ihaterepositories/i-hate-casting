@@ -1,11 +1,4 @@
-using System;
-using System.Collections;
-using Models.WorldObjects.Creatures.Base;
 using Models.WorldObjects.Creatures.Base.MoveBoosting.Interfaces;
-using Models.WorldObjects.Creatures.Base.Moving;
-using UnityEngine;
-using UnityEngine.Serialization;
-using UnityEngine.UI;
 using UserInterface.StatusBar;
 using Zenject;
 
@@ -18,11 +11,13 @@ namespace Models.WorldObjects.Creatures.PlayerImpl.Visuals
         [Inject]
         private void Construct(Player player)
         {
-            _boostService = player.MoveBoostService;
+            _boostService = player.MoveBooster;
         }
 
         private void Update()
         {
+            if (_boostService == null) return;
+            
             UpdateBar(_boostService.BoostCooldownTimeElapsed, _boostService.BoostCooldownDuration);
         }
     }

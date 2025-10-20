@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace Core.Input.InputHandlers
 {
-    public class KeyboardInputHandler : MonoBehaviour, IInputHandler
+    public class KeyboardInputHandler : IInputHandler
     {
         public float GetHorizontalAxisValue()
         {
@@ -17,12 +17,12 @@ namespace Core.Input.InputHandlers
 
         public Vector3 GetPointerPosition()
         {
-            if (Camera.main != null)
+            if (Camera.main is not null)
             {
                 return Camera.main.ScreenToWorldPoint(UnityEngine.Input.mousePosition);
             }
 
-            Debug.LogWarning(gameObject.name + ": camera is null");
+            Debug.LogWarning("Input handler: camera is null");
             return Vector3.zero;
         }
 

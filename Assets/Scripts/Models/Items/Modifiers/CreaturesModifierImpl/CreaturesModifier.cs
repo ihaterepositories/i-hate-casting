@@ -2,7 +2,7 @@ using Models.Items.Modifiers.Base;
 using Models.Items.Modifiers.CreaturesModifierImpl.DataContainers;
 using Models.WorldObjects.Creatures.Base.StatsHandling;
 using Models.WorldObjects.Creatures.Base.StatsHandling.Enums;
-using Models.WorldObjects.Creatures.Base.StatsHandling.Fabrics;
+using Models.WorldObjects.Creatures.Base.StatsHandling.Providers;
 using UnityEngine;
 using Zenject;
 
@@ -12,22 +12,22 @@ namespace Models.Items.Modifiers.CreaturesModifierImpl
     {
         [SerializeField] private CreaturesModifierStats _creaturesModifierStats;
 
-        private CreatureStatsMultiplierFactory _creatureStatsMultiplierFactory;
+        private CreatureStatsMultipliersProvider _creatureStatsMultipliersProvider;
         private (CreatureStatsMultiplier multiplier, CreatureModifyingValues stats)[] _creaturesModifyingData;
 
         [Inject]
-        private void Construct(CreatureStatsMultiplierFactory creatureStatsMultiplierFactory)
+        private void Construct(CreatureStatsMultipliersProvider creatureStatsMultipliersProvider)
         {
-            _creatureStatsMultiplierFactory = creatureStatsMultiplierFactory;
+            _creatureStatsMultipliersProvider = creatureStatsMultipliersProvider;
         }
 
         private void Awake()
         {
             _creaturesModifyingData = new[]
             {
-                (_creatureStatsMultiplierFactory.GetFor(CreatureType.Player), _creaturesModifierStats.PlayerModifyingValues),
-                (_creatureStatsMultiplierFactory.GetFor(CreatureType.Enemy), _creaturesModifierStats.DefaultEnemiesModifyingValues),
-                (_creatureStatsMultiplierFactory.GetFor(CreatureType.Boss), _creaturesModifierStats.BossModifyingValues)
+                (_creatureStatsMultipliersProvider.GetFor(CreatureType.Player), _creaturesModifierStats.PlayerModifyingValues),
+                (_creatureStatsMultipliersProvider.GetFor(CreatureType.Enemy), _creaturesModifierStats.DefaultEnemiesModifyingValues),
+                (_creatureStatsMultipliersProvider.GetFor(CreatureType.Boss), _creaturesModifierStats.BossModifyingValues)
             };
         }
 
