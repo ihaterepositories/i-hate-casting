@@ -82,7 +82,7 @@ namespace Zenject
                 (container) => new SubContainerDependencyProvider(
                     ContractType, SubIdentifier,
                     new SubContainerCreatorByNewPrefabMethod<TParam1, TParam2, TParam3, TParam4, TParam5, TParam6, TParam7, TParam8, TParam9, TParam10>( container,
-                        new PrefabProvider(prefab),
+                        new PrefabsProvider(prefab),
                         gameObjectInfo, installerMethod), false);
 
             return new NameTransformScopeConcreteIdArgConditionCopyNonLazyBinder(BindInfo, gameObjectInfo);

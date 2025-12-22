@@ -58,7 +58,7 @@ namespace Zenject
                                     concreteType,
                                     concreteTypes,
                                     BindInfo.Arguments,
-                                    new PrefabProvider(_prefab),
+                                    new PrefabsProvider(_prefab),
                                     BindInfo.InstantiatedCallback)));
                     break;
                 }
@@ -79,7 +79,7 @@ namespace Zenject
                             argumentTarget,
                             concreteTypes,
                             BindInfo.Arguments,
-                            new PrefabProvider(_prefab),
+                            new PrefabsProvider(_prefab),
                             BindInfo.InstantiatedCallback));
 
                     RegisterProvidersForAllContractsPerConcreteType(
@@ -115,7 +115,7 @@ namespace Zenject
                                     contractType,
                                     BindInfo.ContractTypes,
                                     BindInfo.Arguments,
-                                    new PrefabProvider(_prefab),
+                                    new PrefabsProvider(_prefab),
                                     BindInfo.InstantiatedCallback)));
                     break;
                 }
@@ -136,7 +136,7 @@ namespace Zenject
                             argumentTarget,
                             BindInfo.ContractTypes,
                             BindInfo.Arguments,
-                            new PrefabProvider(_prefab),
+                            new PrefabsProvider(_prefab),
                             BindInfo.InstantiatedCallback));
 
                     RegisterProviderPerContract(

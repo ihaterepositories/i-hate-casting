@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5371429304915310132}
-  - component: {fileID: 1775467018804478640}
+  - component: {fileID: 5884160283527993497}
   m_Layer: 0
   m_Name: ShortRangeAntivirus
   m_TagString: Untagged
@@ -32,7 +32,7 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1775467018804478640
+--- !u!114 &5884160283527993497
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -41,19 +41,19 @@ MonoBehaviour:
   m_GameObject: {fileID: 7472332532555384362}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2fe13d6b73ed475bbe6ab33740e21e4f, type: 3}
+  m_Script: {fileID: 11500000, guid: 294b5817ac6e4db2bf29acdb04b218b5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _weaponType: 0
-  _bulletType: 1
+  _bulletType: 0
   _shootType: 0
   _reloadType: 0
   _aimType: 1
   _weaponStats:
     Range: 3
     MagazineCapacity: 15
-    ReloadTime: 6
-    SpreadDegree: 5
+    ReloadTime: 5
+    SpreadDegree: 10
     DamageToDeal: 2
-    Speed: 6
-    CooldownTime: 1.5
+    Speed: 8
+    CooldownTime: 1

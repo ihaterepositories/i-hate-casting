@@ -142,7 +142,7 @@ namespace Zenject
                     ContractType, SubIdentifier,
                     new SubContainerCreatorByNewPrefabInstaller(
                         container,
-                        new PrefabProvider(prefab),
+                        new PrefabsProvider(prefab),
                         gameObjectInfo, installerType, BindInfo.Arguments), false);
 
             return new NameTransformScopeConcreteIdArgConditionCopyNonLazyBinder(BindInfo, gameObjectInfo);

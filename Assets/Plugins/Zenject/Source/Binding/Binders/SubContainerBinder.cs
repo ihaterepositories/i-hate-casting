@@ -151,7 +151,7 @@ namespace Zenject
                 _bindInfo, _subIdentifier, _resolveAll,
                 (container) => new SubContainerCreatorByNewPrefabMethod(
                     container,
-                    new PrefabProvider(prefab),
+                    new PrefabsProvider(prefab),
                     gameObjectInfo, installerMethod));
 
             return new NameTransformScopeConcreteIdArgConditionCopyNonLazyBinder(_bindInfo, gameObjectInfo);
@@ -222,7 +222,7 @@ namespace Zenject
                 _bindInfo, _subIdentifier, _resolveAll,
                 (container) => new SubContainerCreatorByNewPrefabInstaller(
                     container,
-                    new PrefabProvider(prefab),
+                    new PrefabsProvider(prefab),
                     gameObjectInfo, installerType, _bindInfo.Arguments));
 
             return new NameTransformScopeConcreteIdArgConditionCopyNonLazyBinder(_bindInfo, gameObjectInfo);
@@ -287,7 +287,7 @@ namespace Zenject
             SubFinalizer = new SubContainerPrefabBindingFinalizer(
                 _bindInfo, _subIdentifier, _resolveAll,
                 (container) => new SubContainerCreatorByNewPrefab(
-                    container, new PrefabProvider(prefab), gameObjectInfo));
+                    container, new PrefabsProvider(prefab), gameObjectInfo));
 
             return new NameTransformScopeConcreteIdArgConditionCopyNonLazyBinder(_bindInfo, gameObjectInfo);
         }

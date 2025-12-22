@@ -1,0 +1,30 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 955eb26bcf2943d598b20fee845b188c, type: 3}
+  m_Name: PlayerConfig
+  m_EditorClassIdentifier: 
+  _key: 0
+  _creatureType: 0
+  _healthType: 0
+  _moveType: 0
+  _obstaclesBypassType: 0
+  _moveBoostType: 1
+  _destroyType: 1
+  _animatingType: 0
+  _stats:
+    _maxHealth: 5
+    _speed: 4
+    _boostStrength: 1.8
+    _boostDuration: 0.5
+    _boostCooldownTime: 5
+  _sprite: {fileID: 21300000, guid: 0227c7ae3ce6a1444a5ae12b92a5c32d, type: 3}
+  _animatorOverrideController: {fileID: 22100000, guid: fed677133f4d04a4ca54c789a9e60ff8, type: 2}

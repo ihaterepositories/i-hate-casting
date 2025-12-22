@@ -1,0 +1,37 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bbb281ee3bf0b054c82ac2347e9e782c, type: 3}
+  m_Name: BulletConfigs
+  m_EditorClassIdentifier: 
+  m_GroupName: BulletConfigs
+  m_Data:
+    m_SerializedData: []
+  m_GUID: 098ed390460260e48a886433831da7c2
+  m_SerializeEntries:
+  - m_GUID: 186bce7e652d74f43b2619c69e05799e
+    m_Address: SmallRedBulletConfig
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - BulletConfig
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: a345dfa4aeb15af47adb63a44592c2eb
+    m_Address: SmallWhiteBulletConfig
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - BulletConfig
+    FlaggedDuringContentUpdateRestriction: 0
+  m_ReadOnly: 0
+  m_Settings: {fileID: 11400000, guid: a12368aedcc243b41a2f5b04885d4a2c, type: 2}
+  m_SchemaSet:
+    m_Schemas:
+    - {fileID: 11400000, guid: 1e9629d1cbee781498f4f82fcfd1d3f5, type: 2}
+    - {fileID: 11400000, guid: e2a002da5ab5edc4785a48aa8efe4f6d, type: 2}

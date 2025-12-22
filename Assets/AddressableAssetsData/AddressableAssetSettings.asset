@@ -44,9 +44,11 @@ MonoBehaviour:
   m_BuildAddressablesWithPlayerBuild: 0
   m_overridePlayerVersion: '[UnityEditor.PlayerSettings.bundleVersion]'
   m_GroupAssets:
+  - {fileID: 11400000, guid: eef192f27b29cc14e96be662d958104d, type: 2}
   - {fileID: 11400000, guid: 9021ebf5fac71814ba928132f185b3c3, type: 2}
   - {fileID: 11400000, guid: 2aacfaa3bb4012c479b6649ed13db871, type: 2}
   - {fileID: 11400000, guid: 598181e4e131aab449b4225e978c91f2, type: 2}
+  - {fileID: 11400000, guid: 97dc4f9611817414181ffe7d470670cb, type: 2}
   m_BuildSettings:
     m_CompileScriptsInVirtualMode: 0
     m_CleanupStreamingAssetsAfterBuilds: 1
@@ -87,10 +89,11 @@ MonoBehaviour:
     m_ProfileVersion: 1
   m_LabelTable:
     m_LabelNames:
-    - default
     - CommonArtefact
     - GoldArtefact
     - IncredibleArtefact
+    - BulletConfig
+    - CreatureConfig
   m_SchemaTemplates: []
   m_GroupTemplateObjects:
   - {fileID: 11400000, guid: 01824c36f480d8644aa2cfc2d9ef58ae, type: 2}

@@ -1,11 +1,13 @@
 using System;
+using Core.Pausing.Interfaces;
 using TMPro;
 using UnityEngine;
-using Utils;
+using Utils.Text;
+using Zenject;
 
 namespace Core.GameControl
 {
-    // TODO: Separate UI and Logic
+    // TODO: Separate UI and logic. Move it all to the UI Models folder.
     public class RoundTimer : MonoBehaviour
     { 
         [SerializeField] private TextMeshProUGUI _timerText;
@@ -15,6 +17,14 @@ namespace Core.GameControl
         private float _elapsedTime;
 
         private bool _isTimeExpired;
+
+        private IPauser _pauser;
+
+        [Inject]
+        private void Construct(IPauser pauser)
+        {
+            _pauser = pauser;
+        }
         
         public static event Action OnRoundTimeExpired;
 
@@ -26,7 +36,7 @@ namespace Core.GameControl
 
         private void Update()
         {
-            if (GamePauser.IsGamePaused) return;
+            if (_pauser.IsGamePaused) return;
             if (_isTimeExpired) return;
             
             _elapsedTime -= Time.deltaTime;

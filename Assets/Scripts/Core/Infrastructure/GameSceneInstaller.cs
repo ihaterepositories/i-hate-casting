@@ -1,64 +1,89 @@
-using Core.GameControl;
-using Core.Input.InputHandlers;
-using Core.Input.Interfaces;
-using Models.Items.Base.Spawners;
-using Models.Items.Bullets.Base.Providers;
-using Models.Items.Bullets.EnemyBulletImpl.Pools;
-using Models.Items.Bullets.PlayerBulletImpl.Pools;
-using Models.Items.Weapons.Base.Aiming.Factories;
-using Models.Items.Weapons.Base.Reloading.Factories;
-using Models.Items.Weapons.Base.Shooting.Factories;
-using Models.Items.Weapons.Base.StatsHandling.Providers;
-using Models.WorldObjects.Creatures.Base.Animating.Pools;
-using Models.WorldObjects.Creatures.Base.Living;
-using Models.WorldObjects.Creatures.Base.Living.Factories;
-using Models.WorldObjects.Creatures.Base.Living.Interfaces;
-using Models.WorldObjects.Creatures.Base.MoveBoosting.Factories;
-using Models.WorldObjects.Creatures.Base.Moving.Factories;
-using Models.WorldObjects.Creatures.Base.ObstaclesBypassing.Factories;
-using Models.WorldObjects.Creatures.Base.StatsHandling.Providers;
-using Models.WorldObjects.Creatures.PlayerImpl;
-using Models.WorldObjects.Creatures.PlayerImpl.DataContainers;
-using Models.WorldObjects.Interactables.Base.Visuals;
-using UnityEngine;
-using UnityEngine.Serialization;
+using Core.Pausing;
+using Core.Pausing.Interfaces;
+using Models.Bullets.Services.LifeTimeCalculating.Factories;
+using Models.Bullets.Services.Moving.Factories;
+using Models.Creatures.Services.Animating.Factories;
+using Models.Creatures.Services.Destroying.Factories;
+using Models.Creatures.Services.Living.Factories;
+using Models.Creatures.Services.MoveBoosting.Factories;
+using Models.Creatures.Services.Moving.Factories;
+using Models.Creatures.Services.ObstaclesBypassing.Factories;
+using Models.Creatures.Services.StatsCalculating.Factories;
+using Models.Creatures.Services.StatsCalculating.StatsModifying.Providers;
+using Models.Interactables.Base.Visuals;
+using Models.UI.CooldownViewBars.Services.ValueProviding.Factories;
+using Models.UI.QuantityViewBars.Services.ValueProviding.Factories;
+using Models.UI.QuantityViewBars.Services.Visualizing.Factories;
+using Models.UI.StatusTexts.Services.ValueProviding.Factories;
+using Models.UI.StatusTexts.Services.Visualizing.Factories;
+using Models.Weapons.Services.Aiming.Factories;
+using Models.Weapons.Services.Reloading.Factories;
+using Models.Weapons.Services.Shooting.Factories;
+using Models.Weapons.Services.StatsCalculating.Factories;
+using Models.Weapons.Services.StatsModifying.Providers;
+using Pooling.Factories;
+using Spawners;
+using Spawners.Factories;
+using Spawners.Services.Instantiaters.Factories;
+using Spawners.Services.SpawnBehaviourProviders.Factories;
+using Spawners.Services.SpawnPositionCalculators.Dtos;
+using Spawners.Services.SpawnPositionCalculators.Factories;
+using UIServices.CountdownVisualizers.Factories;
+using UIServices.ImageFadeAnimators.Factories;
 using Zenject;
 
 namespace Core.Infrastructure
 {
     public class GameSceneInstaller : MonoInstaller
     {
-        [FormerlySerializedAs("_playerView")] [SerializeField] private Player _player;
-        
         public override void InstallBindings()
         {
-            Container.Bind<CreatureStatsMultipliersProvider>().AsSingle().NonLazy();
-            Container.Bind<WeaponStatsMultipliersProvider>().AsSingle().NonLazy();
+            Container.Bind<SafeSpawnSettings>().FromScriptableObjectResource("SafeSpawnSettings").AsSingle().NonLazy();
+            
+            Container.Bind<IPauser>().To<Pauser>().AsSingle().NonLazy();
+            
+            Container.Bind<CreatureStatsModifiersProvider>().AsSingle().NonLazy();
+            Container.Bind<CreatureStatsCalculatorsFactory>().AsSingle().NonLazy();
+            
+            Container.Bind<WeaponStatsModifiersProvider>().AsSingle().NonLazy();
+            Container.Bind<WeaponStatsCalculatorsFactory>().AsSingle().NonLazy();
+            
+            Container.Bind<ObjectPoolsFactory>().AsSingle().NonLazy();
+            
+            Container.Bind<BulletMoversFactory>().AsSingle().NonLazy();
+            Container.Bind<BulletLifeTimeCalculatorsFactory>().AsSingle().NonLazy();
+            
+            Container.Bind<WeaponMagazinesFactory>().AsSingle().NonLazy();
+            Container.Bind<WeaponShootersFactory>().AsSingle().NonLazy();
+            Container.Bind<WeaponAimersFactory>().AsSingle().NonLazy();
 
-            Container.Bind<PlayerPositionTracker>().FromComponentInHierarchy().AsSingle().NonLazy();
-            Container.Bind<IInputHandler>().To<KeyboardInputHandler>().AsSingle().NonLazy();
-            
-            Container.Bind<PlayerBulletsPool>().FromComponentInHierarchy().AsSingle();
-            Container.Bind<EnemyBulletsPool>().FromComponentInHierarchy().AsSingle();
-            Container.Bind<BulletsProvider>().AsSingle().NonLazy();
-            
-            Container.Bind<MagazinesFactory>().AsSingle().NonLazy();
-            Container.Bind<ShootersFactory>().AsSingle().NonLazy();
-            Container.Bind<AimersFactory>().AsSingle().NonLazy();
+            Container.Bind<CreatureHealthServicesFactory>().AsSingle().NonLazy();
+            Container.Bind<CreatureMoversFactory>().AsSingle().NonLazy();
+            Container.Bind<CreatureObstaclesBypassersFactory>().AsSingle().NonLazy();
+            Container.Bind<CreatureMoveBoostersFactory>().AsSingle().NonLazy();
+            Container.Bind<CreatureDestroyersFactory>().AsSingle().NonLazy();
+            Container.Bind<CreatureAnimationLaunchersFactory>().AsSingle().NonLazy();
 
-            Container.Bind<HealthServicesFactory>().AsSingle().NonLazy();
-            Container.Bind<ObstaclesBypassersFactory>().AsSingle().NonLazy();
-            Container.Bind<MoversFactory>().AsSingle().NonLazy();
-            Container.Bind<MoveBoostersFactory>().AsSingle().NonLazy();
-            
-            Container.Bind<Player>().FromInstance(_player).AsSingle();
-            
-            Container.Bind<OnDeathExplosionEffectsPool>().FromComponentInHierarchy().AsSingle();
-
-            Container.Bind<GamePauser>().FromComponentInHierarchy().AsSingle();
+            Container.Bind<InstantiatersFactory>().AsSingle().NonLazy();
+            Container.Bind<SpawnPositionCalculatorsFactory>().AsSingle().NonLazy();
+            Container.Bind<SpawnBehaviourProvidersFactory>().AsSingle().NonLazy();
+            Container.Bind<SpawnersFactory>().AsSingle().NonLazy();
 
             Container.Bind<ItemsSpawner>().FromComponentInHierarchy().AsSingle();
-
+            
+            Container.Bind<ResourcesCleaner>().AsSingle().NonLazy();
+            Container.Bind<GameBootstrapper>().FromComponentInHierarchy().AsSingle();
+            
+            Container.Bind<StatusTextValueProvidersFactory>().AsSingle().NonLazy();
+            Container.Bind<StatusTextVisualizersFactory>().AsSingle().NonLazy();
+            
+            Container.Bind<QuantityVewBarValueProvidersFactory>().AsSingle().NonLazy();
+            Container.Bind<QuantityViewBarVisualizersFactory>().AsSingle().NonLazy();
+            
+            Container.Bind<CooldownViewBarValueProvidersFactory>().AsSingle().NonLazy();
+            
+            Container.Bind<CountdownVisualizersFactory>().AsSingle().NonLazy();
+            Container.Bind<ImageFadeAnimatorsFactory>().AsSingle().NonLazy();
             Container.Bind<OnCanInteractHintText>().FromComponentInHierarchy().AsSingle();
         }
     }

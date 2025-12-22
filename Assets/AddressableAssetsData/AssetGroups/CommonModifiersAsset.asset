@@ -18,19 +18,19 @@ MonoBehaviour:
   m_GUID: 91095d67e2a4ea44d89f94a326a3f934
   m_SerializeEntries:
   - m_GUID: 0862b74bd53c79b45bad7ea7221ee710
-    m_Address: Assets/ScriptableObjects/SelectableItems/Modifiers/CommonModifiers/GreenUpdatePackageSelectableItem.asset
+    m_Address: GreenUpdatePackageSelectableItem
     m_ReadOnly: 0
     m_SerializedLabels:
     - CommonArtefact
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 3bda64761c2180846815ee55409e9e97
-    m_Address: Assets/ScriptableObjects/SelectableItems/Modifiers/CommonModifiers/BlueUpdatePackageSelectableItem.asset
+    m_Address: BlueUpdatePackageSelectableItem
     m_ReadOnly: 0
     m_SerializedLabels:
     - CommonArtefact
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 4671098f93ebd0e4aa20a093779b3fb7
-    m_Address: Assets/ScriptableObjects/SelectableItems/Modifiers/CommonModifiers/RedUpdatePackageSelectableItem.asset
+    m_Address: RedUpdatePackageSelectableItem
     m_ReadOnly: 0
     m_SerializedLabels:
     - CommonArtefact

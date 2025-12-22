@@ -1,0 +1,37 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bbb281ee3bf0b054c82ac2347e9e782c, type: 3}
+  m_Name: CreatureConfigs
+  m_EditorClassIdentifier: 
+  m_GroupName: CreatureConfigs
+  m_Data:
+    m_SerializedData: []
+  m_GUID: be4fd56b07cc8df4fae7f54ad599be1d
+  m_SerializeEntries:
+  - m_GUID: a70e3bd826cee2b48baf66e04ccaf88d
+    m_Address: PlayerConfig
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - CreatureConfig
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: cccd2ae94d1ed5143814b19ce51f1e34
+    m_Address: MiniVirusConfig
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - CreatureConfig
+    FlaggedDuringContentUpdateRestriction: 0
+  m_ReadOnly: 0
+  m_Settings: {fileID: 11400000, guid: a12368aedcc243b41a2f5b04885d4a2c, type: 2}
+  m_SchemaSet:
+    m_Schemas:
+    - {fileID: 11400000, guid: ee363083adcc46245afec11a63ed72e1, type: 2}
+    - {fileID: 11400000, guid: c719cee7ece9f1e4e94740036fe58d24, type: 2}

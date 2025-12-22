@@ -48,7 +48,7 @@ namespace Zenject
                     new SubContainerCreatorByNewPrefabWithParams(
                         installerType,
                         container,
-                        new PrefabProvider(prefab),
+                        new PrefabsProvider(prefab),
                         gameObjectInfo), false);
 
             return new NameTransformScopeConcreteIdArgConditionCopyNonLazyBinder(BindInfo, gameObjectInfo);
