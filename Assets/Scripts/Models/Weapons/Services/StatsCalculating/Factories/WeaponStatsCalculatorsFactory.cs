@@ -19,9 +19,7 @@ namespace Models.Weapons.Services.StatsCalculating.Factories
         {
             return weaponType switch
             {
-                WeaponType.PlayerShortRange => new WeaponStatsCalculator(stats, _statsModifiersProvider.GetFor(weaponType)),
-                WeaponType.PlayerMediumRange => new WeaponStatsCalculator(stats, _statsModifiersProvider.GetFor(weaponType)),
-                WeaponType.PlayerLongRange => new WeaponStatsCalculator(stats, _statsModifiersProvider.GetFor(weaponType)),
+                WeaponType.PlayerWeapon => new WeaponStatsCalculator(stats, _statsModifiersProvider.GetFor(weaponType)),
                 WeaponType.EnemyWeapon => new WeaponStatsCalculator(stats, _statsModifiersProvider.GetFor(weaponType)),
                 WeaponType.BossWeapon => new WeaponStatsCalculator(stats, _statsModifiersProvider.GetFor(weaponType)),
                 _ => throw new ArgumentOutOfRangeException()

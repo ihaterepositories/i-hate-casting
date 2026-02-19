@@ -25,9 +25,7 @@ namespace Models.Modifiers.WeaponsModifierImpl
         {
             _weaponsModifyingData = new[]
             {
-                (_weaponsStatsModifiersProvider.GetFor(WeaponType.PlayerShortRange), _weaponsModifierStats.PlayerShortRangeWeaponModifyingValues),
-                (_weaponsStatsModifiersProvider.GetFor(WeaponType.PlayerMediumRange), _weaponsModifierStats.PlayerMediumRangeWeaponModifyingValues),
-                (_weaponsStatsModifiersProvider.GetFor(WeaponType.PlayerLongRange), _weaponsModifierStats.PlayerLongRangeWeaponModifyingValues),
+                (_weaponsStatsModifiersProvider.GetFor(WeaponType.PlayerWeapon), _weaponsModifierStats.PlayerWeapon),
                 (_weaponsStatsModifiersProvider.GetFor(WeaponType.EnemyWeapon), _weaponsModifierStats.DefaultEnemyWeaponModifyingValues),
                 (_weaponsStatsModifiersProvider.GetFor(WeaponType.BossWeapon), _weaponsModifierStats.BossWeaponModifyingValues)
             };

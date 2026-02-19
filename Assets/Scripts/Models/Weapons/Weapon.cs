@@ -24,7 +24,6 @@ namespace Models.Weapons
     {
         [Header("Settings")]
         [SerializeField] private WeaponType _weaponType;
-        [SerializeField] private BulletConfigKey _bulletToUse;
         [SerializeField] private ShootType _shootType;
         [SerializeField] private ReloadType _reloadType;
         [SerializeField] private AimType _aimType;
