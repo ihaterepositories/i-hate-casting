@@ -10,9 +10,6 @@ namespace Models.Weapons.Services.Reloading.Base
     public abstract class Magazine : IMagazineService
     {
         private readonly IWeaponStatsCalculator _weaponStatsCalculator;
-        private readonly IGameObjectFactory _bulletsFactory;
-        
-        private readonly BulletConfig _bulletConfig;
         
         private int _currentBulletsCount;
         
@@ -20,13 +17,9 @@ namespace Models.Weapons.Services.Reloading.Base
         private bool _isReloading;
 
         protected Magazine(
-            BulletConfig bulletConfig,
-            IWeaponStatsCalculator weaponStatsCalculator,
-            IGameObjectFactory bulletsFactory)
+            IWeaponStatsCalculator weaponStatsCalculator)
         {
-            _bulletConfig = bulletConfig;
             _weaponStatsCalculator = weaponStatsCalculator;
-            _bulletsFactory = bulletsFactory;
             
             _currentBulletsCount = _weaponStatsCalculator.CalculateMagazineCapacity();
         }
@@ -77,7 +70,7 @@ namespace Models.Weapons.Services.Reloading.Base
                 _isMagazineEmpty = true;
             }
             
-            var bullet = _bulletsFactory.Create(_bulletConfig);
+            // var bullet = _bulletsFactory.Create(_bulletConfig);
             
             OnCurrentBulletsCountChanged?.Invoke(_currentBulletsCount, MagazineCapacity);
             

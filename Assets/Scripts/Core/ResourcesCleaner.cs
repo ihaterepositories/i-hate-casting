@@ -1,17 +1,28 @@
+using System;
 using System.Collections.Generic;
 using Core.AssetsLoading.PrefabsProviders.Interfaces;
 using Systems.ResourcesCleaning.Interfaces;
+using UnityEngine;
+using Zenject;
 
 namespace Core
 {
-    public class ResourcesCleaner
+    /// <summary>
+    /// Clean resources of all registered resource cleanables inside through Construct or AddResourceCleanable methods.
+    /// </summary>
+    public class ResourcesCleaner : MonoBehaviour
     {
         private readonly List<IResourceCleanable> _resourceCleanables = new();
-        
-        public ResourcesCleaner(
-            IPrefabsProvider prefabsProvider)
+
+        [Inject]
+        private void Construct(IAssetsLoader assetsLoader)
         {
-            _resourceCleanables.Add(prefabsProvider);
+            _resourceCleanables.Add(assetsLoader);
+        }
+
+        private void OnDisable()
+        {
+            CleanResources();
         }
 
         public void AddResourceCleanable(IResourceCleanable resourceCleanable)

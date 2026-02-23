@@ -71,7 +71,7 @@ namespace Core.Infrastructure
 
             Container.Bind<ItemsSpawner>().FromComponentInHierarchy().AsSingle();
             
-            Container.Bind<ResourcesCleaner>().AsSingle().NonLazy();
+            Container.Bind<ResourcesCleaner>().FromComponentInHierarchy().AsSingle();
             Container.Bind<GameBootstrapper>().FromComponentInHierarchy().AsSingle();
             
             Container.Bind<StatusTextValueProvidersFactory>().AsSingle().NonLazy();

@@ -1,7 +1,9 @@
 using Core.Pausing.Interfaces;
 using Models.Bullets.Dtos;
+using Models.Bullets.Services.LifeTimeCalculating.Enums;
 using Models.Bullets.Services.LifeTimeCalculating.Factories;
 using Models.Bullets.Services.LifeTimeCalculating.Interfaces;
+using Models.Bullets.Services.Moving.Enums;
 using Models.Bullets.Services.Moving.Factories;
 using Models.Bullets.Services.Moving.Interfaces;
 using Models.Creatures.Enums;
@@ -13,23 +15,21 @@ using Zenject;
 
 namespace Models.Bullets
 {
-    // Bullet don`t have personal stats. It gets them from a weapon.
-    public class Bullet : PoolableMonoBehaviour, IConfigurable<BulletConfig>
+    // Some bullet stats comes from weapon, from which bullet was launched. 
+    // This can be seen in the Launch method.
+    public class Bullet : PoolableMonoBehaviour
     {
         [Header("Dependencies")]
         [SerializeField] private Rigidbody2D _rb;
-        [SerializeField] private SpriteRenderer _spriteRenderer;
         
-        // Factories
-        private BulletMoversFactory _bulletMoversFactory;
-        private BulletLifeTimeCalculatorsFactory _bulletLifeTimeCalculatorsFactory;
+        [Header("Settings")]
+        [SerializeField] private CreatureType _bulletOwner;
+        [SerializeField] private BulletMoveType _bulletMoveType;
+        [SerializeField] private BulletLifeTimeCalculatorType _bulletLifeTimeCalculatorType;
         
-        // Services
         private IBulletMoveService _mover;
         private IBulletLifeTimeCalculateService _lifeTimeCalculator;
         
-        // Local logic
-        private CreatureType _bulletOwner;
         private float _damageToDeal;
         private bool _isLaunched;
         private IPauser _pauser;
@@ -40,8 +40,8 @@ namespace Models.Bullets
             BulletLifeTimeCalculatorsFactory bulletLifeTimeCalculatorsFactory,
             IPauser pauser)
         {
-            _bulletMoversFactory = bulletMoversFactory;
-            _bulletLifeTimeCalculatorsFactory = bulletLifeTimeCalculatorsFactory;
+            _mover = bulletMoversFactory.Create(_bulletMoveType, _rb, transform, 0);
+            _lifeTimeCalculator = bulletLifeTimeCalculatorsFactory.Create(_bulletLifeTimeCalculatorType, 0f, 0f);
             _pauser = pauser;
         }
 
@@ -68,14 +68,6 @@ namespace Models.Bullets
             }
             
             Destroy();
-        }
-
-        public void Configure(BulletConfig bulletConfig)
-        {
-            _bulletOwner = bulletConfig.BulletOwner;
-            _mover = _bulletMoversFactory.Create(bulletConfig.MoveType, _rb, transform, 0);
-            _lifeTimeCalculator = _bulletLifeTimeCalculatorsFactory.Create(bulletConfig.LifeTimeCalculatorType, 0f, 0f);
-            _spriteRenderer.sprite = bulletConfig.Sprite;
         }
 
         public void Launch(BulletLaunchData launchData)

@@ -13,9 +13,8 @@ namespace Core
     {
         [SerializeField] private SpawnerCreationData[] _creatureSpawnersCreationData;
         
-        private IPrefabsProvider _prefabsProvider;
+        private IAssetsLoader _assetsLoader;
         private SpawnersFactory _spawnersFactory;
-        private ResourcesCleaner _resourcesCleaner;
 
         /// <summary>
         /// Invokes when player has been spawned and pass a player object.
@@ -29,23 +28,16 @@ namespace Core
 
         [Inject]
         private void Construct(
-            IPrefabsProvider prefabsProvider,
-            SpawnersFactory spawnersFactory,
-            ResourcesCleaner resourcesCleaner)
+            IAssetsLoader assetsLoader,
+            SpawnersFactory spawnersFactory)
         {
-            _prefabsProvider = prefabsProvider;
+            _assetsLoader = assetsLoader;
             _spawnersFactory = spawnersFactory;
-            _resourcesCleaner = resourcesCleaner;
         }
 
         private async void Start()
         {
             
-        }
-
-        private void OnDisable()
-        {
-            _resourcesCleaner.CleanResources();
         }
 
         // private async void StartGame()
