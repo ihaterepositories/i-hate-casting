@@ -1,13 +1,12 @@
 using System;
 using System.Collections.Generic;
-using System.Threading;
 using System.Threading.Tasks;
-using Core.AssetsLoading.PrefabsProviders.Interfaces;
+using Core.AssetsLoaders.Interfaces;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
 using UnityEngine.ResourceManagement.AsyncOperations;
 
-namespace Core.AssetsLoading.PrefabsProviders
+namespace Core.AssetsLoaders
 {
     public class AddressablesAssetsLoader : IAssetsLoader
     {

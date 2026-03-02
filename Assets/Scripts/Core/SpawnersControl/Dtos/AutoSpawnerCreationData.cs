@@ -4,33 +4,34 @@ using Spawners.Services.SpawnBehaviourProviders.Enums;
 using Spawners.Services.SpawnPositionCalculators.Enums;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
+using UnityEngine.Serialization;
 
 namespace Core.Dtos
 {
     [Serializable]
-    public class SpawnerCreationData
+    public class AutoSpawnerCreationData
     {
-        [SerializeField] private AssetReferenceGameObject _gameObjectToSpawn;
+        [SerializeField] private AssetReferenceGameObject _prefabToSpawn;
         [SerializeField] private InstantiatingType _instantiatingType;
         [SerializeField] private SpawnPositionType _spawnPositionType;
         [SerializeField] private SpawnBehaviourType _spawnBehaviourType;
         [SerializeField] private float _spawnInterval;
 
-        public SpawnerCreationData(
-            AssetReferenceGameObject gameObjectToSpawn,
+        public AutoSpawnerCreationData(
+            AssetReferenceGameObject prefabToSpawn,
             InstantiatingType instantiatingType,
             SpawnPositionType spawnPositionType, 
             SpawnBehaviourType spawnBehaviourType, 
             float spawnInterval)
         {
-            _gameObjectToSpawn = gameObjectToSpawn;
+            _prefabToSpawn = prefabToSpawn;
             _instantiatingType = instantiatingType;
             _spawnPositionType = spawnPositionType;
             _spawnBehaviourType = spawnBehaviourType;
             _spawnInterval = spawnInterval;
         }
         
-        public AssetReferenceGameObject GameObjectToSpawn => _gameObjectToSpawn;
+        public AssetReferenceGameObject PrefabToSpawn => _prefabToSpawn;
         public InstantiatingType InstantiatingType => _instantiatingType;
         public SpawnPositionType SpawnPositionType => _spawnPositionType;
         public SpawnBehaviourType SpawnBehaviourType => _spawnBehaviourType;

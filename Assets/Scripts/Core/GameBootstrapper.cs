@@ -1,5 +1,6 @@
 using System;
-using Core.AssetsLoading.PrefabsProviders.Interfaces;
+using System.Threading.Tasks;
+using Core.AssetsLoaders.Interfaces;
 using Core.Dtos;
 using Models.Creatures;
 using Spawners.Factories;
@@ -11,11 +12,8 @@ namespace Core
     [DisallowMultipleComponent]
     public class GameBootstrapper : MonoBehaviour
     {
-        [SerializeField] private SpawnerCreationData[] _creatureSpawnersCreationData;
+        [SerializeField] private SpawnersInitializer _spawnersInitializer;
         
-        private IAssetsLoader _assetsLoader;
-        private SpawnersFactory _spawnersFactory;
-
         /// <summary>
         /// Invokes when player has been spawned and pass a player object.
         /// </summary>
@@ -28,11 +26,9 @@ namespace Core
 
         [Inject]
         private void Construct(
-            IAssetsLoader assetsLoader,
-            SpawnersFactory spawnersFactory)
+            SpawnersInitializer spawnersInitializer)
         {
-            _assetsLoader = assetsLoader;
-            _spawnersFactory = spawnersFactory;
+            _spawnersInitializer = spawnersInitializer;
         }
 
         private async void Start()
@@ -40,25 +36,18 @@ namespace Core
             
         }
 
-        // private async void StartGame()
-        // {
-        //     var creatureSpawners =
-        //         _configurablesSpawnersFactory.CreateSpawners<Creature, CreatureConfig, CreatureConfigKey>(_creatureSpawnersCreationData);
-        //     
-        //     _playerSpawner = _configurablesSpawnersFactory.CreatePlayerSpawner();
-        //     _playerSpawner.OnModelSpawned += HandlePlayerSpawned;
-        //     
-        //     yield return _playerSpawner.LaunchSpawning();
-        //     
-        //     // Delay before enemies spawn start
-        //     yield return new WaitForSeconds(3f);
-        //
-        //     foreach (var creatureSpawner in creatureSpawners)
-        //     {
-        //         StartCoroutine(creatureSpawner.LaunchSpawning());
-        //     }
-        // }
-        //
+        private async Task StartGame()
+        {
+            await _spawnersInitializer.Initialize();
+            
+            // Hide loading screen
+            
+            // Delay before enemies spawn start
+            await Task.Delay(3000);
+        
+            
+        }
+        
         // private void HandlePlayerSpawned(Creature creature)
         // {
         //     Debug.Log($"Player spawned");

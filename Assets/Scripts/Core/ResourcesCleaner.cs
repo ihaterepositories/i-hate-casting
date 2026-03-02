@@ -1,6 +1,6 @@
 using System;
 using System.Collections.Generic;
-using Core.AssetsLoading.PrefabsProviders.Interfaces;
+using Core.AssetsLoaders.Interfaces;
 using Systems.ResourcesCleaning.Interfaces;
 using UnityEngine;
 using Zenject;

@@ -4,11 +4,13 @@ using Models.Bullets;
 using Models.Bullets.Dtos;
 using Models.Weapons.Services.Reloading.Interfaces;
 using Models.Weapons.Services.StatsCalculating.Interfaces;
+using Spawners.Interfaces;
 
 namespace Models.Weapons.Services.Reloading.Base
 {
     public abstract class Magazine : IMagazineService
     {
+        private readonly ISpawner<Bullet> _bulletsSpawner;
         private readonly IWeaponStatsCalculator _weaponStatsCalculator;
         
         private int _currentBulletsCount;
@@ -17,8 +19,10 @@ namespace Models.Weapons.Services.Reloading.Base
         private bool _isReloading;
 
         protected Magazine(
+            ISpawner<Bullet> bulletsSpawner,
             IWeaponStatsCalculator weaponStatsCalculator)
         {
+            _bulletsSpawner = bulletsSpawner;
             _weaponStatsCalculator = weaponStatsCalculator;
             
             _currentBulletsCount = _weaponStatsCalculator.CalculateMagazineCapacity();
@@ -69,8 +73,8 @@ namespace Models.Weapons.Services.Reloading.Base
                 OnMagazineEmptied?.Invoke();
                 _isMagazineEmpty = true;
             }
-            
-            // var bullet = _bulletsFactory.Create(_bulletConfig);
+
+            var bullet = _bulletsSpawner.Spawn();
             
             OnCurrentBulletsCountChanged?.Invoke(_currentBulletsCount, MagazineCapacity);
             

@@ -1,11 +1,12 @@
-using System.Collections;
 using Systems.Pooling.Models;
 
 namespace Spawners.Interfaces
 {
-    // Handles gameobjects instantiating behaviour.
+    /// <summary>
+    /// Spawns and returns game object. No auto spawn.
+    /// </summary>
     public interface ISpawner<T> where T : PoolableMonoBehaviour
     {
-        public IEnumerator LaunchSpawning();
+        public T Spawn();
     }
 }

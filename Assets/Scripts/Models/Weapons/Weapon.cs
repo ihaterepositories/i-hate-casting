@@ -1,4 +1,5 @@
 using Core.Pausing.Interfaces;
+using Models.Bullets.Enums;
 using Models.Weapons.Dtos;
 using Models.Weapons.Enums;
 using Models.Weapons.Services.Aiming.Enums;
@@ -24,6 +25,7 @@ namespace Models.Weapons
     {
         [Header("Settings")]
         [SerializeField] private WeaponType _weaponType;
+        [SerializeField] private BulletType _bulletType;
         [SerializeField] private ShootType _shootType;
         [SerializeField] private ReloadType _reloadType;
         [SerializeField] private AimType _aimType;
@@ -49,7 +51,7 @@ namespace Models.Weapons
             _weaponStatsCalculator = statsCalculatorsFactory.Create(_weaponType, _weaponStats);
             
             _magazine = weaponMagazinesFactory.Create(
-                _bulletToUse,
+                _bulletType,
                 _reloadType,
                 _weaponStatsCalculator);
 

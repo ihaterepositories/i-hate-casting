@@ -1,34 +1,54 @@
+using System;
+using System.Collections.Generic;
+using Core;
 using Core.Input.Interfaces;
 using Models.Bullets;
 using Models.Bullets.Dtos;
+using Models.Bullets.Enums;
 using Models.Weapons.Services.Reloading.Base;
 using Models.Weapons.Services.Reloading.Enums;
 using Models.Weapons.Services.StatsCalculating.Interfaces;
+using Spawners.Interfaces;
 
 namespace Models.Weapons.Services.Reloading.Factories
 {
     public class WeaponMagazinesFactory
     {
-        private readonly IGameObjectFactory _bulletsFactory;
-        private readonly IConfigsProvider _configsProvider;
         private readonly IInputHandler _inputHandler;
+        private readonly SpawnersInitializer _spawnersInitializer;
         
-        public WeaponMagazinesFactory(GameObjectFactoriesFactory gameObjectFactoriesFactory, IInputHandler inputHandler)
+        private bool _isSpawnersInitialized;
+        
+        public WeaponMagazinesFactory(
+            IInputHandler inputHandler,
+            SpawnersInitializer spawnersInitializer)
         {
-            _bulletsFactory = gameObjectFactoriesFactory.GetFor<Bullet, BulletConfig>();
             _inputHandler = inputHandler;
+            _spawnersInitializer = spawnersInitializer;
+            
+            _spawnersInitializer.OnInitialized += SetInitializeFlag;
         }
         
         public Magazine Create(
-            BulletConfigKey bulletConfigKey,
+            BulletType bulletType,
             ReloadType reloadType,
             IWeaponStatsCalculator statsCalculator)
         {
+            if (!_isSpawnersInitialized) throw new Exception("Bullet spawners not initialized!");
+            
             return reloadType switch
             {
-                ReloadType.ByInput => new ByInputControlledMagazine(_configsProvider.GetFor<BulletConfig>(bulletConfigKey.ToString()), statsCalculator, _bulletsFactory, _inputHandler),
-                _ => throw new System.ArgumentOutOfRangeException(nameof(reloadType), reloadType, null)
+                ReloadType.ByInput => 
+                    new ByInputControlledMagazine(_spawnersInitializer.BulletSpawners[bulletType], statsCalculator, _inputHandler),
+                
+                _ => throw new ArgumentOutOfRangeException(nameof(reloadType), reloadType, null)
             };
+        }
+        
+        private void SetInitializeFlag()
+        { 
+            _isSpawnersInitialized = true;
+            _spawnersInitializer.OnInitialized -= SetInitializeFlag;
         }
     }
 }

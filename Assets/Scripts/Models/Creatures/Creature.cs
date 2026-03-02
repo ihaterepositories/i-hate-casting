@@ -161,12 +161,12 @@ namespace Models.Creatures
 
         private void HandleSpriteFlip()
         {
-            if (_rigidbody2D.velocity.x < 0 && !_isSpriteFlipped)
+            if (_rigidbody2D.linearVelocity.x < 0 && !_isSpriteFlipped)
             {
                 _spriteRenderer.flipX = true;
                 _isSpriteFlipped = true;
             }
-            else if (_rigidbody2D.velocity.x > 0 && _isSpriteFlipped)
+            else if (_rigidbody2D.linearVelocity.x > 0 && _isSpriteFlipped)
             {
                 _spriteRenderer.flipX = false;
                 _isSpriteFlipped = false;

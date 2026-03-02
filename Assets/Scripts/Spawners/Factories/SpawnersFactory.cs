@@ -27,7 +27,7 @@ namespace Spawners.Factories
             _spawnBehaviourProvidersFactory = spawnBehaviourProvidersFactory;
         }
 
-        public ISpawner<T> Create<T>(
+        public IAutoSpawner<T> CreateAutoSpawner<T>(
             GameObject prefab,
             InstantiatingType instantiatingType,
             SpawnPositionType spawnPositionType, 
@@ -37,11 +37,19 @@ namespace Spawners.Factories
         {
             if (delayBeforeNextSpawn < 0) throw new Exception("Delay before next spawn can't be less than 0!");
             
-            return new Spawner<T>(
+            return new AutoSpawner<T>(
                 _instantiatersFactory.Create<T>(instantiatingType, prefab),
                 _spawnPositionCalculatorsFactory.Create(spawnPositionType),
                 _spawnBehaviourProvidersFactory.Create(spawnBehaviourType),
                 delayBeforeNextSpawn);
+        }
+
+        public ISpawner<T> CreateSpawner<T>(
+            GameObject prefab,
+            InstantiatingType instantiatingType
+            ) where T : PoolableMonoBehaviour
+        {
+            return new Spawner<T>(_instantiatersFactory.Create<T>(instantiatingType, prefab));
         }
     }
 }

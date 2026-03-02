@@ -11,8 +11,8 @@ namespace Models.Creatures.Services.Moving.Base
         protected readonly ICreatureStatsCalculator _statsCalculateService;
         protected readonly Rigidbody2D _rb;
         
-        public bool IsMoving => _rb.velocity.magnitude > 0.01f;
-        public bool IsDirectedToTheRight => _rb.velocity.x > 0;
+        public bool IsMoving => _rb.linearVelocity.magnitude > 0.01f;
+        public bool IsDirectedToTheRight => _rb.linearVelocity.x > 0;
         
         protected Mover(
             ICreatureStatsCalculator statsCalculateService,

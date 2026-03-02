@@ -35,7 +35,7 @@ namespace Models.Creatures.Services.Moving
         
         private void ChangeVelocityByInput()
         {
-            _rb.velocity = new Vector2(_horizontalAxis, _verticalAxis).normalized * _statsCalculateService.CalculateSpeed();
+            _rb.linearVelocity = new Vector2(_horizontalAxis, _verticalAxis).normalized * _statsCalculateService.CalculateSpeed();
         }
     }
 }

@@ -1,7 +1,9 @@
 using Core.Input.Interfaces;
+using Models.Bullets;
 using Models.Bullets.Dtos;
 using Models.Weapons.Services.Reloading.Base;
 using Models.Weapons.Services.StatsCalculating.Interfaces;
+using Spawners.Interfaces;
 
 namespace Models.Weapons.Services.Reloading
 {
@@ -10,10 +12,9 @@ namespace Models.Weapons.Services.Reloading
         private readonly IInputHandler _inputHandler;
         
         public ByInputControlledMagazine(
-            BulletConfig bulletConfig,
+            ISpawner<Bullet> bulletsSpawner,
             IWeaponStatsCalculator statsCalculator,
-            IGameObjectFactory bulletsFactory,
-            IInputHandler inputHandler) : base(bulletConfig, statsCalculator, bulletsFactory)
+            IInputHandler inputHandler) : base(bulletsSpawner, statsCalculator)
         {
             _inputHandler = inputHandler;
         }

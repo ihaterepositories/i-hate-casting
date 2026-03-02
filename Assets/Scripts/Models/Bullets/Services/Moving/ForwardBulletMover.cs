@@ -15,7 +15,7 @@ namespace Models.Bullets.Services.Moving
 
         public void EnableMove()
         {
-            _rigidbody2D.velocity = _transform.right * _moveSpeed;
+            _rigidbody2D.linearVelocity = _transform.right * _moveSpeed;
         }
 
         public void UpdateSpeed(float newSpeed)

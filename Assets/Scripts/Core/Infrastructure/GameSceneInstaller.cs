@@ -1,3 +1,5 @@
+using Core.AssetsLoaders;
+using Core.AssetsLoaders.Interfaces;
 using Core.Pausing;
 using Core.Pausing.Interfaces;
 using Models.Bullets.Services.LifeTimeCalculating.Factories;
@@ -38,6 +40,15 @@ namespace Core.Infrastructure
     {
         public override void InstallBindings()
         {
+            Container.Bind<IAssetsLoader>().To<AddressablesAssetsLoader>().AsSingle().NonLazy();
+            
+            Container.Bind<InstantiatersFactory>().AsSingle().NonLazy();
+            Container.Bind<SpawnPositionCalculatorsFactory>().AsSingle().NonLazy();
+            Container.Bind<SpawnBehaviourProvidersFactory>().AsSingle().NonLazy();
+            Container.Bind<SpawnersFactory>().AsSingle().NonLazy();
+            
+            Container.Bind<SpawnersInitializer>().FromComponentInHierarchy().AsSingle().NonLazy();
+            
             Container.Bind<SafeSpawnSettings>().FromScriptableObjectResource("SafeSpawnSettings").AsSingle().NonLazy();
             
             Container.Bind<IPauser>().To<Pauser>().AsSingle().NonLazy();
@@ -63,11 +74,6 @@ namespace Core.Infrastructure
             Container.Bind<CreatureMoveBoostersFactory>().AsSingle().NonLazy();
             Container.Bind<CreatureDestroyersFactory>().AsSingle().NonLazy();
             Container.Bind<CreatureAnimationLaunchersFactory>().AsSingle().NonLazy();
-
-            Container.Bind<InstantiatersFactory>().AsSingle().NonLazy();
-            Container.Bind<SpawnPositionCalculatorsFactory>().AsSingle().NonLazy();
-            Container.Bind<SpawnBehaviourProvidersFactory>().AsSingle().NonLazy();
-            Container.Bind<SpawnersFactory>().AsSingle().NonLazy();
 
             Container.Bind<ItemsSpawner>().FromComponentInHierarchy().AsSingle();
             

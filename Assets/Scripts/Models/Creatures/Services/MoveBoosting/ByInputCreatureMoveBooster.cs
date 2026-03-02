@@ -19,7 +19,7 @@ namespace Models.Creatures.Services.MoveBoosting
         private float _boostTimer;
         private float _boostCooldownTimer;
         
-        private bool _isMoving => _rigidbody2D.velocity.sqrMagnitude > 0.01f;
+        private bool _isMoving => _rigidbody2D.linearVelocity.sqrMagnitude > 0.01f;
         
         public event Action OnBoostActivated;
         
@@ -39,7 +39,7 @@ namespace Models.Creatures.Services.MoveBoosting
         public void EnableBoost()
         {
             if (_boostCoefficient <= 1f) return;
-            _rigidbody2D.velocity *= _boostCoefficient;
+            _rigidbody2D.linearVelocity *= _boostCoefficient;
         }
         
         public void HandleTimings()

@@ -29,7 +29,7 @@ namespace Models.Creatures.Services.Moving
 
             Vector2 newVelocity = finalDirection * _statsCalculateService.CalculateSpeed();
 
-            _rb.velocity = Vector2.Lerp(_rb.velocity, newVelocity, Time.fixedDeltaTime * 5f);
+            _rb.linearVelocity = Vector2.Lerp(_rb.linearVelocity, newVelocity, Time.fixedDeltaTime * 5f);
         }
 
         private Vector2 CalculateDirectionToPlayerVector()
