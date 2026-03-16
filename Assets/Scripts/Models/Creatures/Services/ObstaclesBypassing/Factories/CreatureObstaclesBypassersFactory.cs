@@ -1,4 +1,6 @@
-using Core;
+using System;
+using Core.GameEventsControl.Interfaces;
+using Core.GameEventsControl.Signals;
 using Models.Creatures.Services.ObstaclesBypassing.Dtos;
 using Models.Creatures.Services.ObstaclesBypassing.Enums;
 using Models.Creatures.Services.ObstaclesBypassing.Interfaces;
@@ -8,15 +10,22 @@ namespace Models.Creatures.Services.ObstaclesBypassing.Factories
 {
     public class CreatureObstaclesBypassersFactory
     {
-        private Transform _playerTransform;
+        private readonly IEventBusSubscriber _eventBusSubscriber;
         
-        public CreatureObstaclesBypassersFactory()
+        private Transform _playerTransform;
+        private bool _isInitialized;
+        
+        public CreatureObstaclesBypassersFactory(IEventBusSubscriber eventBusSubscriber)
         {
-            GameBootstrapper.OnPlayerSpawned += Initialize;
+            _eventBusSubscriber = eventBusSubscriber;
+            _eventBusSubscriber.Subscribe<PlayerSpawnedSignal>(Initialize);
         }
         
         public IObstaclesBypassForCreatureService Create(CreatureObstaclesBypassType creatureObstaclesBypassType, Transform transform)
         {
+            if (!_isInitialized) 
+                throw new Exception("CreatureObstaclesBypassersFactory is not initialized yet. Cannot create an object.");
+            
             switch (creatureObstaclesBypassType)
             {
                 default:
@@ -29,10 +38,11 @@ namespace Models.Creatures.Services.ObstaclesBypassing.Factories
             }
         }
         
-        private void Initialize(Creature player)
+        private void Initialize(PlayerSpawnedSignal playerSpawnedSignal)
         {
-            _playerTransform = player.transform;
-            GameBootstrapper.OnPlayerSpawned -= Initialize;
+            _playerTransform = playerSpawnedSignal.Player.transform;
+            _eventBusSubscriber.Unsubscribe<PlayerSpawnedSignal>(Initialize);
+            _isInitialized = true;
         }
     }
 }

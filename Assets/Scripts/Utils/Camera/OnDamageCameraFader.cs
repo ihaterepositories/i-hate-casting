@@ -1,8 +1,10 @@
 using System.Collections;
-using Core;
+using Core.GameEventsControl.Interfaces;
+using Core.GameEventsControl.Signals;
 using Models.Creatures;
 using UnityEngine;
 using UnityEngine.Rendering.PostProcessing;
+using Zenject;
 
 namespace Utils.Camera
 {
@@ -16,31 +18,35 @@ namespace Utils.Camera
         [SerializeField] private float _fadeInSpeed;
         [SerializeField] private float _fadeOutSpeed;
         
+        private IEventBusSubscriber _eventBusSubscriber;
+        
         private Vignette _vignette;
         private Creature _player;
         
         private bool _fadingIn;
         private bool _isAnimating;
+        
+        [Inject]
+        private void Construct(IEventBusSubscriber eventBusSubscriber)
+        {
+            _eventBusSubscriber = eventBusSubscriber;
+            _eventBusSubscriber.Subscribe<PlayerSpawnedSignal>(Initialize);
+        }
 
         private void Awake()
         {
             _postProcessVolume.profile.TryGetSettings(out _vignette);
         }
 
-        private void OnEnable()
-        {
-            GameBootstrapper.OnPlayerSpawned += Initialize;
-        }
-
         private void OnDisable()
         {
-            GameBootstrapper.OnPlayerSpawned -= Initialize;
+            _eventBusSubscriber.Unsubscribe<PlayerSpawnedSignal>(Initialize);
             _player.Health.OnDamaged -= FadeInVignette;
         }
 
-        private void Initialize(Creature player)
+        private void Initialize(PlayerSpawnedSignal playerSpawnedSignal)
         {
-            _player = player;
+            _player = playerSpawnedSignal.Player;
             _player.Health.OnDamaged += FadeInVignette;
         }
 

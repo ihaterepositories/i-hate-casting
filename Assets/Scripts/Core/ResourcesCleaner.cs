@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Core.AssetsLoaders.Interfaces;
 using Systems.ResourcesCleaning.Interfaces;

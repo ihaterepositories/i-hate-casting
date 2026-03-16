@@ -1,5 +1,6 @@
 using System;
-using Core;
+using Core.GameEventsControl.Interfaces;
+using Core.GameEventsControl.Signals;
 using Models.Creatures;
 using Models.UI.StatusTexts.Services.ValueProviding.Enums;
 using Models.UI.StatusTexts.Services.ValueProviding.Interfaces;
@@ -8,12 +9,15 @@ namespace Models.UI.StatusTexts.Services.ValueProviding.Factories
 {
     public class StatusTextValueProvidersFactory
     {
+        private IEventBusSubscriber _eventBusSubscriber;
         private Creature _player;
+        
         private bool _isInitialized;
 
-        public StatusTextValueProvidersFactory()
+        public StatusTextValueProvidersFactory(IEventBusSubscriber eventBusSubscriber)
         {
-            GameBootstrapper.OnPlayerSpawned += Initialize;
+            _eventBusSubscriber = eventBusSubscriber;
+            _eventBusSubscriber.Subscribe<PlayerSpawnedSignal>(Initialize);
         }
 
         public IStatusTextValueProvideService Create(StatusTextValueResourceType resourceType)
@@ -28,10 +32,10 @@ namespace Models.UI.StatusTexts.Services.ValueProviding.Factories
             };
         }
         
-        private void Initialize(Creature player)
+        private void Initialize(PlayerSpawnedSignal playerSpawnedSignal)
         {
-            GameBootstrapper.OnPlayerSpawned -= Initialize;
-            _player = player;
+            _eventBusSubscriber.Unsubscribe<PlayerSpawnedSignal>(Initialize);
+            _player = playerSpawnedSignal.Player;
             _isInitialized = true;
         }
     }

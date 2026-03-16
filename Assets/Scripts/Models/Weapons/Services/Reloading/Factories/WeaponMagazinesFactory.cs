@@ -1,9 +1,9 @@
 using System;
 using System.Collections.Generic;
-using Core;
+using Core.GameEventsControl.Interfaces;
+using Core.GameEventsControl.Signals;
 using Core.Input.Interfaces;
 using Models.Bullets;
-using Models.Bullets.Dtos;
 using Models.Bullets.Enums;
 using Models.Weapons.Services.Reloading.Base;
 using Models.Weapons.Services.Reloading.Enums;
@@ -14,19 +14,21 @@ namespace Models.Weapons.Services.Reloading.Factories
 {
     public class WeaponMagazinesFactory
     {
-        private readonly IInputHandler _inputHandler;
-        private readonly SpawnersInitializer _spawnersInitializer;
+        private readonly IEventBusSubscriber _eventBusSubscriber;
         
-        private bool _isSpawnersInitialized;
+        private readonly IInputHandler _inputHandler;
+        private Dictionary<BulletType, ISpawner<Bullet>> _bulletSpawners;
+        
+        private bool _isInitialized;
         
         public WeaponMagazinesFactory(
-            IInputHandler inputHandler,
-            SpawnersInitializer spawnersInitializer)
+            IEventBusSubscriber eventBusSubscriber,
+            IInputHandler inputHandler)
         {
+            _eventBusSubscriber = eventBusSubscriber;
             _inputHandler = inputHandler;
-            _spawnersInitializer = spawnersInitializer;
             
-            _spawnersInitializer.OnInitialized += SetInitializeFlag;
+            _eventBusSubscriber.Subscribe<BulletSpawnersInitializedSignal>(Initialize);
         }
         
         public Magazine Create(
@@ -34,21 +36,22 @@ namespace Models.Weapons.Services.Reloading.Factories
             ReloadType reloadType,
             IWeaponStatsCalculator statsCalculator)
         {
-            if (!_isSpawnersInitialized) throw new Exception("Bullet spawners not initialized!");
+            if (!_isInitialized) throw new Exception("Factory is not initialized!");
             
             return reloadType switch
             {
                 ReloadType.ByInput => 
-                    new ByInputControlledMagazine(_spawnersInitializer.BulletSpawners[bulletType], statsCalculator, _inputHandler),
+                    new ByInputControlledMagazine(_bulletSpawners[bulletType], statsCalculator, _inputHandler),
                 
                 _ => throw new ArgumentOutOfRangeException(nameof(reloadType), reloadType, null)
             };
         }
         
-        private void SetInitializeFlag()
+        private void Initialize(BulletSpawnersInitializedSignal bulletSpawnersInitializedSignal)
         { 
-            _isSpawnersInitialized = true;
-            _spawnersInitializer.OnInitialized -= SetInitializeFlag;
+            _eventBusSubscriber.Unsubscribe<BulletSpawnersInitializedSignal>(Initialize);
+            _bulletSpawners = bulletSpawnersInitializedSignal.BulletSpawners;
+            _isInitialized = true;
         }
     }
 }

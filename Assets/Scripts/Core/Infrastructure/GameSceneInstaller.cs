@@ -1,7 +1,13 @@
 using Core.AssetsLoaders;
 using Core.AssetsLoaders.Interfaces;
+using Core.GameEventsControl;
+using Core.GameEventsControl.Interfaces;
 using Core.Pausing;
 using Core.Pausing.Interfaces;
+using Core.RoundBootstrapControl;
+using Core.RoundBootstrapControl.Interfaces;
+using Core.SpawnersControl;
+using Core.SpawnersControl.Interfaces;
 using Models.Bullets.Services.LifeTimeCalculating.Factories;
 using Models.Bullets.Services.Moving.Factories;
 using Models.Creatures.Services.Animating.Factories;
@@ -11,7 +17,7 @@ using Models.Creatures.Services.MoveBoosting.Factories;
 using Models.Creatures.Services.Moving.Factories;
 using Models.Creatures.Services.ObstaclesBypassing.Factories;
 using Models.Creatures.Services.StatsCalculating.Factories;
-using Models.Creatures.Services.StatsCalculating.StatsModifying.Providers;
+using Models.Creatures.Services.StatsMultiplying.Providers;
 using Models.Interactables.Base.Visuals;
 using Models.UI.CooldownViewBars.Services.ValueProviding.Factories;
 using Models.UI.QuantityViewBars.Services.ValueProviding.Factories;
@@ -22,7 +28,7 @@ using Models.Weapons.Services.Aiming.Factories;
 using Models.Weapons.Services.Reloading.Factories;
 using Models.Weapons.Services.Shooting.Factories;
 using Models.Weapons.Services.StatsCalculating.Factories;
-using Models.Weapons.Services.StatsModifying.Providers;
+using Models.Weapons.Services.StatsMultiplying.Providers;
 using Pooling.Factories;
 using Spawners;
 using Spawners.Factories;
@@ -32,6 +38,8 @@ using Spawners.Services.SpawnPositionCalculators.Dtos;
 using Spawners.Services.SpawnPositionCalculators.Factories;
 using UIServices.CountdownVisualizers.Factories;
 using UIServices.ImageFadeAnimators.Factories;
+using Utils.Timers;
+using Utils.Timers.Interfaces;
 using Zenject;
 
 namespace Core.Infrastructure
@@ -40,23 +48,28 @@ namespace Core.Infrastructure
     {
         public override void InstallBindings()
         {
+            Container.Bind<SafeSpawnSettings>().FromScriptableObjectResource("SafeSpawnSettings").AsSingle().NonLazy();
+
+            Container.Bind<ITimer>().To<AsyncTimer>().AsSingle().NonLazy();
+            Container.Bind<IPauser>().To<Pauser>().AsSingle().NonLazy();
             Container.Bind<IAssetsLoader>().To<AddressablesAssetsLoader>().AsSingle().NonLazy();
+            
+            Container.Bind<EventBus>().AsSingle();
+            Container.Bind<IEventBusInvoker>().To<EventBus>().FromResolve();
+            Container.Bind<IEventBusSubscriber>().To<EventBus>().FromResolve();
             
             Container.Bind<InstantiatersFactory>().AsSingle().NonLazy();
             Container.Bind<SpawnPositionCalculatorsFactory>().AsSingle().NonLazy();
             Container.Bind<SpawnBehaviourProvidersFactory>().AsSingle().NonLazy();
             Container.Bind<SpawnersFactory>().AsSingle().NonLazy();
             
-            Container.Bind<SpawnersInitializer>().FromComponentInHierarchy().AsSingle().NonLazy();
+            Container.Bind<ISpawnersCreator>().To<SpawnersCreator>().FromComponentInHierarchy().AsSingle().NonLazy();
+            Container.Bind<IGameBootstrapper>().To<GameBootstrapper>().FromComponentInHierarchy().AsSingle();
             
-            Container.Bind<SafeSpawnSettings>().FromScriptableObjectResource("SafeSpawnSettings").AsSingle().NonLazy();
-            
-            Container.Bind<IPauser>().To<Pauser>().AsSingle().NonLazy();
-            
-            Container.Bind<CreatureStatsModifiersProvider>().AsSingle().NonLazy();
+            Container.Bind<CreatureStatsMultipliersProvider>().AsSingle().NonLazy();
             Container.Bind<CreatureStatsCalculatorsFactory>().AsSingle().NonLazy();
             
-            Container.Bind<WeaponStatsModifiersProvider>().AsSingle().NonLazy();
+            Container.Bind<WeaponStatsMultipliersProvider>().AsSingle().NonLazy();
             Container.Bind<WeaponStatsCalculatorsFactory>().AsSingle().NonLazy();
             
             Container.Bind<ObjectPoolsFactory>().AsSingle().NonLazy();
@@ -78,12 +91,11 @@ namespace Core.Infrastructure
             Container.Bind<ItemsSpawner>().FromComponentInHierarchy().AsSingle();
             
             Container.Bind<ResourcesCleaner>().FromComponentInHierarchy().AsSingle();
-            Container.Bind<GameBootstrapper>().FromComponentInHierarchy().AsSingle();
             
             Container.Bind<StatusTextValueProvidersFactory>().AsSingle().NonLazy();
             Container.Bind<StatusTextVisualizersFactory>().AsSingle().NonLazy();
             
-            Container.Bind<QuantityVewBarValueProvidersFactory>().AsSingle().NonLazy();
+            Container.Bind<QuantityViewBarValueProvidersFactory>().AsSingle().NonLazy();
             Container.Bind<QuantityViewBarVisualizersFactory>().AsSingle().NonLazy();
             
             Container.Bind<CooldownViewBarValueProvidersFactory>().AsSingle().NonLazy();

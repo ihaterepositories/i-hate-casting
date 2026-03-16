@@ -4,9 +4,8 @@ using Spawners.Services.SpawnBehaviourProviders.Enums;
 using Spawners.Services.SpawnPositionCalculators.Enums;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
-using UnityEngine.Serialization;
 
-namespace Core.Dtos
+namespace Core.SpawnersControl.Dtos
 {
     [Serializable]
     public class AutoSpawnerCreationData

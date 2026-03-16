@@ -1,4 +1,5 @@
-using Core;
+using Core.GameEventsControl.Interfaces;
+using Core.GameEventsControl.Signals;
 using DG.Tweening;
 using Models.UI.QuantityViewBars.Services.ValueProviding.Enums;
 using Models.UI.QuantityViewBars.Services.ValueProviding.Factories;
@@ -15,15 +16,17 @@ namespace Models.UI.QuantityViewBars
     public class QuantityViewBar : MonoBehaviour
     {
         [Header("Dependencies")]
-        [SerializeField] protected Image _barImage;
+        [SerializeField] private Image _barImage;
         
         [Header("Settings")]
         [SerializeField] private QuantityViewBarVisualizingType _visualizingType;
         [SerializeField] private QuantityViewBarValueResourceType _resourceType;
 
+        private IEventBusSubscriber _eventBusSubscriber;
+        
         // Factories
         private QuantityViewBarVisualizersFactory _quantityViewBarVisualizersFactory;
-        private QuantityVewBarValueProvidersFactory _quantityVewBarValueProvidersFactory;
+        private QuantityViewBarValueProvidersFactory _quantityViewBarValueProvidersFactory;
         
         // Services
         private IQuantityViewBarVisualizer _quantityViewBarVisualizer;
@@ -31,16 +34,18 @@ namespace Models.UI.QuantityViewBars
         
         [Inject]
         private void Construct(
-            QuantityVewBarValueProvidersFactory quantityVewBarValueProvidersFactory,
+            IEventBusSubscriber eventBusSubscriber,
+            QuantityViewBarValueProvidersFactory quantityViewBarValueProvidersFactory,
             QuantityViewBarVisualizersFactory quantityViewBarVisualizersFactory)
         {
-            _quantityVewBarValueProvidersFactory = quantityVewBarValueProvidersFactory;
+            _eventBusSubscriber = eventBusSubscriber;
+            _quantityViewBarValueProvidersFactory = quantityViewBarValueProvidersFactory;
             _quantityViewBarVisualizersFactory = quantityViewBarVisualizersFactory;
         }
 
         private void OnEnable()
         {
-            GameBootstrapper.OnPlayerSpawnedNotify += Initialize;
+            _eventBusSubscriber.Subscribe<PlayerSpawnedSignal>(Initialize);
         }
 
         private void OnDisable()
@@ -50,10 +55,10 @@ namespace Models.UI.QuantityViewBars
             _barImage.DOKill();
         }
 
-        private void Initialize()
+        private void Initialize(PlayerSpawnedSignal playerSpawnedSignal)
         {
-            GameBootstrapper.OnPlayerSpawnedNotify -= Initialize;
-            _quantityBarValueProvider = _quantityVewBarValueProvidersFactory.Create(_resourceType);
+            _eventBusSubscriber.Unsubscribe<PlayerSpawnedSignal>(Initialize);
+            _quantityBarValueProvider = _quantityViewBarValueProvidersFactory.Create(_resourceType);
             _quantityViewBarVisualizer = _quantityViewBarVisualizersFactory.Create(_visualizingType, _barImage, _quantityBarValueProvider);   
             _quantityBarValueProvider.OnValueChanged += UpdateBar;
         }

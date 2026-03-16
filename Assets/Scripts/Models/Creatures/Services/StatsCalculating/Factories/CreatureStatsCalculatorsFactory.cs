@@ -1,22 +1,22 @@
 using Models.Creatures.Dtos;
 using Models.Creatures.Enums;
 using Models.Creatures.Services.StatsCalculating.Interfaces;
-using Models.Creatures.Services.StatsCalculating.StatsModifying.Providers;
+using Models.Creatures.Services.StatsMultiplying.Providers;
 
 namespace Models.Creatures.Services.StatsCalculating.Factories
 {
     public class CreatureStatsCalculatorsFactory
     {
-       private readonly CreatureStatsModifiersProvider _statsModifiersProvider;
+       private readonly CreatureStatsMultipliersProvider _statsMultipliersProvider;
 
-       public CreatureStatsCalculatorsFactory(CreatureStatsModifiersProvider statsModifiersProvider)
+       public CreatureStatsCalculatorsFactory(CreatureStatsMultipliersProvider statsMultipliersProvider)
        {
-           _statsModifiersProvider = statsModifiersProvider;
+           _statsMultipliersProvider = statsMultipliersProvider;
        }
 
        public ICreatureStatsCalculator Create(CreatureType creatureType, CreatureStats creatureStats)
        {
-           return new CreatureStatsCalculateService(creatureStats, _statsModifiersProvider.GetFor(creatureType));
+           return new CreatureStatsCalculateService(creatureStats, _statsMultipliersProvider.GetFor(creatureType));
        }
     }
 }

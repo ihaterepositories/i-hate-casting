@@ -18,17 +18,16 @@ using Zenject;
 
 namespace Models.Weapons
 {
-    /// <summary>
-    /// Helper class with a common functionality for all weapons.
-    /// </summary>
     public class Weapon : MonoBehaviour
     {
-        [Header("Settings")]
+        [Header("Behaviour settings")]
         [SerializeField] private WeaponType _weaponType;
         [SerializeField] private BulletType _bulletType;
         [SerializeField] private ShootType _shootType;
         [SerializeField] private ReloadType _reloadType;
         [SerializeField] private AimType _aimType;
+        
+        [Header("Stats")]
         [SerializeField] private WeaponStats _weaponStats;
 
         private IWeaponStatsCalculator _weaponStatsCalculator;

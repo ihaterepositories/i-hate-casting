@@ -1,4 +1,5 @@
-using Core;
+using Core.GameEventsControl.Interfaces;
+using Core.GameEventsControl.Signals;
 using DG.Tweening;
 using Models.UI.StatusTexts.Services.ValueProviding.Enums;
 using Models.UI.StatusTexts.Services.ValueProviding.Factories;
@@ -20,6 +21,8 @@ namespace Models.UI.StatusTexts
         [Header("Settings")]
         [SerializeField] private StatusTextValueResourceType _resourceType;
         [SerializeField] private StatusTextVisualizingType _visualizingType;
+
+        private IEventBusSubscriber _eventBusSubscriber;
         
         // Factories
         private StatusTextValueProvidersFactory _valueProvidersFactory;
@@ -31,13 +34,15 @@ namespace Models.UI.StatusTexts
 
         [Inject]
         private void Construct(
+            IEventBusSubscriber eventBusSubscriber,
             StatusTextValueProvidersFactory valueProvidersFactory,
             StatusTextVisualizersFactory visualizersFactory)
         {
+            _eventBusSubscriber = eventBusSubscriber;
             _valueProvidersFactory = valueProvidersFactory;
             _visualizersFactory = visualizersFactory;
 
-            GameBootstrapper.OnPlayerSpawnedNotify += Initialize;
+            _eventBusSubscriber.Subscribe<PlayerSpawnedSignal>(Initialize);
         }
 
         private void OnDisable()
@@ -47,9 +52,9 @@ namespace Models.UI.StatusTexts
             _textMesh.DOKill();
         }
 
-        private void Initialize()
+        private void Initialize(PlayerSpawnedSignal playerSpawnedSignal)
         {
-            GameBootstrapper.OnPlayerSpawnedNotify -= Initialize;
+            _eventBusSubscriber.Unsubscribe<PlayerSpawnedSignal>(Initialize);
             
             _statusTextValueProvider = _valueProvidersFactory.Create(_resourceType);
             _statusTextVisualizer = _visualizersFactory.Create(_visualizingType, _textMesh);

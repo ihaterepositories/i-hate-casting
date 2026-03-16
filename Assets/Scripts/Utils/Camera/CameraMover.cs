@@ -1,6 +1,7 @@
-using Core;
-using Models.Creatures;
+using Core.GameEventsControl.Interfaces;
+using Core.GameEventsControl.Signals;
 using UnityEngine;
+using Zenject;
 
 namespace Utils.Camera
 {
@@ -9,12 +10,20 @@ namespace Utils.Camera
         [Header("Settings")]
         [SerializeField] private float _smoothTime = 0.3f; 
         [SerializeField] private Vector3 _offset;
+
+        private IEventBusSubscriber _eventBusSubscriber;
         
         private Transform _target;
-
         private Vector3 _velocity = Vector3.zero;
         private float _startZ;
 
+        [Inject]
+        private void Construct(IEventBusSubscriber eventBusSubscriber)
+        {
+            _eventBusSubscriber = eventBusSubscriber;
+            _eventBusSubscriber.Subscribe<PlayerSpawnedSignal>(Initialize);
+        }
+        
         private void Start()
         {
             _startZ = transform.position.z;
@@ -33,19 +42,14 @@ namespace Utils.Camera
             transform.position = Vector3.SmoothDamp(transform.position, targetPosition, ref _velocity, _smoothTime);
         }
 
-        private void OnEnable()
-        {
-            GameBootstrapper.OnPlayerSpawned += Initialize;
-        }
-
         private void OnDisable()
         {
-            GameBootstrapper.OnPlayerSpawned -= Initialize;
+            _eventBusSubscriber.Unsubscribe<PlayerSpawnedSignal>(Initialize);
         }
 
-        private void Initialize(Creature player)
+        private void Initialize(PlayerSpawnedSignal playerSpawnedSignal)
         {
-            _target = player.transform;
+            _target = playerSpawnedSignal.Player.transform;
         }
     }
 }

@@ -1,6 +1,6 @@
 using Models.Weapons.Dtos;
 using Models.Weapons.Services.StatsCalculating.Interfaces;
-using Models.Weapons.Services.StatsModifying.Interfaces;
+using Models.Weapons.Services.StatsMultiplying.Interfaces;
 using UnityEngine;
 
 namespace Models.Weapons.Services.StatsCalculating
@@ -8,12 +8,12 @@ namespace Models.Weapons.Services.StatsCalculating
     public class WeaponStatsCalculator : IWeaponStatsCalculator
     {
         private readonly WeaponStats _baseStats;
-        private readonly IWeaponStatsModifier _statsModifier;
+        private readonly IWeaponStatsMultipliers _statsMultipliers;
         
-        public WeaponStatsCalculator(WeaponStats baseStats, IWeaponStatsModifier statsModifier)
+        public WeaponStatsCalculator(WeaponStats baseStats, IWeaponStatsMultipliers statsMultipliers)
         {
             _baseStats = baseStats;
-            _statsModifier = statsModifier;
+            _statsMultipliers = statsMultipliers;
         }
         
         // Range is constant for weapon, it does not modify.
@@ -22,16 +22,16 @@ namespace Models.Weapons.Services.StatsCalculating
         // Magazine capacity is constant for weapon, it does not modify.
         public int CalculateMagazineCapacity() => _baseStats.MagazineCapacity;
 
-        public float CalculateReloadTime() => _statsModifier.ModifyReloadTime(_baseStats.ReloadTime);
+        public float CalculateReloadTime() => _statsMultipliers.ModifyReloadTime(_baseStats.ReloadTime);
         
         public float CalculateSpreadDegree() => Random.Range(
-            -_statsModifier.ModifySpreadDegree(_baseStats.SpreadDegree), 
-            _statsModifier.ModifySpreadDegree(_baseStats.SpreadDegree));
+            -_statsMultipliers.ModifySpreadDegree(_baseStats.SpreadDegree), 
+            _statsMultipliers.ModifySpreadDegree(_baseStats.SpreadDegree));
         
-        public float CalculateDamageToDeal() => _statsModifier.ModifyDamageToDeal(_baseStats.DamageToDeal);
+        public float CalculateDamageToDeal() => _statsMultipliers.ModifyDamageToDeal(_baseStats.DamageToDeal);
 
-        public float CalculateSpeed() => _statsModifier.ModifySpeed(_baseStats.Speed);
+        public float CalculateSpeed() => _statsMultipliers.ModifySpeed(_baseStats.Speed);
 
-        public float CalculateCooldownTime() => _statsModifier.ModifyCooldownTime(_baseStats.CooldownTime);
+        public float CalculateCooldownTime() => _statsMultipliers.ModifyCooldownTime(_baseStats.CooldownTime);
     }
 }

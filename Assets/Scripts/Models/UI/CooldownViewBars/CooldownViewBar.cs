@@ -1,4 +1,5 @@
-using Core;
+using Core.GameEventsControl.Interfaces;
+using Core.GameEventsControl.Signals;
 using DG.Tweening;
 using Models.UI.CooldownViewBars.Services.ValueProviding.Enums;
 using Models.UI.CooldownViewBars.Services.ValueProviding.Factories;
@@ -16,6 +17,8 @@ namespace Models.UI.CooldownViewBars
         
         [Header("Settings")]
         [SerializeField] private CooldownViewBarValueResourceType _resourceType;
+
+        private IEventBusSubscriber _eventBusSubscriber;
         
         // Factories
         private CooldownViewBarValueProvidersFactory _valueProvidersFactory;
@@ -24,9 +27,14 @@ namespace Models.UI.CooldownViewBars
         private ICooldownBarValueProvider _valueProvider;
 
         [Inject]
-        private void Construct(CooldownViewBarValueProvidersFactory valueProvidersFactory)
+        private void Construct(
+            IEventBusSubscriber eventBusSubscriber,
+            CooldownViewBarValueProvidersFactory valueProvidersFactory)
         {
+            _eventBusSubscriber = eventBusSubscriber;
             _valueProvidersFactory = valueProvidersFactory;
+            
+            _eventBusSubscriber.Subscribe<PlayerSpawnedSignal>(Initialize);
         }
 
         private void Update()
@@ -36,19 +44,14 @@ namespace Models.UI.CooldownViewBars
             _barImage.fillAmount = _valueProvider.GetValue().Item1 / _valueProvider.GetValue().Item2;
         }
 
-        private void OnEnable()
-        {
-            GameBootstrapper.OnPlayerSpawnedNotify += Initialize;
-        }
-
         private void OnDisable()
         {
             _barImage.DOKill();
         }
 
-        private void Initialize()
+        private void Initialize(PlayerSpawnedSignal signal)
         {
-            GameBootstrapper.OnPlayerSpawnedNotify -= Initialize;
+            _eventBusSubscriber.Unsubscribe<PlayerSpawnedSignal>(Initialize);
             _valueProvider = _valueProvidersFactory.Create(_resourceType);
         }
     }

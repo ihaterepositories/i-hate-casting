@@ -1,5 +1,6 @@
 using System;
-using Core;
+using Core.GameEventsControl.Interfaces;
+using Core.GameEventsControl.Signals;
 using Core.Input.Interfaces;
 using Models.Creatures.Services.Moving.Enums;
 using Models.Creatures.Services.Moving.Interfaces;
@@ -11,12 +12,19 @@ namespace Models.Creatures.Services.Moving.Factories
     public class CreatureMoversFactory
     {
         private readonly IInputHandler _inputHandler;
-        private Transform _playerTransform;
+        private readonly IEventBusSubscriber _eventBusSubscriber;
         
-        public CreatureMoversFactory(IInputHandler inputHandler)
+        private Transform _playerTransform;
+        private bool _isInitialized;
+        
+        public CreatureMoversFactory(
+            IInputHandler inputHandler,
+            IEventBusSubscriber eventBusSubscriber)
         {
             _inputHandler = inputHandler;
-            GameBootstrapper.OnPlayerSpawned += Initialize;
+            _eventBusSubscriber = eventBusSubscriber;
+            
+            _eventBusSubscriber.Subscribe<PlayerSpawnedSignal>(Initialize);
         }
 
         public ICreatureMover Create(
@@ -25,6 +33,9 @@ namespace Models.Creatures.Services.Moving.Factories
             Rigidbody2D rigidbody2D, 
             Transform transform)
         {
+            if (!_isInitialized) 
+                throw new Exception("CreatureMoversFactory is not initialized yet. Cannot create an object.");
+            
             return creatureMoveType switch
             {
                 CreatureMoveType.ByInput => new ByInputCreatureMover(statsCalculateService, rigidbody2D, _inputHandler),
@@ -33,10 +44,11 @@ namespace Models.Creatures.Services.Moving.Factories
             };
         }
 
-        private void Initialize(Creature player)
+        private void Initialize(PlayerSpawnedSignal playerSpawnedSignal)
         {
-            _playerTransform = player.transform;
-            GameBootstrapper.OnPlayerSpawned -= Initialize;
+            _playerTransform = playerSpawnedSignal.Player.transform;
+            _eventBusSubscriber.Unsubscribe<PlayerSpawnedSignal>(Initialize);
+            _isInitialized = true;
         }
     }
 }

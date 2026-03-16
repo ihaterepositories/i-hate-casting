@@ -1,9 +1,8 @@
 using System;
 using Spawners.Services.Instantiaters.Enums;
-using UnityEngine;
 using UnityEngine.AddressableAssets;
 
-namespace Core.Dtos
+namespace Core.SpawnersControl.Dtos
 {
     [Serializable]
     public class SpawnerCreationData<T> where T : Enum

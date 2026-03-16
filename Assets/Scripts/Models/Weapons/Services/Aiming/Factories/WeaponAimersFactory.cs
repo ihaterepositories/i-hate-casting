@@ -1,6 +1,7 @@
-using Core;
+using System;
+using Core.GameEventsControl.Interfaces;
+using Core.GameEventsControl.Signals;
 using Core.Input.Interfaces;
-using Models.Creatures;
 using Models.Weapons.Services.Aiming.Enums;
 using Models.Weapons.Services.Aiming.Interfaces;
 using Models.Weapons.Services.StatsCalculating.Interfaces;
@@ -10,17 +11,27 @@ namespace Models.Weapons.Services.Aiming.Factories
 {
     public class WeaponAimersFactory
     {
+        private readonly IEventBusSubscriber _eventBusSubscriber;
+        
         private readonly IInputHandler _inputHandler;
         private Transform _playerTransform;
         
-        public WeaponAimersFactory(IInputHandler inputHandler)
+        private bool _isInitialized;
+        
+        public WeaponAimersFactory(
+            IEventBusSubscriber eventBusSubscriber,
+            IInputHandler inputHandler)
         {
+            _eventBusSubscriber = eventBusSubscriber;
             _inputHandler = inputHandler;
-            GameBootstrapper.OnPlayerSpawned += Initialize;
+            
+            _eventBusSubscriber.Subscribe<PlayerSpawnedSignal>(Initialize);
         }
         
         public IAimService Create(AimType aimType, IWeaponStatsCalculator weaponStatsCalculator, Transform weaponTransform)
         {
+            if (!_isInitialized) throw new Exception("Factory is not initialized!");
+            
             return aimType switch
             {
                 AimType.PointerFollowing => new PointerFollowingAimer(weaponStatsCalculator, weaponTransform, _inputHandler),
@@ -29,10 +40,10 @@ namespace Models.Weapons.Services.Aiming.Factories
             };
         }
         
-        private void Initialize(Creature player)
+        private void Initialize(PlayerSpawnedSignal playerSpawnedSignal)
         {
-            _playerTransform = player.transform;
-            GameBootstrapper.OnPlayerSpawned -= Initialize;
+            _eventBusSubscriber.Unsubscribe<PlayerSpawnedSignal>(Initialize);
+            _playerTransform = playerSpawnedSignal.Player.transform;
         }
     }
 }

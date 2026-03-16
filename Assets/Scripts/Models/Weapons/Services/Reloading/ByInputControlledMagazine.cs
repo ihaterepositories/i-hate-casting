@@ -1,6 +1,5 @@
 using Core.Input.Interfaces;
 using Models.Bullets;
-using Models.Bullets.Dtos;
 using Models.Weapons.Services.Reloading.Base;
 using Models.Weapons.Services.StatsCalculating.Interfaces;
 using Spawners.Interfaces;

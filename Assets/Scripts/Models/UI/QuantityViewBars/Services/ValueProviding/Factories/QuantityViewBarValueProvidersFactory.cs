@@ -2,37 +2,37 @@ using System;
 using Core.GameEventsControl.Interfaces;
 using Core.GameEventsControl.Signals;
 using Models.Creatures;
-using Models.UI.CooldownViewBars.Services.ValueProviding.Enums;
-using Models.UI.CooldownViewBars.Services.ValueProviding.Interfaces;
+using Models.UI.QuantityViewBars.Services.ValueProviding.Enums;
+using Models.UI.QuantityViewBars.Services.ValueProviding.Interfaces;
 
-namespace Models.UI.CooldownViewBars.Services.ValueProviding.Factories
+namespace Models.UI.QuantityViewBars.Services.ValueProviding.Factories
 {
-    public class CooldownViewBarValueProvidersFactory
+    public class QuantityViewBarValueProvidersFactory
     {
         private IEventBusSubscriber _eventBusSubscriber;
         private Creature _player;
         
         private bool _isInitialized;
 
-        public CooldownViewBarValueProvidersFactory(IEventBusSubscriber eventBusSubscriber)
+        public QuantityViewBarValueProvidersFactory(IEventBusSubscriber eventBusSubscriber)
         {
             _eventBusSubscriber = eventBusSubscriber;
             _eventBusSubscriber.Subscribe<PlayerSpawnedSignal>(Initialize);
         }
-        
-        public ICooldownBarValueProvider Create(CooldownViewBarValueResourceType resourceType)
+
+        public IQuantityBarValueProvider Create(QuantityViewBarValueResourceType resourceType)
         {
             if (!_isInitialized) throw new NullReferenceException("Factory is not initialized!");
 
             return resourceType switch
             {
-                CooldownViewBarValueResourceType.PlayerBoostCooldown => new PlayerBoostCooldownBarValueProvider(_player.MoveBooster),
-                // StatusBarCooldownValueResourceType.PlayerWeaponCooldown => expr,
+                QuantityViewBarValueResourceType.PlayerHealth => new PlayerHealthQuantityBarValueProvider(_player.Health),
+                // StatusBarValueProvidingType.PlayerWeaponMagazineCapacity => expr,
                 _ => throw new ArgumentOutOfRangeException(nameof(resourceType),
                     resourceType, null)
             };
         }
-        
+
         private void Initialize(PlayerSpawnedSignal playerSpawnedSignal)
         {
             _eventBusSubscriber.Unsubscribe<PlayerSpawnedSignal>(Initialize);

@@ -1,7 +1,6 @@
 using System;
 using System.Threading.Tasks;
 using Models.Bullets;
-using Models.Bullets.Dtos;
 using Models.Weapons.Services.Reloading.Interfaces;
 using Models.Weapons.Services.StatsCalculating.Interfaces;
 using Spawners.Interfaces;
