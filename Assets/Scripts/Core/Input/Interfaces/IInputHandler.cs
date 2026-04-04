@@ -9,7 +9,7 @@ namespace Core.Input.Interfaces
         public Vector3 GetPointerPosition();
         public bool IsFireButtonPressed();
         public bool IsReloadButtonPressed();
-        public bool IsBurstButtonPressed();
+        public bool IsBoostButtonPressed();
         public bool IsInteractingButtonPressed();
         public string GetInteractingButtonName();
     }

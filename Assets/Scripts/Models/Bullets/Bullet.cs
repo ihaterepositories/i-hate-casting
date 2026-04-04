@@ -7,9 +7,9 @@ using Models.Bullets.Services.Moving.Enums;
 using Models.Bullets.Services.Moving.Factories;
 using Models.Bullets.Services.Moving.Interfaces;
 using Models.Creatures.Enums;
-using Systems.Combat.Dtos;
-using Systems.Combat.Interfaces;
-using Systems.Pooling.Models;
+using Shared.Models.PoolableMonoBehaviours;
+using Shared.Systems.Combat.Dtos;
+using Shared.Systems.Combat.Interfaces;
 using UnityEngine;
 using Zenject;
 

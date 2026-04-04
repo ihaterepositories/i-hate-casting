@@ -8,28 +8,28 @@ using Core.RoundBootstrapControl;
 using Core.RoundBootstrapControl.Interfaces;
 using Core.SpawnersControl;
 using Core.SpawnersControl.Interfaces;
+using Core.TimerEngines;
+using Core.TimerEngines.Interfaces;
 using Models.Bullets.Services.LifeTimeCalculating.Factories;
 using Models.Bullets.Services.Moving.Factories;
-using Models.Creatures.Services.Animating.Factories;
-using Models.Creatures.Services.Destroying.Factories;
-using Models.Creatures.Services.Living.Factories;
-using Models.Creatures.Services.MoveBoosting.Factories;
-using Models.Creatures.Services.Moving.Factories;
-using Models.Creatures.Services.ObstaclesBypassing.Factories;
-using Models.Creatures.Services.StatsCalculating.Factories;
-using Models.Creatures.Services.StatsMultiplying.Providers;
+using Models.Creatures.Services.Animators.Factories;
+using Models.Creatures.Services.Destroyers.Factories;
+using Models.Creatures.Services.Health.Factories;
+using Models.Creatures.Services.MoveBoosters.Factories;
+using Models.Creatures.Services.Movers.Factories;
+using Models.Creatures.Services.StatsScalers.Providers;
 using Models.Interactables.Base.Visuals;
 using Models.UI.CooldownViewBars.Services.ValueProviding.Factories;
 using Models.UI.QuantityViewBars.Services.ValueProviding.Factories;
 using Models.UI.QuantityViewBars.Services.Visualizing.Factories;
 using Models.UI.StatusTexts.Services.ValueProviding.Factories;
 using Models.UI.StatusTexts.Services.Visualizing.Factories;
-using Models.Weapons.Services.Aiming.Factories;
-using Models.Weapons.Services.Reloading.Factories;
-using Models.Weapons.Services.Shooting.Factories;
-using Models.Weapons.Services.StatsCalculating.Factories;
-using Models.Weapons.Services.StatsMultiplying.Providers;
-using Pooling.Factories;
+using Models.Weapons.Services.Aimers.Factories;
+using Models.Weapons.Services.Reloaders.Factories;
+using Models.Weapons.Services.Shooters.Factories;
+using Models.Weapons.Services.StatsScalers.Providers;
+using ObjectPools.Factories;
+using Shared.Services.ObstaclesBypassCalculators.Factories;
 using Spawners;
 using Spawners.Factories;
 using Spawners.Services.Instantiaters.Factories;
@@ -38,8 +38,6 @@ using Spawners.Services.SpawnPositionCalculators.Dtos;
 using Spawners.Services.SpawnPositionCalculators.Factories;
 using UIServices.CountdownVisualizers.Factories;
 using UIServices.ImageFadeAnimators.Factories;
-using Utils.Timers;
-using Utils.Timers.Interfaces;
 using Zenject;
 
 namespace Core.Infrastructure
@@ -50,9 +48,10 @@ namespace Core.Infrastructure
         {
             Container.Bind<SafeSpawnSettings>().FromScriptableObjectResource("SafeSpawnSettings").AsSingle().NonLazy();
 
-            Container.Bind<ITimer>().To<AsyncTimer>().AsSingle().NonLazy();
+            Container.Bind<ITimerEngine>().To<CachedTimerEngine>().AsSingle().NonLazy();
+            
             Container.Bind<IPauser>().To<Pauser>().AsSingle().NonLazy();
-            Container.Bind<IAssetsLoader>().To<AddressablesAssetsLoader>().AsSingle().NonLazy();
+            Container.Bind<IAssetsLoader>().To<CachingAssetsLoader>().AsSingle().NonLazy();
             
             Container.Bind<EventBus>().AsSingle();
             Container.Bind<IEventBusInvoker>().To<EventBus>().FromResolve();
@@ -64,33 +63,28 @@ namespace Core.Infrastructure
             Container.Bind<SpawnersFactory>().AsSingle().NonLazy();
             
             Container.Bind<ISpawnersCreator>().To<SpawnersCreator>().FromComponentInHierarchy().AsSingle().NonLazy();
-            Container.Bind<IGameBootstrapper>().To<GameBootstrapper>().FromComponentInHierarchy().AsSingle();
+            Container.Bind<IRoundBootstrapper>().To<RoundBootstrapper>().FromComponentInHierarchy().AsSingle();
             
-            Container.Bind<CreatureStatsMultipliersProvider>().AsSingle().NonLazy();
-            Container.Bind<CreatureStatsCalculatorsFactory>().AsSingle().NonLazy();
-            
-            Container.Bind<WeaponStatsMultipliersProvider>().AsSingle().NonLazy();
-            Container.Bind<WeaponStatsCalculatorsFactory>().AsSingle().NonLazy();
+            Container.Bind<CreatureStatsScalersProvider>().AsSingle().NonLazy();
+            Container.Bind<WeaponStatsScalersProvider>().AsSingle().NonLazy();
             
             Container.Bind<ObjectPoolsFactory>().AsSingle().NonLazy();
             
             Container.Bind<BulletMoversFactory>().AsSingle().NonLazy();
             Container.Bind<BulletLifeTimeCalculatorsFactory>().AsSingle().NonLazy();
             
-            Container.Bind<WeaponMagazinesFactory>().AsSingle().NonLazy();
+            Container.Bind<WeaponReloadersFactory>().AsSingle().NonLazy();
             Container.Bind<WeaponShootersFactory>().AsSingle().NonLazy();
             Container.Bind<WeaponAimersFactory>().AsSingle().NonLazy();
 
-            Container.Bind<CreatureHealthServicesFactory>().AsSingle().NonLazy();
+            Container.Bind<CreatureHealthesFactory>().AsSingle().NonLazy();
             Container.Bind<CreatureMoversFactory>().AsSingle().NonLazy();
-            Container.Bind<CreatureObstaclesBypassersFactory>().AsSingle().NonLazy();
+            Container.Bind<ObstaclesBypassCalculatorsFactory>().AsSingle().NonLazy();
             Container.Bind<CreatureMoveBoostersFactory>().AsSingle().NonLazy();
             Container.Bind<CreatureDestroyersFactory>().AsSingle().NonLazy();
-            Container.Bind<CreatureAnimationLaunchersFactory>().AsSingle().NonLazy();
+            Container.Bind<CreatureAnimatiorsFactory>().AsSingle().NonLazy();
 
             Container.Bind<ItemsSpawner>().FromComponentInHierarchy().AsSingle();
-            
-            Container.Bind<ResourcesCleaner>().FromComponentInHierarchy().AsSingle();
             
             Container.Bind<StatusTextValueProvidersFactory>().AsSingle().NonLazy();
             Container.Bind<StatusTextVisualizersFactory>().AsSingle().NonLazy();

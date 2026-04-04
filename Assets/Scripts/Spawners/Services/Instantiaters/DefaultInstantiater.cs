@@ -1,6 +1,6 @@
 using System;
+using Shared.Models.PoolableMonoBehaviours;
 using Spawners.Services.Instantiaters.Interfaces;
-using Systems.Pooling.Models;
 using UnityEngine;
 using Zenject;
 

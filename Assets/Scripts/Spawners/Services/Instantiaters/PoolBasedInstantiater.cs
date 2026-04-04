@@ -1,6 +1,6 @@
-using Pooling;
+using ObjectPools;
+using Shared.Models.PoolableMonoBehaviours;
 using Spawners.Services.Instantiaters.Interfaces;
-using Systems.Pooling.Models;
 
 namespace Spawners.Services.Instantiaters
 {

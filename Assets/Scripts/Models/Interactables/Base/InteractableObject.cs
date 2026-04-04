@@ -2,7 +2,7 @@ using Core.Input.Interfaces;
 using Models.Creatures;
 using Models.Creatures.Enums;
 using Models.Interactables.Base.Visuals;
-using Systems.Pooling.Models;
+using Shared.Models.PoolableMonoBehaviours;
 using UnityEngine;
 using Zenject;
 

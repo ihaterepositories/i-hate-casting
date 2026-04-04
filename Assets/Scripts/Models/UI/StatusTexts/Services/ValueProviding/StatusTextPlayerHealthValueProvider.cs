@@ -1,5 +1,5 @@
 using System;
-using Models.Creatures.Services.Living.Interfaces;
+using Models.Creatures.Services.Health.Interfaces;
 using Models.UI.StatusTexts.Services.ValueProviding.Interfaces;
 
 namespace Models.UI.StatusTexts.Services.ValueProviding

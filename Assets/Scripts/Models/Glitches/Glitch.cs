@@ -1,12 +1,12 @@
 using Models.Creatures.Dtos;
 using Models.Creatures.Enums;
-using Models.Creatures.Services.StatsMultiplying.Interfaces;
-using Models.Creatures.Services.StatsMultiplying.Providers;
+using Models.Creatures.Services.StatsScalers.Interfaces;
+using Models.Creatures.Services.StatsScalers.Providers;
 using Models.Glitches.Dtos;
 using Models.Weapons.Dtos;
 using Models.Weapons.Enums;
-using Models.Weapons.Services.StatsMultiplying.Interfaces;
-using Models.Weapons.Services.StatsMultiplying.Providers;
+using Models.Weapons.Services.StatsScalers.Interfaces;
+using Models.Weapons.Services.StatsScalers.Providers;
 using UnityEngine;
 using Zenject;
 
@@ -19,29 +19,29 @@ namespace Models.Glitches
     {
         [SerializeField] private GlitchStats _glitchStats;
         
-        private (IWeaponStatsMultipliers multiplier, WeaponStats modifyingValues)[] _weaponsModifyingData;
-        private (ICreatureStatsMultipliers multiplier, CreatureStats modifyingValues)[] _creaturesModifyingData;
+        private (IWeaponStatsScaler multiplier, WeaponStats modifyingValues)[] _weaponsModifyingData;
+        private (ICreatureStatsScaler multiplier, CreatureStats modifyingValues)[] _creaturesModifyingData;
         
         [Inject]
         private void Construct(
-            WeaponStatsMultipliersProvider weaponsStatsMultipliersProvider,
-            CreatureStatsMultipliersProvider creatureStatsMultipliersProvider)
+            WeaponStatsScalersProvider weaponsStatsScalersProvider,
+            CreatureStatsScalersProvider creatureStatsScalersProvider)
         {
             // Assigns "add values" to their multipliers
             // (add values - values which will be added to current multiplier`s values)
             
             _weaponsModifyingData = new[]
             {
-                (weaponsStatsMultipliersProvider.GetFor(WeaponType.PlayerWeapon),_glitchStats.PlayerWeaponModifiers),
-                (weaponsStatsMultipliersProvider.GetFor(WeaponType.EnemyWeapon), _glitchStats.EnemyWeaponsModifiers),
-                (weaponsStatsMultipliersProvider.GetFor(WeaponType.BossWeapon),_glitchStats.BossWeaponsModifiers)
+                (weaponsStatsScalersProvider.GetFor(WeaponType.PlayerWeapon),_glitchStats.PlayerWeaponModifiers),
+                (weaponsStatsScalersProvider.GetFor(WeaponType.EnemyWeapon), _glitchStats.EnemyWeaponsModifiers),
+                (weaponsStatsScalersProvider.GetFor(WeaponType.BossWeapon),_glitchStats.BossWeaponsModifiers)
             };
             
             _creaturesModifyingData = new[]
             {
-                (creatureStatsMultipliersProvider.GetFor(CreatureType.Player),_glitchStats.PlayerModifiers),
-                (creatureStatsMultipliersProvider.GetFor(CreatureType.Enemy), _glitchStats.EnemiesModifiers),
-                (creatureStatsMultipliersProvider.GetFor(CreatureType.Boss), _glitchStats.BossesModifiers)
+                (creatureStatsScalersProvider.GetFor(CreatureType.Player),_glitchStats.PlayerModifiers),
+                (creatureStatsScalersProvider.GetFor(CreatureType.Enemy), _glitchStats.EnemiesModifiers),
+                (creatureStatsScalersProvider.GetFor(CreatureType.Boss), _glitchStats.BossesModifiers)
             };
             
             Activate();
@@ -56,12 +56,12 @@ namespace Models.Glitches
         {
             foreach (var (multiplier, stats) in _weaponsModifyingData)
             {
-                multiplier.AddValuesToMultipliers(stats);
+                multiplier.AddMultipliers(stats);
             }
             
             foreach (var (multiplier, stats) in _creaturesModifyingData)
             {
-                multiplier.AddValuesToMultipliers(stats);
+                multiplier.AddMultipliers(stats);
             }
         }
 
@@ -69,12 +69,12 @@ namespace Models.Glitches
         {
             foreach (var (multiplier, stats) in _weaponsModifyingData)
             {
-                multiplier.SubtractValuesFromMultipliers(stats);
+                multiplier.RemoveMultipliers(stats);
             }
             
             foreach (var (multiplier, stats) in _creaturesModifyingData)
             {
-                multiplier.SubtractValuesFromMultipliers(stats);
+                multiplier.RemoveMultipliers(stats);
             }
         }
     }

@@ -1,6 +1,6 @@
 using System;
 using System.Collections;
-using Systems.Pooling.Models;
+using Shared.Models.PoolableMonoBehaviours;
 
 namespace Spawners.Interfaces
 {

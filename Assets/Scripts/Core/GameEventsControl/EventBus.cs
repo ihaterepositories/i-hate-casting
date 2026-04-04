@@ -32,7 +32,7 @@ namespace Core.GameEventsControl
             }
             else
             {
-                Debug.LogWarning($"EventBus: {key} signal have no subscribers, so it is not invoked.");
+                Debug.LogWarning($"EventBus: {key} signal have no subscribers.");
             }
         }
 

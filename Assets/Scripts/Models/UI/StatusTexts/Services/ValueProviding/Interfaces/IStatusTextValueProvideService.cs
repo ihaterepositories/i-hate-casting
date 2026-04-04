@@ -1,5 +1,5 @@
 using System;
-using Systems.ResourcesCleaning.Interfaces;
+using Shared.Systems.ResourcesCleaning.Interfaces;
 
 namespace Models.UI.StatusTexts.Services.ValueProviding.Interfaces
 {

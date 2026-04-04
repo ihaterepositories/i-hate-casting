@@ -1,5 +1,5 @@
 using System;
-using Models.Creatures.Services.MoveBoosting.Interfaces;
+using Models.Creatures.Services.MoveBoosters.Interfaces;
 using Models.UI.CooldownViewBars.Services.ValueProviding.Interfaces;
 
 namespace Models.UI.CooldownViewBars.Services.ValueProviding

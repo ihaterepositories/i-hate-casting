@@ -1,8 +1,8 @@
 using System;
-using Pooling.Factories;
+using ObjectPools.Factories;
+using Shared.Models.PoolableMonoBehaviours;
 using Spawners.Services.Instantiaters.Enums;
 using Spawners.Services.Instantiaters.Interfaces;
-using Systems.Pooling.Models;
 using UnityEngine;
 using Zenject;
 

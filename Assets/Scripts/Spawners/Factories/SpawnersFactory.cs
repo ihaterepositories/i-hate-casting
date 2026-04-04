@@ -1,4 +1,5 @@
 using System;
+using Shared.Models.PoolableMonoBehaviours;
 using Spawners.Interfaces;
 using Spawners.Services.Instantiaters.Enums;
 using Spawners.Services.Instantiaters.Factories;
@@ -6,7 +7,6 @@ using Spawners.Services.SpawnBehaviourProviders.Enums;
 using Spawners.Services.SpawnBehaviourProviders.Factories;
 using Spawners.Services.SpawnPositionCalculators.Enums;
 using Spawners.Services.SpawnPositionCalculators.Factories;
-using Systems.Pooling.Models;
 using UnityEngine;
 
 namespace Spawners.Factories

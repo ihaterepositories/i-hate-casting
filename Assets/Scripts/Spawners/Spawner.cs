@@ -1,6 +1,6 @@
+using Shared.Models.PoolableMonoBehaviours;
 using Spawners.Interfaces;
 using Spawners.Services.Instantiaters.Interfaces;
-using Systems.Pooling.Models;
 
 namespace Spawners
 {

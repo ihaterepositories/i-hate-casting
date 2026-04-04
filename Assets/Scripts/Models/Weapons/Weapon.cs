@@ -2,18 +2,18 @@ using Core.Pausing.Interfaces;
 using Models.Bullets.Enums;
 using Models.Weapons.Dtos;
 using Models.Weapons.Enums;
-using Models.Weapons.Services.Aiming.Enums;
-using Models.Weapons.Services.Aiming.Factories;
-using Models.Weapons.Services.Aiming.Interfaces;
-using Models.Weapons.Services.Reloading.Enums;
-using Models.Weapons.Services.Reloading.Factories;
-using Models.Weapons.Services.Reloading.Interfaces;
-using Models.Weapons.Services.Shooting.Enums;
-using Models.Weapons.Services.Shooting.Factories;
-using Models.Weapons.Services.Shooting.Interfaces;
-using Models.Weapons.Services.StatsCalculating.Factories;
-using Models.Weapons.Services.StatsCalculating.Interfaces;
+using Models.Weapons.Services.Aimers.Enums;
+using Models.Weapons.Services.Aimers.Factories;
+using Models.Weapons.Services.Aimers.Interfaces;
+using Models.Weapons.Services.Reloaders.Enums;
+using Models.Weapons.Services.Reloaders.Factories;
+using Models.Weapons.Services.Reloaders.Interfaces;
+using Models.Weapons.Services.Shooters.Enums;
+using Models.Weapons.Services.Shooters.Factories;
+using Models.Weapons.Services.Shooters.Interfaces;
+using Models.Weapons.Services.StatsScalers.Providers;
 using UnityEngine;
+using UnityEngine.Serialization;
 using Zenject;
 
 namespace Models.Weapons
@@ -23,47 +23,49 @@ namespace Models.Weapons
         [Header("Behaviour settings")]
         [SerializeField] private WeaponType _weaponType;
         [SerializeField] private BulletType _bulletType;
-        [SerializeField] private ShootType _shootType;
-        [SerializeField] private ReloadType _reloadType;
-        [SerializeField] private AimType _aimType;
+        [FormerlySerializedAs("_shootType")] [SerializeField] private WeaponShootType _weaponShootType;
+        [FormerlySerializedAs("_reloadType")] [SerializeField] private WeaponReloadType _weaponReloadType;
+        [FormerlySerializedAs("_aimType")] [SerializeField] private WeaponAimType _weaponAimType;
         
         [Header("Stats")]
-        [SerializeField] private WeaponStats _weaponStats;
-
-        private IWeaponStatsCalculator _weaponStatsCalculator;
-        private IShootService _shooter;
-        private IMagazineService _magazine;
-        private IAimService _aimer;
+        [SerializeField] private WeaponStats _stats;
+        
+        private IWeaponShooter _weaponShooter;
+        private IWeaponReloader _weaponReloader;
+        private IWeaponAimer _weaponAimer;
         private IPauser _pauser;
         
-        public IShootService Shooter => _shooter;
-        public IMagazineService Magazine => _magazine;
+        public IWeaponShooter WeaponShooter => _weaponShooter;
+        public IWeaponReloader WeaponReloader => _weaponReloader;
 
         [Inject]
         private void Construct(
-            WeaponStatsCalculatorsFactory statsCalculatorsFactory,
-            WeaponMagazinesFactory weaponMagazinesFactory,
+            WeaponStatsScalersProvider statsScalersProvider,
+            WeaponReloadersFactory weaponReloadersFactory,
             WeaponShootersFactory weaponShootersFactory,
             WeaponAimersFactory weaponAimersFactory,
             IPauser pauser)
         {
-            _weaponStatsCalculator = statsCalculatorsFactory.Create(_weaponType, _weaponStats);
+            var statsScaler = statsScalersProvider.GetFor(_weaponType);
             
-            _magazine = weaponMagazinesFactory.Create(
+            _weaponReloader = weaponReloadersFactory.Create(
                 _bulletType,
-                _reloadType,
-                _weaponStatsCalculator);
+                _weaponReloadType,
+                _stats,
+                statsScaler);
 
-            _shooter = weaponShootersFactory.Create(
-                _shootType,
-                _weaponStatsCalculator,
-                _magazine,
-                this.transform);
+            _weaponShooter = weaponShootersFactory.Create(
+                _weaponShootType,
+                _stats,
+                statsScaler,
+                _weaponReloader,
+                transform);
 
-            _aimer = weaponAimersFactory.Create(
-                _aimType,
-                _weaponStatsCalculator,
-                this.transform);
+            _weaponAimer = weaponAimersFactory.Create(
+                _weaponAimType,
+                _stats,
+                statsScaler,
+                transform);
             
             _pauser = pauser;
         }
@@ -72,9 +74,9 @@ namespace Models.Weapons
         {
             if (_pauser.IsGamePaused) return;
             
-            _aimer.UpdateAiming();
-            _shooter.EnableShoot();
-            _magazine.EnableReload();
+            transform.rotation = _weaponAimer.Tick();
+            _weaponShooter.Tick();
+            _weaponReloader.Tick();
         }
     }
 }

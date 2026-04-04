@@ -1,10 +1,10 @@
 using System;
 using System.Collections;
+using Shared.Models.PoolableMonoBehaviours;
 using Spawners.Interfaces;
 using Spawners.Services.Instantiaters.Interfaces;
 using Spawners.Services.SpawnBehaviourProviders.Interfaces;
 using Spawners.Services.SpawnPositionCalculators.Interfaces;
-using Systems.Pooling.Models;
 
 namespace Spawners
 {

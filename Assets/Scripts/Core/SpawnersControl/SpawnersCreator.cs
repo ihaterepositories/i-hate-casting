@@ -8,9 +8,9 @@ using Core.SpawnersControl.Dtos;
 using Core.SpawnersControl.Interfaces;
 using Models.Bullets;
 using Models.Bullets.Enums;
+using Shared.Models.PoolableMonoBehaviours;
 using Spawners.Factories;
 using Spawners.Interfaces;
-using Systems.Pooling.Models;
 using UnityEngine;
 using Zenject;
 
@@ -37,6 +37,11 @@ namespace Core.SpawnersControl
             _assetsLoader = assetsLoader;
             _spawnersFactory = spawnersFactory;
             _eventBusInvoker = eventBusInvoker;
+        }
+
+        private void OnDestroy()
+        {
+            _assetsLoader.CleanResources();
         }
 
         public async Task CreateAsync()

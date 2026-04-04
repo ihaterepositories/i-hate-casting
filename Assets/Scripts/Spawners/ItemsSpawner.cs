@@ -5,11 +5,11 @@ using Mechanics.ItemSelecting.Enums;
 using Mechanics.ItemSelecting.ScriptableObjects;
 using Mechanics.MenuBased.Implementations.CastingMenuImpl;
 using Mechanics.MenuBased.Implementations.SelectionMenuImpl;
+using Shared.Utils.RarityPickers;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
 using UnityEngine.ResourceManagement.AsyncOperations;
 using UnityEngine.ResourceManagement.ResourceLocations;
-using Utils.RarityPick;
 using Zenject;
 using Random = UnityEngine.Random;
 
