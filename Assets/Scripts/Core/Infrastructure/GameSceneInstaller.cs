@@ -33,7 +33,6 @@ using Shared.Services.ObstaclesBypassCalculators.Factories;
 using Spawners;
 using Spawners.Factories;
 using Spawners.Services.Instantiaters.Factories;
-using Spawners.Services.SpawnBehaviourProviders.Factories;
 using Spawners.Services.SpawnPositionCalculators.Dtos;
 using Spawners.Services.SpawnPositionCalculators.Factories;
 using UIServices.CountdownVisualizers.Factories;
@@ -48,22 +47,18 @@ namespace Core.Infrastructure
         {
             Container.Bind<SafeSpawnSettings>().FromScriptableObjectResource("SafeSpawnSettings").AsSingle().NonLazy();
 
-            Container.Bind<ITimerEngine>().To<CachedTimerEngine>().AsSingle().NonLazy();
-            
             Container.Bind<IPauser>().To<Pauser>().AsSingle().NonLazy();
-            Container.Bind<IAssetsLoader>().To<CachingAssetsLoader>().AsSingle().NonLazy();
             
-            Container.Bind<EventBus>().AsSingle();
-            Container.Bind<IEventBusInvoker>().To<EventBus>().FromResolve();
-            Container.Bind<IEventBusSubscriber>().To<EventBus>().FromResolve();
+            Container.Bind<ITimerEngine>().To<CachedTimerEngine>().FromComponentInHierarchy().AsSingle().NonLazy();
+            
+            Container.BindInterfacesAndSelfTo<EventBus>().AsSingle();
             
             Container.Bind<InstantiatersFactory>().AsSingle().NonLazy();
             Container.Bind<SpawnPositionCalculatorsFactory>().AsSingle().NonLazy();
-            Container.Bind<SpawnBehaviourProvidersFactory>().AsSingle().NonLazy();
             Container.Bind<SpawnersFactory>().AsSingle().NonLazy();
             
             Container.Bind<ISpawnersCreator>().To<SpawnersCreator>().FromComponentInHierarchy().AsSingle().NonLazy();
-            Container.Bind<IRoundBootstrapper>().To<RoundBootstrapper>().FromComponentInHierarchy().AsSingle();
+            Container.BindInterfacesAndSelfTo<RoundBootstrapper>().FromComponentsInHierarchy().AsSingle();
             
             Container.Bind<CreatureStatsScalersProvider>().AsSingle().NonLazy();
             Container.Bind<WeaponStatsScalersProvider>().AsSingle().NonLazy();

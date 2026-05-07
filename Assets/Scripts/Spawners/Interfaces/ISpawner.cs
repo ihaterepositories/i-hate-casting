@@ -1,12 +1,15 @@
+using System.Collections;
 using Shared.Models.PoolableMonoBehaviours;
 
 namespace Spawners.Interfaces
 {
     /// <summary>
-    /// Spawns and returns game object. No auto spawn.
+    /// Spawns game object in different provided ways.
     /// </summary>
     public interface ISpawner<T> where T : PoolableMonoBehaviour
     {
-        public T Spawn();
+        public void Spawn();
+        public T SpawnAndGet();
+        public IEnumerator SpawnCoroutine(float waitTime, bool continueSpawn);
     }
 }

@@ -35,7 +35,7 @@ namespace Models.Creatures.Services.Movers.Factories
             ICreatureStatsScaler statsScaler,
             Transform transform)
         {
-            if (!_isInitialized) 
+            if (!_isInitialized && creatureMoveType == CreatureMoveType.PlayerFollowing) 
                 throw new Exception("CreatureMoversFactory is not initialized yet. Cannot create an object.");
             
             return creatureMoveType switch

@@ -18,7 +18,7 @@ namespace Spawners.Services.SpawnPositionCalculators.Factories
         {
             return spawnPositionType switch
             {
-                SpawnPositionType.Center => new CenterSpawnPositionCalculator(),
+                SpawnPositionType.Default => new CenterSpawnPositionCalculator(),
                 SpawnPositionType.SafeRandom => new SafeRandomSpawnPositionCalculator(_safeSpawnSettings),
                 _ => throw new ArgumentOutOfRangeException(nameof(spawnPositionType), spawnPositionType, null)
             };

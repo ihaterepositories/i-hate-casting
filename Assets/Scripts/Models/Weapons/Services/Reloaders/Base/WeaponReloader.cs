@@ -79,7 +79,7 @@ namespace Models.Weapons.Services.Reloaders.Base
                 _isMagazineEmpty = true;
             }
 
-            var bullet = _bulletsSpawner.Spawn();
+            var bullet = _bulletsSpawner.SpawnAndGet();
             
             OnCurrentBulletsCountChanged?.Invoke(_currentBulletsCount, MagazineCapacity);
             

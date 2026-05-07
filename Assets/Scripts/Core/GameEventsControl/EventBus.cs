@@ -9,7 +9,7 @@ namespace Core.GameEventsControl
     public class EventBus : IEventBusInvoker, IEventBusSubscriber
     {
         // Callbacks dictionary
-        // key - signal`s class name
+        // key - signal's class name
         // value - list of methods, that should be called when signal invoked
         private Dictionary<string, List<object>> _callbacks = new();
         

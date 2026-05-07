@@ -42,7 +42,7 @@ namespace Models.Creatures
         [SerializeField] private CreatureType _creatureType;
         [SerializeField] private CreatureHealthType _healthType;
         [SerializeField] private CreatureMoveType _moveType;
-        [FormerlySerializedAs("_obstaclesBypassType")] [SerializeField] private ObstaclesBypassStrength _obstaclesBypassStrength;
+        [SerializeField] private ObstaclesBypassStrength _obstaclesBypassStrength;
         [SerializeField] private CreatureMoveBoostType _moveBoostType;
         [SerializeField] private CreatureDestroyType _destroyType;
         [SerializeField] private CreatureAnimatingType _animatingType;
@@ -92,12 +92,12 @@ namespace Models.Creatures
 
             _destroyer = destroyersFactory.Create(_destroyType, this);
 
-            _creatureAnimator = animatiorsFactory.Create(
-                _animatingType,
-                _spriteAnimator,
-                _animatorOverrideController,
-                _mover,
-                _health);
+            // _creatureAnimator = animatiorsFactory.Create(
+            //     _animatingType,
+            //     _spriteAnimator,
+            //     _animatorOverrideController,
+            //     _mover,
+            //     _health);
 
             _spriteFlipper = new RigidBodiedSpriteFlipper(_rigidbody2D, _spriteRenderer);
             
@@ -111,7 +111,7 @@ namespace Models.Creatures
         private void OnDisable()
         {
             _health.OnHealthGone -= Destroy;
-            _creatureAnimator.CleanResources();
+            // _creatureAnimator.CleanResources();
         }
 
         private void Update()
@@ -125,7 +125,7 @@ namespace Models.Creatures
             }
             
             _spriteFlipper.Tick();
-            _creatureAnimator.Tick();
+            // _creatureAnimator.Tick();
             
             if (_moveBoostType != CreatureMoveBoostType.None)
                 _moveBooster.Tick();

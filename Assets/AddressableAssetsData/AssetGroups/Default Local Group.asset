@@ -11,15 +11,18 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: bbb281ee3bf0b054c82ac2347e9e782c, type: 3}
   m_Name: Default Local Group
-  m_EditorClassIdentifier: 
+  m_EditorClassIdentifier: Unity.Addressables.Editor::UnityEditor.AddressableAssets.Settings.AddressableAssetGroup
   m_GroupName: Default Local Group
-  m_Data:
-    m_SerializedData: []
-  m_GUID: 3207e0a1ff20de64488be66156444c1c
-  m_SerializeEntries: []
+  m_GUID: feb488da404cd4d4cb349eed1090bd14
+  m_SerializeEntries:
+  - m_GUID: 501d9e893fff50a42817eb4a059af0f4
+    m_Address: Assets/Prefabs/Creatures/Player.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   m_ReadOnly: 0
-  m_Settings: {fileID: 11400000, guid: a12368aedcc243b41a2f5b04885d4a2c, type: 2}
+  m_Settings: {fileID: 11400000, guid: 8340831f46e5a8d499477a4cac1c8619, type: 2}
   m_SchemaSet:
     m_Schemas:
-    - {fileID: 11400000, guid: b67efca119c80414193250ab579f567e, type: 2}
-    - {fileID: 11400000, guid: 4aaa111f6f7bbf74db10c3be72841c47, type: 2}
+    - {fileID: 11400000, guid: 58f8b3fc3095ce94e8cef59142094d96, type: 2}
+    - {fileID: 11400000, guid: 6cbdeac684ba75141adfcfaa69193b13, type: 2}

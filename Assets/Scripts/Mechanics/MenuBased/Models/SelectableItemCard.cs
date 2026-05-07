@@ -1,11 +1,11 @@
 using System;
+using System.ComponentModel;
 using ButtonAnimators;
 using DG.Tweening;
 using Mechanics.ItemSelecting.Enums;
 using Mechanics.ItemSelecting.ScriptableObjects;
 using Mechanics.MenuBased.Models.ScriptableObjects;
 using TMPro;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -17,7 +17,7 @@ namespace Mechanics.MenuBased.Models
         [SerializeField] private TextMeshProUGUI _itemNameText;
         [SerializeField] private TextMeshProUGUI _itemDescriptionText;
         [SerializeField] private Image _itemImage;
-        [SerializeField] private UnityEngine.UI.Button _button;
+        [SerializeField] private Button _button;
         [SerializeField] private RectTransform _rect;
         [SerializeField] private InteractableButtonAnimator _interactableButtonAnimator;
         [SerializeField] private SelectableItemCardSpritesSo _cardsSprites;
@@ -141,7 +141,7 @@ namespace Mechanics.MenuBased.Models
                     _currentBackSprite = _cardsSprites.IncredibleCardBackSprite;
                     _currentTextColor = _textsColors.IncredibleCardTextColor;
                     break;
-                default: throw new UnexpectedEnumValueException<ItemRarity>(rarity);
+                default: throw new InvalidEnumArgumentException(nameof(rarity), (int)rarity, typeof(ItemRarity));
             }
         }
         

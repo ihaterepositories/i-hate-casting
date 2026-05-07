@@ -23,6 +23,7 @@ namespace Core.TimerEngines
         
         private void Update()
         {
+            if (_pauser == null)  return;
             if (_pauser.IsGamePaused) return;
             
             foreach (var timerData in _timers)
